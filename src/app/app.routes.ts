@@ -1,3 +1,61 @@
 import { Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent, title: 'Game Hub' },
+  {
+    path: 'adminDashboard',
+    loadComponent: () =>
+      import('./pages/admin-dashboard/admin-dashboard.component').then(
+        (obj) => obj.AdminDashboardComponent
+      ),
+    title: 'AdminDashboard',
+  },
+  {
+    path: 'checkout',
+    loadComponent: () =>
+      import('./pages/checkout/checkout.component').then(
+        (obj) => obj.CheckoutComponent
+      ),
+    title: 'Checkout',
+  },
+  {
+    path: 'favorites',
+    loadComponent: () =>
+      import('./pages/favorites/favorites.component').then(
+        (obj) => obj.FavoritesComponent
+      ),
+    title: 'Favorites Games',
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login/login.component').then((obj) => obj.LoginComponent),
+    title: 'Login',
+  },
+  {
+    path: 'payment',
+    loadComponent: () =>
+      import('./pages/payment/payment.component').then(
+        (obj) => obj.PaymentComponent
+      ),
+    title: 'Payment',
+  },
+  {
+    path: 'productDetails',
+    loadComponent: () =>
+      import('./pages/product-details/product-details.component').then(
+        (obj) => obj.ProductDetailsComponent
+      ),
+    title: 'Product Details',
+  },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/register/register.component').then(
+        (obj) => obj.RegisterComponent
+      ),
+    title: 'Register',
+  },
+];
