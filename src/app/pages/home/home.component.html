@@ -1,1 +1,111 @@
-<p>home works!</p>
+<div class="w-full p-4 space-y-6 bg-gray-900 text-gray-100">
+  <!--  Header Section -->
+  <div class="text-center sm:text-left">
+    <h1 class="text-2xl font-bold text-white">New and trending</h1>
+    <p class="text-sm text-gray-400">Based on player counts and release date</p>
+  </div>
+
+  <!--  Filters Section -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div>
+      <label for="orderSelect" class="block mb-1 font-medium text-gray-300"
+        >Order by:</label
+      >
+      <select
+        id="orderSelect"
+        class="w-full border border-gray-700 bg-gray-800 text-gray-200 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300"
+      >
+        <option value="Relevance">Relevance</option>
+        <option value="Date added">Date added</option>
+        <option value="Name">Name</option>
+        <option value="Release date">Release date</option>
+        <option value="Popularity">Popularity</option>
+        <option value="Average rating">Average rating</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="platformSelect" class="block mb-1 font-medium text-gray-300"
+        >Platform:</label
+      >
+      <select
+        id="platformSelect"
+        class="w-full border border-gray-700 bg-gray-800 text-gray-200 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300"
+      >
+        <option disabled selected>Platforms</option>
+        <option value="PC">PC</option>
+        <option value="Playstation">Playstation</option>
+        <option value="Xbox">Xbox</option>
+        <option value="Android">Android</option>
+        <option value="Apple Macintosh">Apple Macintosh</option>
+        <option value="Linux">Linux</option>
+        <option value="Nintendo">Nintendo</option>
+      </select>
+    </div>
+  </div>
+
+  <!--  Game Card Container -->
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    @for(item of list; track item.rawgId) {
+    <!--  Card Wrapper with group for hover tracking -->
+    <div
+      class="group border border-gray-700 rounded-2xl p-4 shadow-md bg-gray-800 transition duration-300 hover:shadow-lg"
+    >
+      <!--  Game Summary -->
+      <div>
+        <img
+          [src]="item.backgroundImage"
+          alt="Game image"
+          class="w-full h-48 object-cover rounded-xl"
+        />
+
+        <div class="mt-4 text-center">
+          <p
+            class="text-lg font-semibold text-gray-200 hover:text-gray-400 cursor-pointer"
+          >
+            {{ item.name }}
+          </p>
+          <button
+            class="mt-2 px-3 py-1 bg-blue-500 text-white rounded-full text-sm font-medium cursor-pointer"
+          >
+            + {{ item.reviewsCount }}
+          </button>
+        </div>
+      </div>
+
+      <!--  Hover Reveal Section -->
+      <div
+        class="overflow-hidden max-h-0 group-hover:max-h-48 transition-all duration-500 ease-in-out mt-4 space-y-2 text-gray-300 text-sm"
+      >
+        <!--  Flexbox Rows for label & value -->
+        <p class="flex justify-between">
+          <span class="font-semibold">Release date:</span>
+          <span>{{ item.released | date }}</span>
+        </p>
+        <hr />
+        <p class="flex justify-between">
+          <span class="font-semibold">Genres:</span>
+          <span
+            >{{ item.tags[0].name }},
+            {{ item.tags[item.tags.length - 1].name }}</span
+          >
+        </p>
+        <hr />
+        <p class="flex justify-between">
+          <span class="font-semibold">Chart:</span>
+          <span
+            >#{{ item.ratingTop }} Top
+            {{ item.released | date : "Y" }}</span
+          >
+        </p>
+
+        <button
+          class="w-full mt-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-100 rounded-lg text-sm cursor-pointer"
+        >
+          Show more like this
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</div>
