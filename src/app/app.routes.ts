@@ -58,4 +58,12 @@ export const routes: Routes = [
       ),
     title: 'Register',
   },
+  {
+    path: 'not-found',
+    loadComponent: () =>
+      import('./pages/not-found/not-found.component').then(
+        (obj) => obj.NotFoundComponent
+      ),
+  },
+  { path: '**', redirectTo: 'not-found' },
 ];
