@@ -26,7 +26,7 @@ export class AppComponent {
     // when route changes
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const hiddenRoutes = ['/login', '/register'];
+        const hiddenRoutes = ['/login', '/register', '/not-found', '/404'];
         this.showNavbar = !hiddenRoutes.includes(event.urlAfterRedirects);
         this.showFooter = !hiddenRoutes.includes(event.urlAfterRedirects);
       }
