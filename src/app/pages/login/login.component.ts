@@ -36,6 +36,9 @@ export class LoginComponent {
       Validators.email,
       Validators.maxLength(255),
       Validators.minLength(5),
+      Validators.pattern(
+        /^(?=.{5,255}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+      ),
     ]),
     passwordVal: new FormControl(null, [
       Validators.required,
@@ -48,11 +51,14 @@ export class LoginComponent {
   });
 
   userLoginData() {
+    this.loginValidation.markAllAsTouched();
+
     if (!this.loginValidation.valid) return;
     this.loginUserDataObj = {
       email: this.email,
       password: this.password,
     };
+
     console.log(this.loginUserDataObj);
     this.email = '';
     this.password = '';
