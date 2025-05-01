@@ -36,7 +36,7 @@ export class LoginComponent {
   };
 
   loginValidation = new FormGroup({
-    emailVal: new FormControl(null, [
+    emailVal: new FormControl('', [
       Validators.required,
       Validators.email,
       Validators.maxLength(255),
@@ -45,7 +45,7 @@ export class LoginComponent {
         /^(?=.{5,255}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
       ),
     ]),
-    passwordVal: new FormControl(null, [
+    passwordVal: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
       Validators.maxLength(20),

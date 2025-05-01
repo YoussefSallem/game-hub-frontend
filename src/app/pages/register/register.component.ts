@@ -47,19 +47,19 @@ export class RegisterComponent {
   };
 
   registerValidation = new FormGroup({
-    fnameVal: new FormControl(null, [
+    fnameVal: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(50),
       Validators.pattern(/^[a-zA-Z]{3,50}$/),
     ]),
-    lnameVal: new FormControl(null, [
+    lnameVal: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(50),
       Validators.pattern(/^[a-zA-Z]{3,50}$/),
     ]),
-    emailVal: new FormControl(null, [
+    emailVal: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
       Validators.maxLength(255),
@@ -69,14 +69,14 @@ export class RegisterComponent {
       ),
     ]),
 
-    phoneNumberVal: new FormControl(null, [
+    phoneNumberVal: new FormControl('', [
       Validators.required,
       Validators.minLength(10),
       Validators.maxLength(15),
       Validators.pattern(/^[0-9]{10,15}$/),
     ]),
 
-    passwordVal: new FormControl(null, [
+    passwordVal: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
       Validators.maxLength(20),
@@ -84,7 +84,7 @@ export class RegisterComponent {
         /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+\-={}[\]\\:";'<>?,./~`]{5,20}$/
       ),
     ]),
-    confirmPasswordVal: new FormControl(null, [
+    confirmPasswordVal: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
       Validators.maxLength(20),
