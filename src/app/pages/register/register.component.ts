@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ApiUsersService } from '../../services/api-users.service';
 
 @Component({
   selector: 'app-register',
@@ -22,6 +23,8 @@ import {
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+  constructor(private _apiUsersService: ApiUsersService) {}
+
   firstName: string = '';
   lastName: string = '';
   email: string = '';
@@ -30,19 +33,17 @@ export class RegisterComponent {
   confirmPassword: string = '';
 
   registerUserDataObj: {
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    PhoneNumber: string;
-    Password: string;
-    ConfirmPassword: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone: string;
+    password: string;
   } = {
-    FirstName: '',
-    LastName: '',
-    Email: '',
-    PhoneNumber: '',
-    Password: '',
-    ConfirmPassword: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone: '',
+    password: '',
   };
 
   registerValidation = new FormGroup({
@@ -98,20 +99,30 @@ export class RegisterComponent {
 
     if (!this.registerValidation.valid) return;
     this.registerUserDataObj = {
-      FirstName: this.firstName,
-      LastName: this.lastName,
-      Email: this.email,
-      PhoneNumber: this.phoneNumber,
-      Password: this.password,
-      ConfirmPassword: this.confirmPassword,
+      first_name: this.firstName,
+      last_name: this.lastName,
+      email: this.email,
+      phone: this.phoneNumber,
+      password: this.password,
     };
     console.log(this.registerUserDataObj);
+    // send user data to backend
+    this._apiUsersService.addUser(this.registerUserDataObj).subscribe({
+      next: (res) => {
+        console.log('User Registerd', res);
+      },
+      error: (err) => {
+        console.log('Error: ', err);
+      },
+    });
+    // reset variables
     this.firstName = '';
     this.lastName = '';
     this.email = '';
     this.phoneNumber = '';
     this.password = '';
     this.confirmPassword = '';
+    // reset inputs validaton
     this.registerValidation.reset();
   }
 
