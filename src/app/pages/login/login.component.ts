@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ApiLoginService } from '../../services/api-login.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,10 @@ import {
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  constructor(
+    private _apiLoginService: ApiLoginService,
+    private router: Router
+  ) {}
   email: string = '';
   password: string = '';
 
@@ -58,12 +63,28 @@ export class LoginComponent {
       email: this.email,
       password: this.password,
     };
-
     console.log(this.loginUserDataObj);
+    this._apiLoginService.loginUser(this.loginUserDataObj).subscribe({
+      next: (res) => {
+        console.log('Login Success', res);
+        if (res.token) {
+          this._apiLoginService.storeTokenInCookie(res.token);
+          this.router.navigate(['/home']);
+        } else {
+          console.log('Token not found in response!');
+        }
+      },
+      error: (error) => {
+        console.log('Login Error:', error);
+      },
+    });
+
     this.email = '';
     this.password = '';
     this.loginValidation.reset();
   }
+
+  storeToken(token: string) {}
 
   get isEmailValid() {
     return this.loginValidation.controls.emailVal.valid;
