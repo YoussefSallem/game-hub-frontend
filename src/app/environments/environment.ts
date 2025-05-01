@@ -1,4 +1,4 @@
 export const environment = {
   baseUrl:
-    'http://localhost:5000/api',
+    'https://game-hub-backend-woad.vercel.app/api',
 };
