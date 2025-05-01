@@ -63,6 +63,9 @@ export class RegisterComponent {
       Validators.minLength(5),
       Validators.maxLength(255),
       Validators.email,
+      Validators.pattern(
+        /^(?=.{5,255}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+      ),
     ]),
 
     phoneNumberVal: new FormControl(null, [
@@ -77,7 +80,7 @@ export class RegisterComponent {
       Validators.minLength(5),
       Validators.maxLength(20),
       Validators.pattern(
-        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+=\-{}[\]:;"'<>,.?/~`]{5, 20}$/
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+\-={}[\]\\:";'<>?,./~`]{5,20}$/
       ),
     ]),
     confirmPasswordVal: new FormControl(null, [
@@ -91,6 +94,8 @@ export class RegisterComponent {
   });
 
   userRegisterData() {
+    this.registerValidation.markAllAsTouched();
+
     if (!this.registerValidation.valid) return;
     this.registerUserDataObj = {
       FirstName: this.firstName,

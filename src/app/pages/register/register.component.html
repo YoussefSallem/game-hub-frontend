@@ -57,17 +57,26 @@
             [(ngModel)]="firstName"
             formControlName="fnameVal"
             [ngClass]="{
-              'border-slate-500': !registerValidation.controls.fnameVal.dirty,
+              'border-slate-500': !registerValidation.controls.fnameVal.touched,
               'border-green-500':
                 isFirstNameValid &&
-                registerValidation.controls.fnameVal.dirty &&
+                registerValidation.controls.fnameVal.touched &&
                 registerValidation.controls.fnameVal.value,
               'border-red-500':
                 !isFirstNameValid &&
-                registerValidation.controls.fnameVal.dirty &&
-                registerValidation.controls.fnameVal.value
+                registerValidation.controls.fnameVal.touched
             }"
           />
+          <div
+            *ngIf="
+              registerValidation.controls.fnameVal.touched &&
+              !registerValidation.controls.fnameVal.value
+            "
+          >
+            <p class="text-red-500 text-xs xl:text-sm">
+              First name is required.
+            </p>
+          </div>
           <div
             *ngIf="
               !isFirstNameValid &&
@@ -90,17 +99,25 @@
             [(ngModel)]="lastName"
             formControlName="lnameVal"
             [ngClass]="{
-              'border-slate-500': !registerValidation.controls.lnameVal.dirty,
+              'border-slate-500': !registerValidation.controls.lnameVal.touched,
               'border-green-500':
                 isLastNameValid &&
-                registerValidation.controls.lnameVal.dirty &&
+                registerValidation.controls.lnameVal.touched &&
                 registerValidation.controls.lnameVal.value,
               'border-red-500':
-                !isLastNameValid &&
-                registerValidation.controls.lnameVal.dirty &&
-                registerValidation.controls.lnameVal.value
+                !isLastNameValid && registerValidation.controls.lnameVal.touched
             }"
           />
+          <div
+            *ngIf="
+              registerValidation.controls.lnameVal.touched &&
+              !registerValidation.controls.lnameVal.value
+            "
+          >
+            <p class="text-red-500 text-xs xl:text-sm">
+              Last name is required.
+            </p>
+          </div>
           <div
             *ngIf="
               !isLastNameValid &&
@@ -123,17 +140,23 @@
             [(ngModel)]="email"
             formControlName="emailVal"
             [ngClass]="{
-              'border-slate-500': !registerValidation.controls.emailVal.dirty,
+              'border-slate-500': !registerValidation.controls.emailVal.touched,
               'border-green-500':
                 isEmailValid &&
-                registerValidation.controls.emailVal.dirty &&
+                registerValidation.controls.emailVal.touched &&
                 registerValidation.controls.emailVal.value,
               'border-red-500':
-                !isEmailValid &&
-                registerValidation.controls.emailVal.dirty &&
-                registerValidation.controls.emailVal.value
+                !isEmailValid && registerValidation.controls.emailVal.touched
             }"
           />
+          <div
+            *ngIf="
+              registerValidation.controls.emailVal.touched &&
+              !registerValidation.controls.emailVal.value
+            "
+          >
+            <p class="text-red-500 text-xs xl:text-sm">Email is required.</p>
+          </div>
           <div
             *ngIf="
               !isEmailValid &&
@@ -155,17 +178,26 @@
             formControlName="phoneNumberVal"
             [ngClass]="{
               'border-slate-500':
-                !registerValidation.controls.phoneNumberVal.dirty,
+                !registerValidation.controls.phoneNumberVal.touched,
               'border-green-500':
                 isPhoneNumberValid &&
-                registerValidation.controls.phoneNumberVal.dirty &&
+                registerValidation.controls.phoneNumberVal.touched &&
                 registerValidation.controls.phoneNumberVal.value,
               'border-red-500':
                 !isPhoneNumberValid &&
-                registerValidation.controls.phoneNumberVal.dirty &&
-                registerValidation.controls.phoneNumberVal.value
+                registerValidation.controls.phoneNumberVal.touched
             }"
           />
+          <div
+            *ngIf="
+              registerValidation.controls.phoneNumberVal.touched &&
+              !registerValidation.controls.phoneNumberVal.value
+            "
+          >
+            <p class="text-red-500 text-xs xl:text-sm">
+              Phone number is required.
+            </p>
+          </div>
           <div
             *ngIf="
               !isPhoneNumberValid &&
@@ -189,17 +221,24 @@
             formControlName="passwordVal"
             [ngClass]="{
               'border-slate-500':
-                !registerValidation.controls.passwordVal.dirty,
+                !registerValidation.controls.passwordVal.touched,
               'border-green-500':
                 isPasswordValid &&
-                registerValidation.controls.passwordVal.dirty &&
+                registerValidation.controls.passwordVal.touched &&
                 registerValidation.controls.passwordVal.value,
               'border-red-500':
                 !isPasswordValid &&
-                registerValidation.controls.passwordVal.dirty &&
-                registerValidation.controls.passwordVal.value
+                registerValidation.controls.passwordVal.touched
             }"
           />
+          <div
+            *ngIf="
+              registerValidation.controls.passwordVal.touched &&
+              !registerValidation.controls.passwordVal.value
+            "
+          >
+            <p class="text-red-500 text-xs xl:text-sm">Password is required.</p>
+          </div>
           <div
             *ngIf="
               !isPasswordValid &&
@@ -223,17 +262,25 @@
             formControlName="confirmPasswordVal"
             [ngClass]="{
               'border-slate-500':
-                !registerValidation.controls.confirmPasswordVal.dirty,
+                !registerValidation.controls.confirmPasswordVal.touched,
               'border-green-500':
                 isConfirmPasswordValid &&
-                registerValidation.controls.confirmPasswordVal.dirty &&
+                registerValidation.controls.confirmPasswordVal.touched &&
                 registerValidation.controls.confirmPasswordVal.value,
               'border-red-500':
                 !isConfirmPasswordValid &&
-                registerValidation.controls.confirmPasswordVal.dirty &&
-                registerValidation.controls.confirmPasswordVal.value
+                registerValidation.controls.confirmPasswordVal.touched
             }"
           />
+
+          <div
+            *ngIf="
+              registerValidation.controls.confirmPasswordVal.touched &&
+              !registerValidation.controls.confirmPasswordVal.value
+            "
+          >
+            <p class="text-red-500 text-xs xl:text-sm">Password is required.</p>
+          </div>
           <div
             *ngIf="
               !isConfirmPasswordValid &&

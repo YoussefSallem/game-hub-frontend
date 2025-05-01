@@ -37,17 +37,23 @@
             [(ngModel)]="email"
             formControlName="emailVal"
             [ngClass]="{
-              'border-slate-500': !loginValidation.controls.emailVal.dirty,
+              'border-slate-500': !loginValidation.controls.emailVal.touched,
               'border-green-500':
                 isEmailValid &&
-                loginValidation.controls.emailVal.dirty &&
+                loginValidation.controls.emailVal.touched &&
                 loginValidation.controls.emailVal.value,
               'border-red-500':
-                !isEmailValid &&
-                loginValidation.controls.emailVal.dirty &&
-                loginValidation.controls.emailVal.value
+                !isEmailValid && loginValidation.controls.emailVal.touched
             }"
           />
+          <div
+            *ngIf="
+              loginValidation.controls.emailVal.touched &&
+              !loginValidation.controls.emailVal.value
+            "
+          >
+            <p class="text-red-500 text-xs xl:text-sm">Email is required.</p>
+          </div>
           <div
             *ngIf="
               !isEmailValid &&
@@ -67,17 +73,23 @@
             [(ngModel)]="password"
             formControlName="passwordVal"
             [ngClass]="{
-              'border-slate-500': !loginValidation.controls.passwordVal.dirty,
+              'border-slate-500': !loginValidation.controls.passwordVal.touched,
               'border-green-500':
                 isPasswordValid &&
-                loginValidation.controls.passwordVal.dirty &&
+                loginValidation.controls.passwordVal.touched &&
                 loginValidation.controls.passwordVal.value,
               'border-red-500':
-                !isPasswordValid &&
-                loginValidation.controls.passwordVal.dirty &&
-                loginValidation.controls.passwordVal.value
+                !isPasswordValid && loginValidation.controls.passwordVal.touched
             }"
           />
+          <div
+            *ngIf="
+              loginValidation.controls.passwordVal.touched &&
+              !loginValidation.controls.passwordVal.value
+            "
+          >
+            <p class="text-red-500 text-xs xl:text-sm">Email is required.</p>
+          </div>
           <div
             *ngIf="
               !isPasswordValid &&
