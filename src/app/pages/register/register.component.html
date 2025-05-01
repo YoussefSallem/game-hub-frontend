@@ -20,7 +20,7 @@
         class="absolute inset-0 bg-gradient-to-r from-gray-900 to-transparent z-10"
       ></div>
       <img
-        src="/Images/form-bg.jpg"
+        src="/Images/reg.jpg"
         alt="Background"
         class="absolute inset-0 w-full h-full object-cover"
       />
@@ -59,9 +59,13 @@
             [ngClass]="{
               'border-slate-500': !registerValidation.controls.fnameVal.dirty,
               'border-green-500':
-                isFirstNameValid && registerValidation.controls.fnameVal.dirty,
+                isFirstNameValid &&
+                registerValidation.controls.fnameVal.dirty &&
+                registerValidation.controls.fnameVal.value,
               'border-red-500':
-                !isFirstNameValid && registerValidation.controls.fnameVal.dirty
+                !isFirstNameValid &&
+                registerValidation.controls.fnameVal.dirty &&
+                registerValidation.controls.fnameVal.value
             }"
           />
           <div
@@ -88,9 +92,13 @@
             [ngClass]="{
               'border-slate-500': !registerValidation.controls.lnameVal.dirty,
               'border-green-500':
-                isLastNameValid && registerValidation.controls.lnameVal.dirty,
+                isLastNameValid &&
+                registerValidation.controls.lnameVal.dirty &&
+                registerValidation.controls.lnameVal.value,
               'border-red-500':
-                !isLastNameValid && registerValidation.controls.lnameVal.dirty
+                !isLastNameValid &&
+                registerValidation.controls.lnameVal.dirty &&
+                registerValidation.controls.lnameVal.value
             }"
           />
           <div
@@ -117,9 +125,13 @@
             [ngClass]="{
               'border-slate-500': !registerValidation.controls.emailVal.dirty,
               'border-green-500':
-                isEmailValid && registerValidation.controls.emailVal.dirty,
+                isEmailValid &&
+                registerValidation.controls.emailVal.dirty &&
+                registerValidation.controls.emailVal.value,
               'border-red-500':
-                !isEmailValid && registerValidation.controls.emailVal.dirty
+                !isEmailValid &&
+                registerValidation.controls.emailVal.dirty &&
+                registerValidation.controls.emailVal.value
             }"
           />
           <div
@@ -146,10 +158,12 @@
                 !registerValidation.controls.phoneNumberVal.dirty,
               'border-green-500':
                 isPhoneNumberValid &&
-                registerValidation.controls.phoneNumberVal.dirty,
+                registerValidation.controls.phoneNumberVal.dirty &&
+                registerValidation.controls.phoneNumberVal.value,
               'border-red-500':
                 !isPhoneNumberValid &&
-                registerValidation.controls.phoneNumberVal.dirty
+                registerValidation.controls.phoneNumberVal.dirty &&
+                registerValidation.controls.phoneNumberVal.value
             }"
           />
           <div
@@ -178,10 +192,12 @@
                 !registerValidation.controls.passwordVal.dirty,
               'border-green-500':
                 isPasswordValid &&
-                registerValidation.controls.passwordVal.dirty,
+                registerValidation.controls.passwordVal.dirty &&
+                registerValidation.controls.passwordVal.value,
               'border-red-500':
                 !isPasswordValid &&
-                registerValidation.controls.passwordVal.dirty
+                registerValidation.controls.passwordVal.dirty &&
+                registerValidation.controls.passwordVal.value
             }"
           />
           <div
@@ -210,10 +226,12 @@
                 !registerValidation.controls.confirmPasswordVal.dirty,
               'border-green-500':
                 isConfirmPasswordValid &&
-                registerValidation.controls.confirmPasswordVal.dirty,
+                registerValidation.controls.confirmPasswordVal.dirty &&
+                registerValidation.controls.confirmPasswordVal.value,
               'border-red-500':
                 !isConfirmPasswordValid &&
-                registerValidation.controls.confirmPasswordVal.dirty
+                registerValidation.controls.confirmPasswordVal.dirty &&
+                registerValidation.controls.confirmPasswordVal.value
             }"
           />
           <div
