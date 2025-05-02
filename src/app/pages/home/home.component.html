@@ -45,6 +45,27 @@
     </div>
   </div>
 
+  <!-- skeleton loader -->
+  <div *ngIf="isLoading" class="grid grid-cols-1 lg:grid-cols-4 gap-6 ">
+    @for(item of skeletonArray; track $index){
+      <div class="flex flex-col animate-pulse space-x-4 rounded-md border border-blue-300 p-4">
+        <div class="size-50 w-full mb-3 rounded-2xl bg-gray-200"></div>
+        <div class="space-y-6 py-1">
+          <div class="h-2 rounded bg-gray-200"></div>
+          <div class="space-y-3">
+            <div class="grid grid-cols-1 gap-4">
+              <div class="col-span-1 h-2 rounded bg-gray-200"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="col-span-1 h-2 rounded bg-gray-200"></div>
+              <div class="col-span-1 h-2 rounded bg-gray-200"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
   <!--  Game Card Container -->
   <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
     @for(item of list; track item.rawgId) {
