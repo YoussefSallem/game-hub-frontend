@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
+  skeletonArray: number[] = Array.from({ length: 11 }, (_, i) => i); // static array 
   list: any = [];
   page: number = 1;
   isLoading: boolean = false;
