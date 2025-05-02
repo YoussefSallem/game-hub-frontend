@@ -183,9 +183,14 @@
               </svg>
               Genres:
             </span>
-            <span class="font-medium text-right"
-              >{{ item.tags[0].name }}, {{ item.tags[1].name }}</span
-            >
+            <span>
+              {{
+                item.tags?.[0]?.name || 'N/A'
+              }},
+              {{
+                item.tags?.[item.tags.length - 1]?.name || 'N/A'
+              }}
+            </span>
           </div>
 
           <div class="flex justify-between items-center">
