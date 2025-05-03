@@ -44,7 +44,11 @@
     </div>
     <!-- Bottom Side - Form -->
     <div class="p-6 h-1/2">
-      <form [formGroup]="loginValidation" class="flex flex-col gap-3">
+      <form
+        (submit)="userLoginData()"
+        [formGroup]="loginValidation"
+        class="flex flex-col gap-3"
+      >
         <div class="text-center text-2xl md:hidden">
           <h2>GameHub</h2>
         </div>
@@ -57,7 +61,6 @@
             placeholder="Email"
             name="email"
             class="w-full px-4 py-1 xl:py-2 border rounded-lg focus:outline-0 focus:ring-blue-500 focus:ring-2 placeholder:text-slate-600 caret-blue-500 transition-all duration-300"
-            [(ngModel)]="email"
             formControlName="emailVal"
             [ngClass]="{
               'border-slate-500': !loginValidation.controls.emailVal.touched,
@@ -68,6 +71,7 @@
               'border-red-500':
                 !isEmailValid && loginValidation.controls.emailVal.touched
             }"
+            (input)="errorMessage = ''"
           />
           <div
             *ngIf="
@@ -93,7 +97,6 @@
             placeholder="Password"
             name="password"
             class="w-full px-4 py-1 xl:py-2 border rounded-lg focus:outline-0 focus:ring-blue-500 focus:ring-2 placeholder:text-slate-600 caret-blue-500 transition-all duration-300"
-            [(ngModel)]="password"
             formControlName="passwordVal"
             [ngClass]="{
               'border-slate-500': !loginValidation.controls.passwordVal.touched,
@@ -104,6 +107,7 @@
               'border-red-500':
                 !isPasswordValid && loginValidation.controls.passwordVal.touched
             }"
+            (input)="errorMessage = ''"
           />
           <div
             *ngIf="
@@ -121,7 +125,8 @@
             "
           >
             <p class="text-red-500 text-xs xl:text-sm">
-              Passwords is not valid.
+              Password must be at least 8 characters, contain a letter and a
+              number.
             </p>
           </div>
         </div>
@@ -151,10 +156,9 @@
         </div>
         <div>
           <input
-            type="button"
+            type="submit"
             value="Login"
             class="w-full px-4 py-1 xl:py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors duration-300 cursor-pointer"
-            (click)="userLoginData()"
           />
         </div>
         <div *ngIf="errorMessage" class="text-red-500 text-sm text-center">

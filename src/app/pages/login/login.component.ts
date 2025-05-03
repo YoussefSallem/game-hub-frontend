@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
   rememberMe: boolean = false;
 
-  loginUserDataObj: { email: string; password: string } = {
+  loginUserDataObj: { email: string | null; password: string | null } = {
     email: '',
     password: '',
   };
@@ -69,11 +69,10 @@ export class LoginComponent implements OnInit {
 
   userLoginData() {
     this.loginValidation.markAllAsTouched();
-
     if (!this.loginValidation.valid) return;
     this.loginUserDataObj = {
-      email: this.email,
-      password: this.password,
+      email: this.loginValidation.controls.emailVal.value,
+      password: this.loginValidation.controls.passwordVal.value,
     };
 
     console.log(this.loginUserDataObj);
@@ -81,16 +80,13 @@ export class LoginComponent implements OnInit {
 
     this._apiLoginService.loginUser(this.loginUserDataObj).subscribe({
       next: (res) => {
-        console.log('Login Success', res);
         if (res.token) {
           this._apiLoginService.storeTokenInCookie(res.token, this.rememberMe);
           this.router.navigate(['/home']);
         } else {
-          console.log('Token not found in response!');
         }
       },
       error: (error) => {
-        console.log('Login Error:', error);
         if (error.status === 400) {
           this.errorMessage = 'Invalid Email or Password';
         } else {
@@ -99,12 +95,12 @@ export class LoginComponent implements OnInit {
       },
     });
 
-    this.email = '';
-    this.password = '';
     this.loginValidation.reset();
-  }
 
-  storeToken(token: string) {}
+    // remove focus from input after submit
+    (document.activeElement as HTMLElement).blur();
+    this.loginValidation.controls.passwordVal.markAsUntouched(); // to prevent "required" error
+  }
 
   get isEmailValid() {
     return this.loginValidation.controls.emailVal.valid;
