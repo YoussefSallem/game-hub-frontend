@@ -18,10 +18,9 @@ import { RouterLink } from '@angular/router';
 })
 export class RecoveryPasswordComponent {
   constructor(private _apiRecoverPasswordService: ApiRecoverPasswordService) {}
-  email: string = '';
   emailStatus: string = '';
 
-  userEmailInputObj: { email: string } = { email: '' };
+  userEmailInputObj: { email: string } | null = { email: '' };
   recoveryPasswordEmailValidation = new FormGroup({
     emailVal: new FormControl('', [
       Validators.email,
@@ -36,7 +35,9 @@ export class RecoveryPasswordComponent {
   sendRecoveryEmail() {
     this.recoveryPasswordEmailValidation.markAllAsTouched();
     if (!this.recoveryPasswordEmailValidation.valid) return;
-    this.userEmailInputObj = { email: this.email };
+    this.userEmailInputObj = {
+      email: this.recoveryPasswordEmailValidation.controls.emailVal.value ?? '',
+    };
     console.log(this.userEmailInputObj);
     this._apiRecoverPasswordService
       .recoverPassword(this.userEmailInputObj)
@@ -51,7 +52,6 @@ export class RecoveryPasswordComponent {
           this.emailStatus = 'Email failed to send. Please try again.';
         },
       });
-    this.email = '';
     this.recoveryPasswordEmailValidation.reset();
   }
   get isEmailValid() {
