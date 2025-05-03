@@ -8,10 +8,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { ApiRecoverPasswordService } from '../../services/api-recover-password.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-recovery-password',
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './recovery-password.component.html',
   styleUrl: './recovery-password.component.css',
 })

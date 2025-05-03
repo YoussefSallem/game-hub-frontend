@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
+import { RecoveryPasswordComponent } from './pages/recovery-password/recovery-password.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -58,10 +59,7 @@ export const routes: Routes = [
   },
   {
     path: 'passwordRecovery',
-    loadComponent: () =>
-      import('./pages/recovery-password/recovery-password.component').then(
-        (obj) => obj.RecoveryPasswordComponent
-      ),
+    component: RecoveryPasswordComponent,
     title: 'Password Recovery',
   },
   {
