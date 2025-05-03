@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ApiLoginService } from '../../services/api-login.service';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -22,14 +23,24 @@ import { ApiLoginService } from '../../services/api-login.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   constructor(
     private _apiLoginService: ApiLoginService,
     private router: Router
-  ) {}
+  ) {
+    this.rememberMe = this._apiLoginService.getRememberMe();
+  }
+
+  ngOnInit(): void {
+    if (this._apiLoginService.isLoggedIn()) {
+      this.router.navigate(['/home']);
+    }
+  }
+
   email: string = '';
   password: string = '';
   errorMessage: string = '';
+  rememberMe: boolean = false;
 
   loginUserDataObj: { email: string; password: string } = {
     email: '',
@@ -64,12 +75,15 @@ export class LoginComponent {
       email: this.email,
       password: this.password,
     };
+
     console.log(this.loginUserDataObj);
+    console.log('Remember Me value:', this.rememberMe);
+
     this._apiLoginService.loginUser(this.loginUserDataObj).subscribe({
       next: (res) => {
         console.log('Login Success', res);
         if (res.token) {
-          this._apiLoginService.storeTokenInCookie(res.token);
+          this._apiLoginService.storeTokenInCookie(res.token, this.rememberMe);
           this.router.navigate(['/home']);
         } else {
           console.log('Token not found in response!');
