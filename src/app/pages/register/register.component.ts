@@ -28,19 +28,14 @@ export class RegisterComponent {
     private router: Router
   ) {}
 
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  phoneNumber: string = '';
-  password: string = '';
-  confirmPassword: string = '';
+  errMessage:string = ''
 
   registerUserDataObj: {
-    first_name: string;
-    last_name: string;
-    email: string;
-    phone: string;
-    password: string;
+    first_name: string | null;
+    last_name: string | null;
+    email: string | null;
+    phone: string | null;
+    password: string | null;
   } = {
     first_name: '',
     last_name: '',
@@ -102,33 +97,29 @@ export class RegisterComponent {
 
     if (!this.registerValidation.valid) return;
     this.registerUserDataObj = {
-      first_name: this.firstName,
-      last_name: this.lastName,
-      email: this.email,
-      phone: this.phoneNumber,
-      password: this.password,
+      first_name: this.registerValidation.controls.fnameVal.value,
+      last_name: this.registerValidation.controls.lnameVal.value,
+      email: this.registerValidation.controls.emailVal.value,
+      phone: this.registerValidation.controls.phoneNumberVal.value,
+      password: this.registerValidation.controls.passwordVal.value,
     };
     console.log(this.registerUserDataObj);
     // send user data to backend
     this._apiUsersService.addUser(this.registerUserDataObj).subscribe({
       next: (res) => {
-        console.log('User Registerd', res);
+        console.log('User Registered', res);
+        this.router.navigate(['/home']);
       },
       error: (err) => {
-        console.log('Error: ', err);
+        this.errMessage = err.error.errMessage;
       },
     });
-    // reset variables
-    this.firstName = '';
-    this.lastName = '';
-    this.email = '';
-    this.phoneNumber = '';
-    this.password = '';
-    this.confirmPassword = '';
-    // navigate to home page
-    this.router.navigate(['/home']);
-    // reset inputs validaton
+    // reset inputs validation
     this.registerValidation.reset();
+
+    // remove focus from input after submit
+    (document.activeElement as HTMLElement).blur();
+    this.registerValidation.controls.confirmPasswordVal.markAsUntouched() // to prevent "required" error
   }
 
   get isFirstNameValid() {
