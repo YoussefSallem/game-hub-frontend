@@ -92,8 +92,10 @@ export class LoginComponent implements OnInit {
       error: (error) => {
         console.log('Login Error:', error);
         if (error.status === 400) {
+          this.rememberMe = false;
           this.errorMessage = 'Invalid Email or Password';
         } else {
+          this.rememberMe = false;
           this.errorMessage = 'something went wrong, try again later.';
         }
       },
@@ -103,8 +105,6 @@ export class LoginComponent implements OnInit {
     this.password = '';
     this.loginValidation.reset();
   }
-
-  storeToken(token: string) {}
 
   get isEmailValid() {
     return this.loginValidation.controls.emailVal.valid;

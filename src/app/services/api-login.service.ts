@@ -18,7 +18,7 @@ export class ApiLoginService {
   storeTokenInCookie(token: string, rememberMe: boolean) {
     // add 30 days expiration date for remember me feature
     const expirationDate = rememberMe
-      ? new Date(Date.now() + 30 * 24 * 60 * 60 * 100)
+      ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
       : undefined;
 
     this.cookieService.set('authToken', token, {
