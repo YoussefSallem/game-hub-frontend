@@ -34,6 +34,7 @@ export class RecoveryPasswordComponent {
     ]),
   });
   sendRecoveryEmail() {
+    this.recoveryPasswordEmailValidation.markAllAsTouched();
     if (!this.recoveryPasswordEmailValidation.valid) return;
     this.userEmailInputObj = { email: this.email };
     console.log(this.userEmailInputObj);
