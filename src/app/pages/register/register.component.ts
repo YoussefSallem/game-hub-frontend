@@ -28,7 +28,8 @@ export class RegisterComponent {
     private router: Router
   ) {}
 
-  errMessage:string = ''
+  errMessage: string = '';
+  isLoading: boolean = false;
 
   registerUserDataObj: {
     first_name: string | null;
@@ -103,14 +104,19 @@ export class RegisterComponent {
       phone: this.registerValidation.controls.phoneNumberVal.value,
       password: this.registerValidation.controls.passwordVal.value,
     };
+    this.isLoading = true;
+    console.log('Spinner should appear now, isLoading =', this.isLoading);
+
     console.log(this.registerUserDataObj);
     // send user data to backend
     this._apiUsersService.addUser(this.registerUserDataObj).subscribe({
       next: (res) => {
         console.log('User Registered', res);
+        this.isLoading = false;
         this.router.navigate(['/home']);
       },
       error: (err) => {
+        this.isLoading = false;
         this.errMessage = err.error.errMessage;
       },
     });
@@ -119,7 +125,7 @@ export class RegisterComponent {
 
     // remove focus from input after submit
     (document.activeElement as HTMLElement).blur();
-    this.registerValidation.controls.confirmPasswordVal.markAsUntouched() // to prevent "required" error
+    this.registerValidation.controls.confirmPasswordVal.markAsUntouched(); // to prevent "required" error
   }
 
   get isFirstNameValid() {

@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
   password: string = '';
   errorMessage: string = '';
   rememberMe: boolean = false;
+  isLoading: boolean = false;
 
   loginUserDataObj: { email: string | null; password: string | null } = {
     email: '',
@@ -75,12 +76,14 @@ export class LoginComponent implements OnInit {
       password: this.loginValidation.controls.passwordVal.value,
     };
 
+    this.isLoading = true;
     console.log(this.loginUserDataObj);
     console.log('Remember Me value:', this.rememberMe);
 
     this._apiLoginService.loginUser(this.loginUserDataObj).subscribe({
       next: (res) => {
         console.log('Login Success', res);
+        this.isLoading = false;
         if (res.token) {
           this._apiLoginService.storeTokenInCookie(res.token, this.rememberMe);
           this.router.navigate(['/home']);
@@ -89,6 +92,7 @@ export class LoginComponent implements OnInit {
         }
       },
       error: (error) => {
+        this.isLoading = false;
         if (error.status === 400) {
           this.rememberMe = false;
           this.errorMessage = 'Invalid Email or Password';

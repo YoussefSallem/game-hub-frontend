@@ -19,6 +19,7 @@ import { RouterLink } from '@angular/router';
 export class RecoveryPasswordComponent {
   constructor(private _apiRecoverPasswordService: ApiRecoverPasswordService) {}
   emailStatus: string = '';
+  isLoading: boolean = false;
 
   userEmailInputObj: { email: string } | null = { email: '' };
   recoveryPasswordEmailValidation = new FormGroup({
@@ -38,6 +39,7 @@ export class RecoveryPasswordComponent {
     this.userEmailInputObj = {
       email: this.recoveryPasswordEmailValidation.controls.emailVal.value ?? '',
     };
+    this.isLoading = true;
     console.log(this.userEmailInputObj);
     this._apiRecoverPasswordService
       .recoverPassword(this.userEmailInputObj)
@@ -46,10 +48,12 @@ export class RecoveryPasswordComponent {
           console.log('Email queued for delivery');
           this.emailStatus =
             'We sent an email with a password-reset link. Check it.';
+          this.isLoading = false;
         },
         error: (err) => {
           console.log('Faild to send', err);
           this.emailStatus = 'Email failed to send. Please try again.';
+          this.isLoading = false;
         },
       });
     this.recoveryPasswordEmailValidation.reset();

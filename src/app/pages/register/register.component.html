@@ -70,14 +70,17 @@
       <h2 class="text-xl font-semibold mb-4 text-gray-800">
         Create Your Account and Start Gaming!
       </h2>
-      <form (submit)="userRegisterData()" [formGroup]="registerValidation" class="flex flex-col gap-3">
+      <form
+        (submit)="userRegisterData()"
+        [formGroup]="registerValidation"
+        class="flex flex-col gap-3"
+      >
         <div class="flex flex-col gap-0.5">
           <input
             type="text"
             name="Fname"
             placeholder="First Name"
             class="w-full px-4 py-1 xl:py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
-
             formControlName="fnameVal"
             [ngClass]="{
               'border-slate-500': !registerValidation.controls.fnameVal.touched,
@@ -119,7 +122,6 @@
             name="Lname"
             placeholder="Last Name"
             class="w-full px-4 py-1 xl:py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
-
             formControlName="lnameVal"
             [ngClass]="{
               'border-slate-500': !registerValidation.controls.lnameVal.touched,
@@ -160,7 +162,6 @@
             name="email"
             placeholder="Email"
             class="w-full px-4 py-1 xl:py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
-
             formControlName="emailVal"
             [ngClass]="{
               'border-slate-500': !registerValidation.controls.emailVal.touched,
@@ -197,7 +198,6 @@
             name="Phone"
             placeholder="Phone Number"
             class="w-full px-4 py-1 xl:py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
-
             formControlName="phoneNumberVal"
             [ngClass]="{
               'border-slate-500':
@@ -240,7 +240,6 @@
             name="password"
             placeholder="Password"
             class="w-full px-4 py-1 xl:py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
-
             formControlName="passwordVal"
             [ngClass]="{
               'border-slate-500':
@@ -281,7 +280,6 @@
             name="confirmPassword"
             placeholder="Confirm Password"
             class="w-full px-4 py-1 xl:py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
-
             formControlName="confirmPasswordVal"
             [ngClass]="{
               'border-slate-500':
@@ -308,7 +306,6 @@
             *ngIf="
               !isConfirmPasswordValid &&
               registerValidation.controls.confirmPasswordVal.touched &&
-
               registerValidation.controls.confirmPasswordVal.value
             "
           >
@@ -319,14 +316,38 @@
         </div>
 
         <p class="text-red-500 text-xs xl:text-sm">
-          {{errMessage}}
+          {{ errMessage }}
         </p>
         <button
           type="submit"
           class="w-full py-1 lg:py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300 font-medium mt-1 cursor-pointer"
-
         >
-          Register
+          <span *ngIf="!isLoading">Register</span>
+          <span
+            *ngIf="isLoading"
+            class="flex items-center gap-2 justify-center"
+          >
+            <svg
+              class="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+          </span>
         </button>
       </form>
       <p class="text-center text-gray-500 text-sm mt-4">
