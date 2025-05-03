@@ -29,6 +29,7 @@ export class LoginComponent {
   ) {}
   email: string = '';
   password: string = '';
+  errorMessage: string = '';
 
   loginUserDataObj: { email: string; password: string } = {
     email: '',
@@ -76,6 +77,11 @@ export class LoginComponent {
       },
       error: (error) => {
         console.log('Login Error:', error);
+        if (error.status === 400) {
+          this.errorMessage = 'Invalid Email or Password';
+        } else {
+          this.errorMessage = 'something went wrong, try again later.';
+        }
       },
     });
 

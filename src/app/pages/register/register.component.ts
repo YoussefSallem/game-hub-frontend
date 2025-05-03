@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterLink, RouterModule, Router } from '@angular/router';
 import {
   FormControl,
   FormGroup,
@@ -23,7 +23,10 @@ import { ApiUsersService } from '../../services/api-users.service';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  constructor(private _apiUsersService: ApiUsersService) {}
+  constructor(
+    private _apiUsersService: ApiUsersService,
+    private router: Router
+  ) {}
 
   firstName: string = '';
   lastName: string = '';
@@ -122,6 +125,8 @@ export class RegisterComponent {
     this.phoneNumber = '';
     this.password = '';
     this.confirmPassword = '';
+    // navigate to home page
+    this.router.navigate(['/home']);
     // reset inputs validaton
     this.registerValidation.reset();
   }

@@ -57,6 +57,14 @@ export const routes: Routes = [
     title: 'Register',
   },
   {
+    path: 'passwordRecovery',
+    loadComponent: () =>
+      import('./pages/recovery-password/recovery-password.component').then(
+        (obj) => obj.RecoveryPasswordComponent
+      ),
+    title: 'Password Recovery',
+  },
+  {
     path: 'not-found',
     loadComponent: () =>
       import('./pages/not-found/not-found.component').then(
