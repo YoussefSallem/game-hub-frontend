@@ -80,10 +80,12 @@ export class LoginComponent implements OnInit {
 
     this._apiLoginService.loginUser(this.loginUserDataObj).subscribe({
       next: (res) => {
+        console.log('Login Success', res);
         if (res.token) {
           this._apiLoginService.storeTokenInCookie(res.token, this.rememberMe);
           this.router.navigate(['/home']);
         } else {
+          console.log('Token not found in response!');
         }
       },
       error: (error) => {
