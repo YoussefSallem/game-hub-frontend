@@ -2,18 +2,20 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ApiGamesService } from '../../services/api-games.service';
 import { FormsModule } from '@angular/forms';
+import { SideBarComponent } from '../../components/home-components/side-bar/side-bar.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SideBarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  skeletonArray: number[] = Array.from({ length: 11 }, (_, i) => i); // static array 
+  skeletonArray: number[] = Array.from({ length: 11 }, (_, i) => i); // static array
   list: any = [];
   page: number = 1;
   isLoading: boolean = false;
+
   constructor(private _apiGamesService: ApiGamesService) {}
 
   ngOnInit(): void {
