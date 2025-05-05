@@ -94,26 +94,6 @@
       </div>
     </div>
 
-    <!-- Skeleton Loader -->
-    <div
-      *ngIf="isLoading"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
-    >
-      @for(item of skeletonArray; track $index){
-      <div
-        class="animate-pulse rounded-xl border border-gray-700 p-4 bg-gray-800/50"
-      >
-        <div class="aspect-video w-full rounded-lg bg-gray-700 mb-4"></div>
-        <div class="h-5 w-3/4 rounded bg-gray-700 mb-3"></div>
-        <div class="h-4 w-1/2 rounded bg-gray-700"></div>
-        <div class="mt-4 flex justify-between">
-          <div class="h-3 w-16 rounded bg-gray-700"></div>
-          <div class="h-3 w-16 rounded bg-gray-700"></div>
-        </div>
-      </div>
-      }
-    </div>
-
     <!-- Game Card Container -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       @for(item of list; track item.rawgId) {
@@ -240,6 +220,26 @@
               Show more like this
             </button>
           </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Skeleton Loader -->
+    <div
+      *ngIf="isLoading"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+    >
+      @for(item of skeletonArray; track $index){
+      <div
+        class="animate-pulse rounded-xl border border-gray-700 p-4 bg-gray-800/50"
+      >
+        <div class="aspect-video w-full rounded-lg bg-gray-700 mb-4"></div>
+        <div class="h-5 w-3/4 rounded bg-gray-700 mb-3"></div>
+        <div class="h-4 w-1/2 rounded bg-gray-700"></div>
+        <div class="mt-4 flex justify-between">
+          <div class="h-3 w-16 rounded bg-gray-700"></div>
+          <div class="h-3 w-16 rounded bg-gray-700"></div>
         </div>
       </div>
       }
