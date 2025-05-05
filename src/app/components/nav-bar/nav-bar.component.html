@@ -27,19 +27,20 @@
       <div class="flex items-center relative">
         <!-- Auth Links - Hidden on mobile -->
         <!-- <div class="hidden md:flex space-x-2 lg:space-x-4"> -->
-        <div class="hidden md:flex space-x-2 lg:space-x-4 mr-25">
+        <div class="hidden md:flex space-x-2 lg:space-x-4">
           <a
             routerLink="login"
             class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
             routerLinkActive="bg-gray-900"
             >Login</a
           >
-          <a
+          <!-- ^ Formerly Register Btn ^ -->
+          <!-- <a
             routerLink="register"
             class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
             routerLinkActive="bg-gray-900"
             >Register</a
-          >
+          > -->
         </div>
 
         <!-- Mobile menu button -->
@@ -72,8 +73,8 @@
           </button>
         </div>
 
-        <!-- Dark Mode Toggle Button -->
-        <app-dark-mode-toggle class="absolute top-2 right-2" />
+        <!-- ! Dark Mode Toggle Button ! -->
+        <app-dark-mode-toggle class="absolute top-2 right-15" />
       </div>
     </div>
   </div>
