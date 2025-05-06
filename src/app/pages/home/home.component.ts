@@ -11,15 +11,33 @@ import { SideBarComponent } from '../../components/home-components/side-bar/side
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  skeletonArray: number[] = Array.from({ length: 11 }, (_, i) => i); // static array
+  skeletonArray: number[] = Array.from({ length: 11 }, (_, i) => i);
   list: any = [];
   page: number = 1;
   isLoading: boolean = false;
+  selectedGenre: string | null = null;
+  genres: any[] = [];
+  genresLoading: boolean = false;
 
   constructor(private _apiGamesService: ApiGamesService) {}
 
   ngOnInit(): void {
+    this.loadGenres();
     this.loadMore();
+  }
+
+  loadGenres() {
+    this.genresLoading = true;
+    this._apiGamesService.getGenres().subscribe({
+      next: (res) => {
+        this.genres = res.results; // Extract results from response
+        this.genresLoading = false;
+      },
+      error: (err) => {
+        console.error('Error loading genres:', err);
+        this.genresLoading = false;
+      },
+    });
   }
 
   @HostListener('window:scroll', [])
@@ -34,21 +52,24 @@ export class HomeComponent implements OnInit {
 
   orderValue: string = 'Relevance';
   onOrderChange(event: Event) {
-    // accessing event.target.value with proper type assertion
     const target = event.target as HTMLSelectElement;
     this.orderValue = target.value;
-
-    // reset
-    this.page = 1;
-    this.list = [];
-    this.loadMore();
+    this.resetAndLoad();
   }
 
   platformValue: string = 'all';
   onPlatformChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.platformValue = target.value;
+    this.resetAndLoad();
+  }
 
+  onGenreSelected(genreId: string | null) {
+    this.selectedGenre = genreId;
+    this.resetAndLoad();
+  }
+
+  resetAndLoad() {
     this.page = 1;
     this.list = [];
     this.loadMore();
@@ -56,18 +77,46 @@ export class HomeComponent implements OnInit {
 
   loadMore() {
     this.isLoading = true;
-    this._apiGamesService
-      .getGames(this.page, this.platformValue, this.orderValue)
-      .subscribe({
-        next: (res) => {
-          this.list.push(...res.data);
-          this.page++;
-          this.isLoading = false;
-        },
-        error: (err) => {
-          console.error(err);
-          this.isLoading = false;
-        },
-      });
+
+    if (this.selectedGenre) {
+      this._apiGamesService
+        .getGamesByGenre(this.selectedGenre, this.page)
+        .subscribe({
+          next: (res) => {
+            const transformedGames = res.results.map((game: any) => ({
+              ...game,
+              backgroundImage: game.background_image,
+              background_image: undefined,
+            }));
+            this.list.push(...transformedGames);
+            this.page++;
+            this.isLoading = false;
+          },
+          error: (err) => {
+            console.error(err);
+            this.isLoading = false;
+          },
+        });
+    } else {
+      this._apiGamesService
+        .getGames(this.page, this.platformValue, this.orderValue)
+        .subscribe({
+          next: (res) => {
+            this.list.push(...res.data);
+            this.page++;
+            this.isLoading = false;
+          },
+          error: (err) => {
+            console.error(err);
+            this.isLoading = false;
+          },
+        });
+    }
+  }
+
+  getGenreName(genreId: string | null): string {
+    if (!genreId) return '';
+    const genre = this.genres.find((g) => g.id === genreId);
+    return genre ? genre.name : '';
   }
 }

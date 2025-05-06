@@ -3,6 +3,42 @@
     <div class="flex h-16 items-center justify-between">
       <!-- Left section: Logo + Search -->
       <div class="flex items-center flex-1 sm:flex-none">
+        <!-- Sidebar toggle button -->
+        <button
+          (click)="toggleSidebar()"
+          class="mr-2 lg:hidden p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
+        >
+          <span class="sr-only">Toggle sidebar</span>
+          <svg
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+            <rect
+              x="2"
+              y="4"
+              width="6"
+              height="16"
+              rx="1"
+              fill="currentColor"
+              fill-opacity="0.2"
+              stroke-width="1.5"
+            />
+            <rect
+              x="10"
+              y="4"
+              width="12"
+              height="16"
+              rx="1"
+              stroke-width="1.5"
+            />
+            <circle cx="5" cy="8" r="1" fill="currentColor" />
+            <circle cx="5" cy="12" r="1" fill="currentColor" />
+            <circle cx="5" cy="16" r="1" fill="currentColor" />
+          </svg>
+        </button>
+
         <!-- Logo -->
         <div class="flex-shrink-0">
           <a routerLink="home" class="text-xl sm:text-2xl font-bold">GameHub</a>
