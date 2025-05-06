@@ -80,11 +80,17 @@ export class HomeComponent implements OnInit {
 
     if (this.selectedGenre) {
       this._apiGamesService
-        .getGamesByGenre(this.selectedGenre, this.page)
+        .getGamesByGenre(
+          this.selectedGenre,
+          this.page,
+          this.platformValue,
+          this.orderValue
+        )
         .subscribe({
           next: (res) => {
             const transformedGames = res.results.map((game: any) => ({
               ...game,
+              rawgId: game.id,
               backgroundImage: game.background_image,
               background_image: undefined,
             }));
