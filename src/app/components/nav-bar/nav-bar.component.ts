@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { DarkModeToggleComponent } from '../dark-mode-toggle/dark-mode-toggle.component';
 import { ApiLoginService } from '../../services/api-login.service';
+import { SidebarService } from '../../services/sidebar.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,7 +13,8 @@ import { ApiLoginService } from '../../services/api-login.service';
 export class NavBarComponent implements OnInit {
   constructor(
     private _apiLoginService: ApiLoginService,
-    private router: Router
+    private router: Router,
+    private sidebarService: SidebarService
   ) {}
 
   isMenuOpen: boolean = false;
@@ -24,6 +26,10 @@ export class NavBarComponent implements OnInit {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  toggleSidebar() {
+    this.sidebarService.toggle();
   }
 
   closeMenu() {
