@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RecoveryPasswordComponent } from './pages/recovery-password/recovery-password.component';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -68,6 +69,11 @@ export const routes: Routes = [
       import('./pages/not-found/not-found.component').then(
         (obj) => obj.NotFoundComponent
       ),
+  },
+  {
+    path: 'payment',
+    component: PaymentComponent,
+    title: 'Payment Page',
   },
   { path: '**', redirectTo: 'not-found' },
 ];
