@@ -18,6 +18,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
   paymentError = '';
   total: number = 0;
   orderNumber: string = '';
+  orderID: string = '';
 
   constructor(private http: HttpClient, private orderService: OrderService) {
     this.total = this.orderService.getTotal();
@@ -64,6 +65,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
             .toPromise()
             .then((res) => {
               if (res?.id) {
+                this.orderID = res.id;
                 return res.id;
               } else {
                 throw new Error('No order ID returned from server');
@@ -94,17 +96,5 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         },
       })
       .render('#paypal-button-container');
-  }
-
-  // Generate a random order number for display purposes
-  generateOrderNumber(): string {
-    if (!this.orderNumber) {
-      const timestamp = new Date().getTime().toString().slice(-6);
-      const random = Math.floor(Math.random() * 10000)
-        .toString()
-        .padStart(4, '0');
-      this.orderNumber = `GH-${timestamp}-${random}`;
-    }
-    return this.orderNumber;
   }
 }
