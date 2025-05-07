@@ -2,11 +2,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarService } from '../../../services/sidebar.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './side-bar.component.html',
 })
 export class SideBarComponent {
