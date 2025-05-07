@@ -45,12 +45,12 @@ export const routes: Routes = [
     title: 'Payment',
   },
   {
-    path: 'productDetails',
+    path: 'gameDetails',
     loadComponent: () =>
-      import('./pages/product-details/product-details.component').then(
-        (obj) => obj.ProductDetailsComponent
+      import('./pages/game-details/game-details.component').then(
+        (obj) => obj.GameDetailsComponent
       ),
-    title: 'Product Details',
+    title: 'Game Details',
   },
   {
     path: 'register',
