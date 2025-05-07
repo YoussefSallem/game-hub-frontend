@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 declare var paypal: any;
 
@@ -25,9 +26,12 @@ export class PaymentComponent implements OnInit {
       .Buttons({
         createOrder: () => {
           return this.http
-            .post<{ id: string }>('${baseUrl}/paypal/create-order', {
-              amount: '10.00',
-            })
+            .post<{ id: string }>(
+              `${environment.baseUrl}/paypal/create-order`,
+              {
+                amount: '10.00',
+              }
+            )
             .toPromise()
             .then((res) => {
               if (res?.id) {
@@ -40,7 +44,7 @@ export class PaymentComponent implements OnInit {
 
         onApprove: (data: any) => {
           return this.http
-            .post('${baseUrl}/paypal/capture-order', {
+            .post(`${environment.baseUrl}/paypal/capture-order`, {
               orderID: data.orderID,
             })
             .toPromise()
