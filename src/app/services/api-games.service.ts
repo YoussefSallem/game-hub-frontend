@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 export class ApiGamesService {
   constructor(private httpClient: HttpClient) {}
 
-  getGameById(gameId: string | null): Observable<any> {
-    return this.httpClient.get(`${environment.baseUrl}/games/${gameId}`);
+  getGameBySlugName(slug: string | null): Observable<any> {
+    return this.httpClient.get(`${environment.baseUrl}/games/${slug}`);
   }
 
   getGames(

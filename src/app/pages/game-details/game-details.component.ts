@@ -15,13 +15,13 @@ export class GameDetailsComponent implements OnInit {
     private _ApiGamesService: ApiGamesService,
     private _Location:Location
   ) {}
-  gameId!: string | null;
+  slug!: string | null;
   game: any;
   isLoading: boolean = true;
 
   ngOnInit(): void {
-    this.gameId = this._ActivatedRoute.snapshot.paramMap.get('id');
-    this._ApiGamesService.getGameById(this.gameId).subscribe({
+    this.slug = this._ActivatedRoute.snapshot.paramMap.get('slug');
+    this._ApiGamesService.getGameBySlugName(this.slug).subscribe({
       next: (res) => {
         this.isLoading = false;
         this.game = res;
