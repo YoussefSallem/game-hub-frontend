@@ -45,7 +45,7 @@ export const routes: Routes = [
     title: 'Payment',
   },
   {
-    path: 'gameDetails',
+    path: 'games/:id',
     loadComponent: () =>
       import('./pages/game-details/game-details.component').then(
         (obj) => obj.GameDetailsComponent
