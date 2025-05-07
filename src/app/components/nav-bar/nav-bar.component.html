@@ -3,6 +3,42 @@
     <div class="flex h-16 items-center justify-between">
       <!-- Left section: Logo + Search -->
       <div class="flex items-center flex-1 sm:flex-none">
+        <!-- Sidebar toggle button -->
+        <button
+          (click)="toggleSidebar()"
+          class="mr-2 lg:hidden p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
+        >
+          <span class="sr-only">Toggle sidebar</span>
+          <svg
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+            <rect
+              x="2"
+              y="4"
+              width="6"
+              height="16"
+              rx="1"
+              fill="currentColor"
+              fill-opacity="0.2"
+              stroke-width="1.5"
+            />
+            <rect
+              x="10"
+              y="4"
+              width="12"
+              height="16"
+              rx="1"
+              stroke-width="1.5"
+            />
+            <circle cx="5" cy="8" r="1" fill="currentColor" />
+            <circle cx="5" cy="12" r="1" fill="currentColor" />
+            <circle cx="5" cy="16" r="1" fill="currentColor" />
+          </svg>
+        </button>
+
         <!-- Logo -->
         <div class="flex-shrink-0">
           <a routerLink="home" class="text-xl sm:text-2xl font-bold">GameHub</a>
@@ -28,19 +64,21 @@
         <!-- Auth Links - Hidden on mobile -->
         <!-- <div class="hidden md:flex space-x-2 lg:space-x-4"> -->
         <div class="hidden md:flex space-x-2 lg:space-x-4">
+          @if (isLoginIn) {
+          <a
+            (click)="logout()"
+            class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
+            routerLinkActive="bg-gray-900"
+            >Logout</a
+          >
+          }@else {
           <a
             routerLink="login"
-            class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+            class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
             routerLinkActive="bg-gray-900"
             >Login</a
           >
-          <!-- ^ Formerly Register Btn ^ -->
-          <!-- <a
-            routerLink="register"
-            class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-            routerLinkActive="bg-gray-900"
-            >Register</a
-          > -->
+          }
         </div>
 
         <!-- Mobile menu button -->
@@ -99,30 +137,21 @@
       <!-- Navigation links -->
       <a
         routerLink="home"
+        (click)="closeMenu()"
         class="text-white hover:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium"
         routerLinkActive="bg-gray-900"
         >Home</a
       >
       <a
-        routerLink="productDetails"
-        class="text-white hover:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium"
-        routerLinkActive="bg-gray-900"
-        >Details</a
-      >
-      <a
         routerLink="favorites"
+        (click)="closeMenu()"
         class="text-white hover:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium"
         routerLinkActive="bg-gray-900"
         >Favorites</a
       >
       <a
-        routerLink="adminDashboard"
-        class="text-white hover:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium"
-        routerLinkActive="bg-gray-900"
-        >Dashboard</a
-      >
-      <a
         routerLink="checkout"
+        (click)="closeMenu()"
         class="text-white hover:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium"
         routerLinkActive="bg-gray-900"
         >Checkout</a
@@ -130,18 +159,22 @@
 
       <!-- Auth links -->
       <div class="border-t border-gray-700 mt-4 pt-4">
+        @if (isLoginIn) {
         <a
+          (click)="logout()"
+          class="text-white hover:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium cursor-pointer"
+        >
+          Logout
+        </a>
+        } @else {
+        <a
+          (click)="closeMenu()"
           routerLink="login"
           class="text-white hover:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium"
           routerLinkActive="bg-gray-900"
-          >Login</a
         >
-        <a
-          routerLink="register"
-          class="text-white hover:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium"
-          routerLinkActive="bg-gray-900"
-          >Register</a
-        >
+          Login </a
+        >}
       </div>
     </div>
   </div>

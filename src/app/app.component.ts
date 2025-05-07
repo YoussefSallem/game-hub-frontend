@@ -3,17 +3,10 @@ import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { DarkModeToggleComponent } from './components/dark-mode-toggle/dark-mode-toggle.component';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    NavBarComponent,
-    RouterModule,
-    CommonModule,
-    DarkModeToggleComponent,
-  ],
+  imports: [RouterOutlet, NavBarComponent, RouterModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

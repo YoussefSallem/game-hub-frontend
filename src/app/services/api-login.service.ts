@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -12,9 +12,11 @@ export class ApiLoginService {
     private httpClient: HttpClient,
     private cookieService: CookieService
   ) {}
+
   loginUser(loginData: object): Observable<any> {
     return this.httpClient.post(`${environment.baseUrl}/auth`, loginData);
   }
+
   storeTokenInCookie(token: string, rememberMe: boolean) {
     // add 30 days expiration date for remember me feature
     const expirationDate = rememberMe
@@ -48,7 +50,7 @@ export class ApiLoginService {
   }
 
   // clear all auth cookies on logout
-  // added path to delete the cookie from all the paths
+  // to delete the cookie from all the paths
   logout(): void {
     this.cookieService.delete('authToken', '/');
     this.cookieService.delete('rememberMe', '/');

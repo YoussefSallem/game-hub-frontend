@@ -1,13 +1,16 @@
-<div class="flex min-h-screen relative justify-center items-center p-4">
+<div
+  class="flex min-h-screen relative justify-center items-center p-4 bg-gray-900"
+>
   <!-- Background Image with overlay -->
-  <div class="fixed inset-0 z-0">
+  <div class="fixed inset-0 z-0 bg-gray-900">
     <div
       class="absolute inset-0 bg-gradient-to-r from-black to-transparent z-5"
     ></div>
     <img
-      src="/Images/arc1.jpg"
+      rel="preload"
+      src="/Images/bg968.jpg"
       alt="image"
-      class="absolute inset-0 w-screen h-screen object-cover"
+      class="absolute object-cover inset-0"
       loading="eager"
     />
   </div>
@@ -44,9 +47,10 @@
         <span class="text-sm font-medium text-black">Home</span>
       </a>
       <img
-        src="/Images/bgbg3.jpg"
+        src="/Images/bgbg3.webp"
+        rel="preload"
         alt="Image"
-        class="absolute w-full h-full object-cover rounded-t-4xl"
+        class="absolute w-full h-full object-center rounded-t-4xl bg-gray-900"
         style="min-height: 300px"
         loading="eager"
       />
