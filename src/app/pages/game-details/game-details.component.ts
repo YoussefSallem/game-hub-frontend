@@ -17,16 +17,19 @@ export class GameDetailsComponent implements OnInit {
   ) {}
   gameId!: string | null;
   game: any;
+  isLoading: boolean = true;
+
   ngOnInit(): void {
     this.gameId = this._ActivatedRoute.snapshot.paramMap.get('id');
     this._ApiGamesService.getGameById(this.gameId).subscribe({
       next: (res) => {
+        this.isLoading = false;
         this.game = res;
       },
       error: (err) => {
         console.error(err);
-      }
+        this.isLoading = false;
+      },
     });
   }
-
 }
