@@ -1,51 +1,304 @@
-<div
-  class="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6"
->
+<div class="min-h-screen bg-gray-900 text-gray-100 p-6">
+  <!-- Header with back button -->
+  <div class="flex items-center mb-6">
+    <a
+      routerLink="/checkout"
+      class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+    >
+      <svg
+        class="w-5 h-5"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 19l-7-7m0 0l7-7m-7 7h18"
+        />
+      </svg>
+      <span>Go Back</span>
+    </a>
+    <h1 class="text-2xl font-bold mx-auto">Payment</h1>
+  </div>
+
+  <!-- Progress Steps -->
+  <div class="bg-gray-800 rounded-lg p-4 mb-6">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center">
+        <div
+          class="bg-gray-700 text-white rounded-full w-8 h-8 flex items-center justify-center"
+        >
+          <span>1</span>
+        </div>
+        <span class="ml-2 text-gray-400">Order details</span>
+      </div>
+      <div class="flex items-center">
+        <div
+          [ngClass]="{
+            'bg-blue-600': !paymentSuccess,
+            'bg-green-600': paymentSuccess
+          }"
+          class="text-white rounded-full w-8 h-8 flex items-center justify-center transition-colors duration-500"
+        >
+          <span *ngIf="!paymentSuccess">2</span>
+          <svg
+            *ngIf="paymentSuccess"
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+        </div>
+        <span class="ml-2 text-white">Payment</span>
+      </div>
+      <div class="flex items-center">
+        <div
+          [ngClass]="{
+            'bg-gray-700': !paymentSuccess,
+            'bg-blue-600': paymentSuccess
+          }"
+          class="text-white rounded-full w-8 h-8 flex items-center justify-center transition-colors duration-500"
+        >
+          <span>3</span>
+        </div>
+        <span
+          [ngClass]="{
+            'text-gray-400': !paymentSuccess,
+            'text-white': paymentSuccess
+          }"
+          class="ml-2 transition-colors duration-500"
+          >Confirmation</span
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Form Container -->
   <div
-    class="bg-white rounded-2xl shadow-md p-8 max-w-md w-full text-center space-y-4"
+    class="bg-gray-800 rounded-2xl shadow-lg p-8 max-w-md w-full mx-auto text-center space-y-6 border border-gray-700"
   >
-    <div class="text-xl font-semibold text-gray-800">
-      Total amount to pay: $10
-    </div>
-    <div class="text-sm text-gray-600">
-      Please do not refresh the browser while the transaction is processing.
+    <!-- Payment Form (shown when not successful) -->
+    <div *ngIf="!paymentSuccess" class="space-y-6">
+      <div class="flex items-center justify-center mb-2">
+        <svg
+          class="w-10 h-10 text-blue-500 mr-2"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        <h2 class="text-2xl font-bold text-white">Payment Details</h2>
+      </div>
+
+      <div
+        class="text-xl font-semibold text-gray-200 bg-gray-700/50 py-3 px-4 rounded-lg"
+      >
+        Total amount: <span class="text-blue-400">${{ total.toFixed(2) }}</span>
+      </div>
+
+      <div
+        class="text-sm text-gray-400 bg-gray-700/30 p-3 rounded-lg flex items-center"
+      >
+        <svg
+          class="w-5 h-5 text-yellow-500 mr-2"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        Please do not refresh the browser while the transaction is processing.
+      </div>
+
+      <div id="paypal-button-container" class="mt-4"></div>
+
+      <!-- Error Message -->
+      <div
+        *ngIf="paymentError"
+        class="mt-4 text-red-600 bg-red-100 px-4 py-3 rounded-lg flex items-center"
+      >
+        <svg
+          class="w-5 h-5 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        {{ paymentError }}
+      </div>
     </div>
 
-    <div id="paypal-button-container"></div>
+    <!-- Success Message (shown after payment) -->
+    <div *ngIf="paymentSuccess" class="py-6 space-y-6">
+      <div class="flex flex-col items-center justify-center">
+        <div
+          class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mb-4 animate-pulse"
+        >
+          <svg
+            class="w-12 h-12 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-white mb-2">Payment Successful!</h2>
+        <p class="text-green-400 text-lg">Thank you for your purchase</p>
+        <div class="text-gray-400 mt-2">Order #{{ generateOrderNumber() }}</div>
+      </div>
 
-    <!-- Payment Success Message -->
-    <div
-      *ngIf="paymentSuccess"
-      class="mt-4 text-green-600 bg-green-100 px-4 py-2 rounded-lg"
-    >
-      🎉 Payment successful! Thank you.
-    </div>
+      <div class="bg-gray-700/50 p-4 rounded-lg">
+        <div class="flex justify-between mb-2">
+          <span class="text-gray-400">Amount paid:</span>
+          <span class="text-white font-semibold">${{ total.toFixed(2) }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-400">Payment method:</span>
+          <span class="text-white">PayPal</span>
+        </div>
+      </div>
 
-    <!-- Error Message -->
-    <div
-      *ngIf="paymentError"
-      class="mt-4 text-red-600 bg-red-100 px-4 py-2 rounded-lg"
-    >
-      {{ paymentError }}
+      <p class="text-gray-400 text-sm">
+        A confirmation email has been sent to your registered email address.
+      </p>
     </div>
 
     <div class="mt-4 flex justify-center gap-4">
       <!-- Continue Shopping Button -->
-      @if (paymentSuccess) {
       <a
+        *ngIf="paymentSuccess"
         routerLink="/home"
-        class="px-4 py-2 bg-blue-500 text-white rounded-lg cursor-pointer hover:bg-blue-600 transition"
+        class="px-6 py-3 bg-blue-600 text-white rounded-lg cursor-pointer hover:bg-blue-700 transition flex items-center"
       >
+        <svg
+          class="w-5 h-5 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+          ></path>
+        </svg>
         Continue Shopping
       </a>
-      } @else {
+
       <!-- Cancel Button -->
-      <div
-        class="px-4 py-2 bg-red-500 text-white rounded-lg cursor-pointer hover:bg-red-600 transition"
+      <a
+        *ngIf="!paymentSuccess"
+        routerLink="/checkout"
+        class="px-6 py-3 bg-red-600 text-white rounded-lg cursor-pointer hover:bg-red-700 transition"
       >
         Cancel
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer Info Section -->
+  <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+    <div
+      class="p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors"
+    >
+      <div class="flex justify-center mb-2">
+        <svg
+          class="w-8 h-8 text-yellow-500"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
       </div>
-      }
+      <h3 class="font-semibold">Your information is Safe</h3>
+      <p class="text-sm text-gray-400">
+        All transactions are secure and encrypted for your protection.
+      </p>
+    </div>
+    <div
+      class="p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors"
+    >
+      <div class="flex justify-center mb-2">
+        <svg
+          class="w-8 h-8 text-blue-500"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </div>
+      <h3 class="font-semibold">Secure checkout</h3>
+      <p class="text-sm text-gray-400">
+        We use industry-standard encryption to protect your payment details.
+      </p>
+    </div>
+    <div
+      class="p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors"
+    >
+      <div class="flex justify-center mb-2">
+        <svg
+          class="w-8 h-8 text-green-500"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </div>
+      <h3 class="font-semibold">Need Help?</h3>
+      <p class="text-sm text-gray-400">
+        Our support team is available 24/7 to assist with any payment issues.
+      </p>
     </div>
   </div>
 </div>

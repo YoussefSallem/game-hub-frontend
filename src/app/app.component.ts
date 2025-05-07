@@ -26,6 +26,7 @@ export class AppComponent {
           '/404',
           '/passwordRecovery',
           '/payment',
+          '/checkout',
         ];
         this.showNavbar = !hiddenRoutes.includes(event.urlAfterRedirects);
         this.showFooter = !hiddenRoutes.includes(event.urlAfterRedirects);
