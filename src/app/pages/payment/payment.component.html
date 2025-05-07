@@ -1,1 +1,51 @@
-<p>payment works!</p>
+<div
+  class="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6"
+>
+  <div
+    class="bg-white rounded-2xl shadow-md p-8 max-w-md w-full text-center space-y-4"
+  >
+    <div class="text-xl font-semibold text-gray-800">
+      Total amount to pay: $10
+    </div>
+    <div class="text-sm text-gray-600">
+      Please do not refresh the browser while the transaction is processing.
+    </div>
+
+    <div id="paypal-button-container"></div>
+
+    <!-- Payment Success Message -->
+    <div
+      *ngIf="paymentSuccess"
+      class="mt-4 text-green-600 bg-green-100 px-4 py-2 rounded-lg"
+    >
+      🎉 Payment successful! Thank you.
+    </div>
+
+    <!-- Error Message -->
+    <div
+      *ngIf="paymentError"
+      class="mt-4 text-red-600 bg-red-100 px-4 py-2 rounded-lg"
+    >
+      {{ paymentError }}
+    </div>
+
+    <div class="mt-4 flex justify-center gap-4">
+      <!-- Continue Shopping Button -->
+      @if (paymentSuccess) {
+      <a
+        routerLink="/home"
+        class="px-4 py-2 bg-blue-500 text-white rounded-lg cursor-pointer hover:bg-blue-600 transition"
+      >
+        Continue Shopping
+      </a>
+      } @else {
+      <!-- Cancel Button -->
+      <div
+        class="px-4 py-2 bg-red-500 text-white rounded-lg cursor-pointer hover:bg-red-600 transition"
+      >
+        Cancel
+      </div>
+      }
+    </div>
+  </div>
+</div>
