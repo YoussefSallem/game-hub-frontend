@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { SideBarComponent } from '../../components/home-components/side-bar/side-bar.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiGamesService } from '../../services/api-games.service';
 
 @Component({
   selector: 'app-game-details',
-  imports: [SideBarComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './game-details.component.html',
   styleUrl: './game-details.component.css',
 })
 export class GameDetailsComponent implements OnInit {
   constructor(
     private _ActivatedRoute: ActivatedRoute,
-    private _ApiGamesService: ApiGamesService
+    private _ApiGamesService: ApiGamesService,
+    private _Location:Location
   ) {}
   gameId!: string | null;
   game: any;
@@ -31,5 +31,9 @@ export class GameDetailsComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+  back(){
+    this._Location.back()
   }
 }
