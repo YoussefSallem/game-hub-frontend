@@ -3,6 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ApiGamesService } from '../../services/api-games.service';
 import { FormsModule } from '@angular/forms';
 import { SideBarComponent } from '../../components/home-components/side-bar/side-bar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -19,11 +20,15 @@ export class HomeComponent implements OnInit {
   genres: any[] = [];
   genresLoading: boolean = false;
 
-  constructor(private _apiGamesService: ApiGamesService) {}
+  constructor(private _apiGamesService: ApiGamesService, private _router:Router) {}
 
   ngOnInit(): void {
     this.loadGenres();
     this.loadMore();
+  }
+
+  goToGameDetails(id:string) {
+    this._router.navigateByUrl(`games/${id}`)
   }
 
   loadGenres() {
