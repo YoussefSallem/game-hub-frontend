@@ -64,16 +64,16 @@ export const routes: Routes = [
     title: 'Password Recovery',
   },
   {
+    path: 'payment',
+    component: PaymentComponent,
+    title: 'Payment Page',
+  },
+  {
     path: 'not-found',
     loadComponent: () =>
       import('./pages/not-found/not-found.component').then(
         (obj) => obj.NotFoundComponent
       ),
-  },
-  {
-    path: 'payment',
-    component: PaymentComponent,
-    title: 'Payment Page',
   },
   { path: '**', redirectTo: 'not-found' },
 ];
