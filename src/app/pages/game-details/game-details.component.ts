@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiGamesService } from '../../services/api-games.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-game-details',
@@ -13,7 +14,8 @@ export class GameDetailsComponent implements OnInit {
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private _ApiGamesService: ApiGamesService,
-    private _Location:Location
+    private _Location: Location,
+    private cartService: CartService
   ) {}
   slug!: string | null;
   game: any;
@@ -33,7 +35,19 @@ export class GameDetailsComponent implements OnInit {
     });
   }
 
-  back(){
-    this._Location.back()
+  back() {
+    this._Location.back();
+  }
+
+  addToCart() {
+    if (this.game) {
+      this.cartService.addToCart({
+        id: this.game.rawgId,
+        name: this.game.name,
+        price: this.game.price || 59.99,
+        image: this.game.background_image || this.game.backgroundImage, // Fixed image property
+        slug: this.game.slug,
+      });
+    }
   }
 }
