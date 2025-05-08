@@ -1,8 +1,10 @@
-<div class="flex flex-row min-h-screen overflow-y-hidden">
+<div
+  class="flex flex-row min-h-[calc(100vh-4rem)] md:min-h-screen overflow-y-hidden pt-16 md:pt-0"
+>
   <!-- skeletonLoader -->
   <div
     *ngIf="isLoading"
-    class="w-full p-4 md:p-6 space-y-6 bg-gray-900 text-gray-100 min-h-screen overflow-y-auto animate-pulse"
+    class="w-full p-4 md:p-6 space-y-6 bg-gray-900 text-gray-100 overflow-y-auto animate-pulse"
   >
     <div class="flex flex-col md:flex-row gap-8">
       <div class="md:w-1/3">
@@ -83,7 +85,7 @@
   <!-- Main Content (Original) -->
   <div
     *ngIf="!isLoading && game"
-    class="w-full p-4 md:p-6 space-y-6 bg-gray-900 text-gray-100 min-h-screen overflow-y-auto"
+    class="w-full p-4 md:p-6 space-y-6 bg-gray-900 text-gray-100 overflow-y-auto"
   >
     <div class="flex flex-col md:flex-row gap-8">
       <!-- Game Image Section -->
