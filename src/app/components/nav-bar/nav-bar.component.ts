@@ -4,8 +4,8 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
+  HostListener,
 } from '@angular/core';
-import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DarkModeToggleComponent } from '../dark-mode-toggle/dark-mode-toggle.component';
@@ -14,9 +14,7 @@ import { SidebarService } from '../../services/sidebar.service';
 import { KeyboardService } from '../../services/keyboard.service';
 import { ApiGamesService } from '../../services/api-games.service';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { CartService, CartItem } from '../../services/cart.service';
-
 
 @Component({
   selector: 'app-nav-bar',
