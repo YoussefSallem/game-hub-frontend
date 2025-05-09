@@ -5,73 +5,35 @@
   [class.lg:block]="true"
 >
   <div class="p-4">
-    <div class="flex flex-col gap-3">
-      <div
-        class="flex items-center gap-2 cursor-pointer"
-        routerLink="/checkout"
+    <div class="flex items-center gap-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        viewBox="0 0 24 24"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          viewBox="0 0 24 24"
-        >
-          <circle cx="9" cy="21" r="1" />
-          <circle cx="20" cy="21" r="1" />
-          <path
-            d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
-          />
-        </svg>
+        <circle cx="9" cy="21" r="1" />
+        <circle cx="20" cy="21" r="1" />
+        <path
+          d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+        />
+      </svg>
 
-        <h2 class="text-2xl font-bold text-white mb-1">Purchasing</h2>
-      </div>
-      <div
-        class="flex items-center gap-2 cursor-pointer"
-        routerLink="/wishlist"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          viewBox="0 0 24 24"
-        >
-          <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-          <path d="M12 7V21" />
-          <path d="M2 13h20" />
-          <path
-            d="M12 7c1.104 0 2-1.12 2-2.5S13.104 2 12 2 10 3.12 10 4.5 10.896 7 12 7z"
-          />
-          <path
-            d="M7 7c1.104 0 2-1.12 2-2.5S8.104 2 7 2 5 3.12 5 4.5 5.896 7 7 7z"
-          />
-          <path
-            d="M17 7c1.104 0 2-1.12 2-2.5S18.104 2 17 2s-2 1.12-2 2.5 0.896 2.5 2 2.5z"
-          />
-        </svg>
-
-        <h2 class="text-2xl font-bold text-white mb-1 cursor-pointer">
-          Wishlist
-        </h2>
-      </div>
+      <h2 class="text-2xl font-bold text-white mb-1">Purchasing</h2>
     </div>
 
     <!-- Buy Games button -->
     <button
-      class="w-full flex items-center justify-between my-3 p-2 rounded transition-colors"
-      [class.text-blue-400]="selectedGenre === null"
-      [class.bg-gray-700]="selectedGenre === null"
-      [class.hover:text-blue-400]="selectedGenre !== null"
-      [class.hover:bg-gray-700]="selectedGenre !== null"
+      class="w-full flex items-center justify-between my-3 p-2 roun ded transition-colors cursor-pointer"
+      [class.text-blue-400]="activeButton === 'buy'"
+      [class.bg-gray-700]="activeButton === 'buy'"
+      [class.hover:text-blue-400]="activeButton !== 'buy'"
+      [class.hover:bg-gray-700]="activeButton !== 'buy'"
       (click)="onBuyGamesClick(); $event.preventDefault()"
     >
       <span class="font-medium">Buy Games</span>
@@ -85,6 +47,42 @@
           fill-rule="evenodd"
           d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
           clip-rule="evenodd"
+        />
+      </svg>
+    </button>
+    <!-- Wishlist button -->
+    <button
+      class="w-full flex items-center justify-between my-3 p-2 rounded transition-colors cursor-pointer"
+      [class.text-blue-400]="activeButton === 'wishlist'"
+      [class.bg-gray-700]="activeButton === 'wishlist'"
+      [class.hover:text-blue-400]="activeButton !== 'wishlist'"
+      [class.hover:bg-gray-700]="activeButton !== 'wishlist'"
+      (click)="onWishlistClick(); $event.preventDefault()"
+      routerLink="/wishlist"
+    >
+      <span class="font-medium">Wishlist</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        viewBox="0 0 24 24"
+      >
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+        <path d="M12 7V21" />
+        <path d="M2 13h20" />
+        <path
+          d="M12 7c1.104 0 2-1.12 2-2.5S13.104 2 12 2 10 3.12 10 4.5 10.896 7 12 7z"
+        />
+        <path
+          d="M7 7c1.104 0 2-1.12 2-2.5S8.104 2 7 2 5 3.12 5 4.5 5.896 7 7 7z"
+        />
+        <path
+          d="M17 7c1.104 0 2-1.12 2-2.5S18.104 2 17 2s-2 1.12-2 2.5 0.896 2.5 2 2.5z"
         />
       </svg>
     </button>

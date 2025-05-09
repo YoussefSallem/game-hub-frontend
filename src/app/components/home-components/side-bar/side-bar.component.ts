@@ -23,8 +23,17 @@ export class SideBarComponent {
     this.sidebarService.close();
   }
 
+  activeButton: 'buy' | 'wishlist' | null = 'buy';
+
   onBuyGamesClick() {
     this.genreSelected.emit(null);
     this.sidebarService.close();
+    this.activeButton = 'buy';
+  }
+
+  onWishlistClick() {
+    this.genreSelected.emit(null);
+    this.sidebarService.close();
+    this.activeButton = 'wishlist';
   }
 }

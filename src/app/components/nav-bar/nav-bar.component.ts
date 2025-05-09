@@ -1,4 +1,10 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DarkModeToggleComponent } from '../dark-mode-toggle/dark-mode-toggle.component';
@@ -12,7 +18,7 @@ import { CartService, CartItem } from '../../services/cart.service';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit, OnChanges {
   isMenuOpen: boolean = false;
   isLoginIn: boolean = false;
   isCartOpen = false;
@@ -32,6 +38,10 @@ export class NavBarComponent implements OnInit {
       this.cartItems = items;
       this.cartItemsCount = items.length;
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.isLoginIn = this._apiLoginService.isLoggedIn();
   }
 
   toggleMenu() {
