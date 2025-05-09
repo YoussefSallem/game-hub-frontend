@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { OrderService } from '../../services/order.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -10,31 +11,21 @@ import { OrderService } from '../../services/order.service';
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })
-export class CheckoutComponent {
-  // Flag to track edit mode
+export class CheckoutComponent implements OnInit {
   isEditMode = false;
+  orderItems: any[] = [];
 
-  // Sample data - in a real app, this would come from a service
-  orderItems = [
-    {
-      id: 1,
-      title: 'Game Title 1',
-      edition: 'Digital Edition',
-      quantity: 1,
-      price: 29.99,
-      image: 'assets/images/game-placeholder.jpg',
-    },
-    {
-      id: 2,
-      title: 'Game Title 2',
-      edition: 'Standard Edition',
-      quantity: 1,
-      price: 19.99,
-      image: 'assets/images/game-placeholder.jpg',
-    },
-  ];
+  constructor(
+    private orderService: OrderService,
+    private router: Router,
+    private cartService: CartService
+  ) {}
 
-  constructor(private orderService: OrderService, private router: Router) {}
+  ngOnInit() {
+    this.cartService.getCartItems().subscribe((items) => {
+      this.orderItems = items;
+    });
+  }
 
   // Toggle edit mode
   toggleEditMode() {
@@ -43,13 +34,14 @@ export class CheckoutComponent {
 
   // Remove item from cart
   removeItem(index: number) {
-    this.orderItems.splice(index, 1);
+    const itemToRemove = this.orderItems[index];
+    this.cartService.removeFromCart(itemToRemove.id);
   }
 
-  // Calculate totals
+  // Remove insurance and update calculations
   get subtotal(): number {
     return this.orderItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
+      (sum, item) => sum + item.price * (item.quantity || 1),
       0
     );
   }
@@ -58,12 +50,8 @@ export class CheckoutComponent {
     return this.subtotal * 0.09; // 9% tax rate
   }
 
-  get insurance(): number {
-    return 2.0;
-  }
-
   get total(): number {
-    return this.subtotal + this.tax + this.insurance;
+    return this.subtotal + this.tax;
   }
 
   navigateToPayment() {

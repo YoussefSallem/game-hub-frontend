@@ -4,6 +4,8 @@ import { ApiGamesService } from '../../services/api-games.service';
 import { FormsModule } from '@angular/forms';
 import { SideBarComponent } from '../../components/home-components/side-bar/side-bar.component';
 import { Router } from '@angular/router';
+import { WishlistService } from '../../services/wishlist.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-home',
@@ -20,15 +22,20 @@ export class HomeComponent implements OnInit {
   genres: any[] = [];
   genresLoading: boolean = false;
 
-  constructor(private _apiGamesService: ApiGamesService, private _router:Router) {}
+  constructor(
+    private _apiGamesService: ApiGamesService,
+    private _apiWishlistService: WishlistService,
+    private _router: Router,
+    private _toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.loadGenres();
     this.loadMore();
   }
 
-  goToGameDetails(id:string) {
-    this._router.navigateByUrl(`games/${id}`)
+  goToGameDetails(id: string) {
+    this._router.navigateByUrl(`games/${id}`);
   }
 
   loadGenres() {
@@ -129,5 +136,22 @@ export class HomeComponent implements OnInit {
     if (!genreId) return '';
     const genre = this.genres.find((g) => g.id === genreId);
     return genre ? genre.name : '';
+  }
+
+  // Update the addToFav method
+  addToFav(gameId: string) {
+    this._apiWishlistService.addToWishlist(gameId).subscribe({
+      next: (res) => {
+        console.log('Successfully added to wishlist', res);
+        // Add toast notification
+        this._toastService.show(
+          'Game added to wishlist successfully!',
+          'success'
+        );
+      },
+      error: (err) => {
+        console.log('Error details:', err);
+      },
+    });
   }
 }

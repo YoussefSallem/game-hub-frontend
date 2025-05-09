@@ -3,10 +3,17 @@ import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ToastComponent } from './components/toast/toast.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavBarComponent, RouterModule, CommonModule],
+  imports: [
+    RouterOutlet,
+    NavBarComponent,
+    RouterModule,
+    CommonModule,
+    ToastComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
