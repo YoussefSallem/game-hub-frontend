@@ -45,12 +45,55 @@
         </div>
 
         <!-- Search Bar - Hidden on mobile -->
-        <div class="hidden md:block ml-6">
-          <input
-            type="text"
-            class="outline-0 px-4 py-2 text-gray-50 rounded-3xl bg-gray-600 w-48 lg:w-64"
-            placeholder="Search games"
-          />
+        <div class="hidden md:block ml-28">
+          <div class="relative w-fit">
+            <input
+              #searchInput
+              type="text"
+              class="outline-0 px-4 py-2 text-gray-50 rounded-3xl bg-gray-600 w-48 lg:w-64 transition-all duration-300"
+              placeholder="Search games"
+              [(ngModel)]="searchQuery"
+              (input)="onInputChange()"
+              (blur)="onSearchBlur()"
+              (focus)="onInputChange()"
+            />
+
+            <div
+              *ngIf="showResults"
+              class="absolute bg-black text-white mt-2 rounded-xl shadow-lg p-4 w-[24rem] max-h-[400px] overflow-y-auto z-50"
+            >
+              <h3 class="text-sm font-semibold mb-2">
+                Games
+                <span class="text-gray-400 text-xs">{{
+                  searchResults.length
+                }}</span>
+              </h3>
+              <ul>
+                <li
+                  *ngFor="let game of searchResults"
+                  class="flex items-center space-x-3 mb-2 hover:bg-gray-700 p-2 rounded-lg cursor-pointer"
+                >
+                  <img
+                    [src]="game.backgroundImage"
+                    alt="cover"
+                    class="w-10 h-10 object-cover rounded-md"
+                  />
+                  <div>
+                    <p class="font-medium">{{ game.name }}</p>
+                    <!-- <p class="text-xs text-gray-400">
+                      {{ game.parentPlatforms.map(p => p.name).join(', ') }}
+                    </p> -->
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="absolute -top-0.5 -right-0.5 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded shadow-md pointer-events-none"
+            >
+              ALT + ENTER
+            </div>
+          </div>
         </div>
       </div>
 

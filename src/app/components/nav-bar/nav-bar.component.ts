@@ -1,27 +1,93 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { DarkModeToggleComponent } from '../dark-mode-toggle/dark-mode-toggle.component';
 import { ApiLoginService } from '../../services/api-login.service';
 import { SidebarService } from '../../services/sidebar.service';
+import { KeyboardService } from '../../services/keyboard.service';
+import { ApiGamesService } from '../../services/api-games.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-nav-bar',
-  imports: [RouterLink, RouterModule, DarkModeToggleComponent],
+  imports: [
+    RouterLink,
+    RouterModule,
+    DarkModeToggleComponent,
+    FormsModule,
+    CommonModule,
+  ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })
-export class NavBarComponent implements OnInit {
-  constructor(
-    private _apiLoginService: ApiLoginService,
-    private router: Router,
-    private sidebarService: SidebarService
-  ) {}
+export class NavBarComponent implements OnInit, AfterViewInit {
+  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
   isMenuOpen: boolean = false;
   isLoginIn: boolean = false;
 
+  searchQuery: string = '';
+
+  searchResults: any[] = [];
+  showResults = false;
+
+  constructor(
+    private _apiLoginService: ApiLoginService,
+    private router: Router,
+    private sidebarService: SidebarService,
+    private keyboardService: KeyboardService,
+    private gameService: ApiGamesService
+  ) {}
+
+  onInputChange(): void {
+    const trimmed = this.searchQuery.trim();
+    if (!trimmed) {
+      this.searchResults = [];
+      this.showResults = false;
+      return;
+    }
+
+    this.gameService.searchGames(trimmed).subscribe({
+      next: (games) => {
+        this.searchResults = games;
+        this.showResults = true;
+      },
+      error: (err) => {
+        console.error('Search error:', err);
+        this.showResults = false;
+      },
+    });
+  }
+
   ngOnInit(): void {
     this.isLoginIn = this._apiLoginService.isLoggedIn();
+  }
+
+  ngAfterViewInit(): void {
+    this.keyboardService.keydown$.subscribe((event) => {
+      const tag = (event.target as HTMLElement).tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+      if (event.altKey && event.key === 'Enter') {
+        event.preventDefault();
+        this.searchInput.nativeElement.focus();
+        console.log(
+          this.searchInput.nativeElement.classList.add('lg:w-[600px]')
+        );
+      }
+    });
+  }
+
+  onSearchBlur(): void {
+    setTimeout(() => {
+      this.showResults = false;
+    }, 150);
   }
 
   toggleMenu() {
