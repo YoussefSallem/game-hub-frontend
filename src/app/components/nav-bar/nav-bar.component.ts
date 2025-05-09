@@ -1,26 +1,46 @@
 import {
   Component,
   OnInit,
-  HostListener,
   OnChanges,
   SimpleChanges,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  HostListener,
 } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DarkModeToggleComponent } from '../dark-mode-toggle/dark-mode-toggle.component';
 import { ApiLoginService } from '../../services/api-login.service';
 import { SidebarService } from '../../services/sidebar.service';
+import { KeyboardService } from '../../services/keyboard.service';
+import { ApiGamesService } from '../../services/api-games.service';
+import { FormsModule } from '@angular/forms';
 import { CartService, CartItem } from '../../services/cart.service';
 
 @Component({
   selector: 'app-nav-bar',
-  imports: [RouterLink, RouterModule, DarkModeToggleComponent, CommonModule],
+  imports: [
+    RouterLink,
+    RouterModule,
+    DarkModeToggleComponent,
+    FormsModule,
+    CommonModule,
+  ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })
-export class NavBarComponent implements OnInit, OnChanges {
+export class NavBarComponent implements OnInit, AfterViewInit, OnChanges {
+  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+
   isMenuOpen: boolean = false;
   isLoginIn: boolean = false;
+
+  searchQuery: string = '';
+
+  searchResults: any[] = [];
+  showResults = false;
+
   isCartOpen = false;
   cartItems: CartItem[] = [];
   cartItemsCount = 0;
@@ -29,8 +49,30 @@ export class NavBarComponent implements OnInit, OnChanges {
     private _apiLoginService: ApiLoginService,
     private router: Router,
     private sidebarService: SidebarService,
-    private cartService: CartService
+    private keyboardService: KeyboardService,
+    private cartService: CartService,
+    private gameService: ApiGamesService
   ) {}
+
+  onInputChange(): void {
+    const trimmed = this.searchQuery.trim();
+    if (!trimmed) {
+      this.searchResults = [];
+      this.showResults = false;
+      return;
+    }
+
+    this.gameService.searchGames(trimmed).subscribe({
+      next: (games) => {
+        this.searchResults = games;
+        this.showResults = true;
+      },
+      error: (err) => {
+        console.error('Search error:', err);
+        this.showResults = false;
+      },
+    });
+  }
 
   ngOnInit(): void {
     this.isLoginIn = this._apiLoginService.isLoggedIn();
@@ -42,6 +84,27 @@ export class NavBarComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.isLoginIn = this._apiLoginService.isLoggedIn();
+  }
+
+  ngAfterViewInit(): void {
+    this.keyboardService.keydown$.subscribe((event) => {
+      const tag = (event.target as HTMLElement).tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+      if (event.altKey && event.key === 'Enter') {
+        event.preventDefault();
+        this.searchInput.nativeElement.focus();
+        console.log(
+          this.searchInput.nativeElement.classList.add('lg:w-[600px]')
+        );
+      }
+    });
+  }
+
+  onSearchBlur(): void {
+    setTimeout(() => {
+      this.showResults = false;
+    }, 150);
   }
 
   toggleMenu() {
