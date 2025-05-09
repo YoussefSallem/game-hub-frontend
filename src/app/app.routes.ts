@@ -25,7 +25,7 @@ export const routes: Routes = [
     title: 'Checkout',
   },
   {
-    path: 'favorites',
+    path: 'wishlist',
     loadComponent: () =>
       import('./pages/favorites/favorites.component').then(
         (obj) => obj.FavoritesComponent

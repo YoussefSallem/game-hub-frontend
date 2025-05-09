@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SideBarComponent } from '../../components/home-components/side-bar/side-bar.component';
 import { Router } from '@angular/router';
 import { WishlistService } from '../../services/wishlist.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private _apiGamesService: ApiGamesService,
     private _apiWishlistService: WishlistService,
-    private _router: Router
+    private _router: Router,
+    private _toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -136,27 +138,19 @@ export class HomeComponent implements OnInit {
     return genre ? genre.name : '';
   }
 
-  addToFav(gameId: any) {
-    console.log('hello');
+  // Update the addToFav method
+  addToFav(gameId: string) {
     this._apiWishlistService.addToWishlist(gameId).subscribe({
       next: (res) => {
         console.log('Successfully added to wishlist', res);
-        console.log('Game added to wishlist successfully!');
+        // Add toast notification
+        this._toastService.show(
+          'Game added to wishlist successfully!',
+          'success'
+        );
       },
       error: (err) => {
-        console.error('Error details:', err);
-        if (err.status == 401) {
-          console.log('please login');
-          this._router.navigate(['/login']);
-        } else {
-          console.log(
-            `Error: ${
-              err.error?.message ||
-              err.message ||
-              'Failed to add to wishlist. Please try again.'
-            }`
-          );
-        }
+        console.log('Error details:', err);
       },
     });
   }
