@@ -1,0 +1,21 @@
+<div class="hidden md:flex items-center space-x-2 lg:space-x-4">
+  <!-- Desktop Theme Toggle -->
+  <app-dark-mode-toggle />
+
+  <!-- Login/Logout Button -->
+  @if (isLoginIn) {
+  <a
+    (click)="logout()"
+    class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
+    routerLinkActive="bg-gray-900"
+    >Logout</a
+  >
+  } @else {
+  <a
+    routerLink="login"
+    class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
+    routerLinkActive="bg-gray-900"
+    >Login</a
+  >
+  }
+</div>
