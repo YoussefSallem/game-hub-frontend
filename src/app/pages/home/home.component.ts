@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
   }
 
   goToGameDetails(id: string) {
+    window.scrollTo(0, 0);
     this._router.navigateByUrl(`games/${id}`);
   }
 
