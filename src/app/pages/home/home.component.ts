@@ -138,19 +138,40 @@ export class HomeComponent implements OnInit {
     return genre ? genre.name : '';
   }
 
-  // Update the addToFav method
   addToFav(gameId: string) {
-    this._apiWishlistService.addToWishlist(gameId).subscribe({
+    // First check if game is already in wishlist
+    this._apiWishlistService.showGamesInWishlist().subscribe({
       next: (res) => {
-        console.log('Successfully added to wishlist', res);
-        // Add toast notification
-        this._toastService.show(
-          'Game added to wishlist successfully!',
-          'success'
-        );
+        const wishlist = res['wishlist'] || [];
+        if (wishlist.includes(gameId)) {
+          this._toastService.show(
+            'Game is already in your wishlist!',
+            'warning'
+          );
+          return;
+        }
+
+        // If not in wishlist, proceed to add it
+        this._apiWishlistService.addToWishlist(gameId).subscribe({
+          next: (res) => {
+            console.log('Successfully added to wishlist', res);
+            this._toastService.show(
+              'Game added to wishlist successfully!',
+              'success'
+            );
+          },
+          error: (err) => {
+            console.log('Error details:', err);
+            this._toastService.show(
+              'You already added this game to your wishlist.',
+              'error'
+            );
+          },
+        });
       },
       error: (err) => {
-        console.log('Error details:', err);
+        console.log('Error checking wishlist:', err);
+        this._toastService.show('Failed to check wishlist status', 'error');
       },
     });
   }
