@@ -23,6 +23,7 @@
       <ul>
         <li
           *ngFor="let game of searchResults"
+          (click)="goToGameDetails(game.slug)"
           class="flex items-center space-x-3 mb-2 hover:bg-gray-700 p-2 rounded-lg cursor-pointer"
         >
           <img

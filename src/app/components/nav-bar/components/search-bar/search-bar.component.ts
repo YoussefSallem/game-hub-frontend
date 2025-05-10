@@ -11,6 +11,7 @@ import { ApiGamesService } from '../../../../services/api-games.service';
 import { FormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -33,7 +34,8 @@ export class SearchBarComponent implements AfterViewInit {
   constructor(
     private keyboardService: KeyboardService,
     private gameService: ApiGamesService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private _router: Router
   ) {
     // Initialize the debounced search
     this.searchSubject
@@ -53,6 +55,7 @@ export class SearchBarComponent implements AfterViewInit {
         this.gameService.searchGames(query).subscribe({
           next: (games) => {
             this.searchResults = games;
+            console.log(this.searchResults);
             this.showResults = true;
           },
           error: (err) => {
@@ -102,5 +105,10 @@ export class SearchBarComponent implements AfterViewInit {
 
       this.allowCollapse = true; // Reset flag
     }, 150);
+  }
+
+  goToGameDetails(slug: string) {
+    window.scrollTo(0, 0);
+    this._router.navigateByUrl(`games/${slug}`);
   }
 }
