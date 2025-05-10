@@ -60,7 +60,8 @@
             class="w-full text-sm md:text-base border border-gray-700 bg-gray-800 text-gray-200 rounded-lg p-2 md:p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition-colors"
           >
             <option value="Relevance">Relevance</option>
-            <option value="Name">Name</option>
+            <option value="Name">Name (A → Z)</option>
+            <option value="-Name">Name (Z → A)</option>
             <option value="Release date">Release date</option>
             <option value="Popularity">Popularity</option>
             <option value="Average rating">Average rating</option>
@@ -153,7 +154,11 @@
 
     <!-- Game Card Container with improved responsiveness -->
     <div
-      [class]="isVerticalLayout ? 'flex flex-col items-center justify-center min-h-[60vh] gap-4' : 'grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 xs:gap-3 sm:gap-4 md:gap-5 lg:gap-6'"
+      [class]="
+        isVerticalLayout
+          ? 'flex flex-col items-center justify-center min-h-[60vh] gap-4'
+          : 'grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 xs:gap-3 sm:gap-4 md:gap-5 lg:gap-6'
+      "
     >
       @for(item of list; track item.rawgId) {
       <div
