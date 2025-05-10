@@ -11,7 +11,6 @@ import { ToastService } from '../../services/toast.service';
   selector: 'app-home',
   imports: [CommonModule, FormsModule, SideBarComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
   skeletonArray: number[] = Array.from({ length: 11 }, (_, i) => i);

@@ -20,7 +20,6 @@ import { ApiUsersService } from '../../services/api-users.service';
     ReactiveFormsModule,
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
   constructor(

@@ -15,7 +15,6 @@ import { ToastComponent } from './components/toast/toast.component';
     ToastComponent,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'Game Hub';

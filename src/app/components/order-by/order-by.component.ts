@@ -4,8 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-order-by',
   imports: [],
   templateUrl: './order-by.component.html',
-  styleUrl: './order-by.component.css'
 })
-export class OrderByComponent {
-
-}
+export class OrderByComponent {}

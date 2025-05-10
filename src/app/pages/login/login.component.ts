@@ -21,7 +21,6 @@ import { OnInit } from '@angular/core';
     RouterModule,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
   constructor(
