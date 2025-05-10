@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   selectedGenre: string | null = null;
   genres: any[] = [];
   genresLoading: boolean = false;
+  isVerticalLayout: boolean = false;
 
   constructor(
     private _apiGamesService: ApiGamesService,
@@ -154,5 +155,9 @@ export class HomeComponent implements OnInit {
         console.log('Error details:', err);
       },
     });
+  }
+
+  toggleLayout(isVertical: boolean) {
+    this.isVerticalLayout = isVertical;
   }
 }

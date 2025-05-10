@@ -27,88 +27,140 @@
 
     <!-- Filters Section -->
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-3 md:gap-4"
+      class="flex flex-col md:flex-row gap-3 md:gap-4 items-start justify-between"
     >
-      <div class="sm:col-span-2 md:col-span-1 lg:col-span-1">
-        <label
-          for="orderSelect"
-          class="block mb-1 md:mb-2 text-sm md:text-base font-medium text-gray-300"
-        >
-          <span class="flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            Order by:
-          </span>
-        </label>
-        <select
-          id="orderSelect"
-          [(ngModel)]="orderValue"
-          (change)="onOrderChange($event)"
-          class="w-full text-sm md:text-base border border-gray-700 bg-gray-800 text-gray-200 rounded-lg p-2 md:p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition-colors"
-        >
-          <option value="Relevance">Relevance</option>
-          <option value="Name">Name</option>
-          <option value="Release date">Release date</option>
-          <option value="Popularity">Popularity</option>
-          <option value="Average rating">Average rating</option>
-        </select>
+      <!-- Left side filters - will stack on mobile, side by side on larger screens -->
+      <div class="w-full md:w-auto flex flex-col sm:flex-row gap-3 md:gap-4">
+        <!-- Order filter -->
+        <div class="w-full sm:w-48 md:w-52 lg:w-56">
+          <label
+            for="orderSelect"
+            class="block mb-1 md:mb-2 text-sm md:text-base font-medium text-gray-300"
+          >
+            <span class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Order by:
+            </span>
+          </label>
+          <select
+            id="orderSelect"
+            [(ngModel)]="orderValue"
+            (change)="onOrderChange($event)"
+            class="w-full text-sm md:text-base border border-gray-700 bg-gray-800 text-gray-200 rounded-lg p-2 md:p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition-colors"
+          >
+            <option value="Relevance">Relevance</option>
+            <option value="Name">Name</option>
+            <option value="Release date">Release date</option>
+            <option value="Popularity">Popularity</option>
+            <option value="Average rating">Average rating</option>
+          </select>
+        </div>
+
+        <!-- Platform filter -->
+        <div class="w-full sm:w-48 md:w-52 lg:w-56">
+          <label
+            for="platformSelect"
+            class="block mb-1 md:mb-2 text-sm md:text-base font-medium text-gray-300"
+          >
+            <span class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Platform:
+            </span>
+          </label>
+          <select
+            id="platformSelect"
+            (change)="onPlatformChange($event)"
+            class="w-full text-sm md:text-base border border-gray-700 bg-gray-800 text-gray-200 rounded-lg p-2 md:p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition-colors"
+          >
+            <option disabled selected>Platforms</option>
+            <option value="PC">PC</option>
+            <option value="Playstation">Playstation</option>
+            <option value="Xbox">Xbox</option>
+            <option value="Android">Android</option>
+            <option value="Linux">Linux</option>
+            <option value="Nintendo">Nintendo</option>
+          </select>
+        </div>
       </div>
 
-      <div class="sm:col-span-2 md:col-span-1 lg:col-span-1">
-        <label
-          for="platformSelect"
-          class="block mb-1 md:mb-2 text-sm md:text-base font-medium text-gray-300"
-        >
-          <span class="flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            Platform:
-          </span>
-        </label>
-        <select
-          id="platformSelect"
-          (change)="onPlatformChange($event)"
-          class="w-full text-sm md:text-base border border-gray-700 bg-gray-800 text-gray-200 rounded-lg p-2 md:p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition-colors"
-        >
-          <option disabled selected>Platforms</option>
-          <option value="PC">PC</option>
-          <option value="Playstation">Playstation</option>
-          <option value="Xbox">Xbox</option>
-          <option value="Android">Android</option>
-          <option value="Linux">Linux</option>
-          <option value="Nintendo">Nintendo</option>
-        </select>
+      <!-- Right side SVG icons - hidden on small screens, right-aligned on larger screens -->
+      <div
+        class="w-full md:w-auto hidden sm:flex flex-col items-center md:items-end gap-2 mt-2 md:mt-0"
+      >
+        <h3 class="text-sm md:text-base font-medium text-gray-300 mb-1">
+          Display options:
+        </h3>
+        <div class="flex justify-center items-center gap-3">
+          <svg
+            (click)="toggleLayout(true)"
+            [class.text-blue-400]="isVerticalLayout"
+            [class.text-sky-500]="!isVerticalLayout"
+            class="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 hover:text-blue-400 transition-colors cursor-pointer"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <rect x="4" y="4" width="16" height="6" rx="2" />
+            <rect x="4" y="14" width="16" height="6" rx="2" />
+          </svg>
+          <svg
+            (click)="toggleLayout(false)"
+            [class.text-blue-400]="!isVerticalLayout"
+            [class.text-sky-500]="isVerticalLayout"
+            class="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 hover:text-blue-400 transition-colors cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
+            />
+          </svg>
+        </div>
       </div>
     </div>
 
     <!-- Game Card Container with improved responsiveness -->
     <div
-      class="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 xs:gap-3 sm:gap-4 md:gap-5 lg:gap-6"
+      [class]="isVerticalLayout ? 'flex flex-col items-center justify-center min-h-[60vh] gap-4' : 'grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 xs:gap-3 sm:gap-4 md:gap-5 lg:gap-6'"
     >
       @for(item of list; track item.rawgId) {
       <div
         (click)="goToGameDetails(item.slug)"
         class="cursor-pointer group relative transform transition-all duration-300 hover:scale-[1.02] hover:z-20"
+        [style.width]="isVerticalLayout ? '450px' : null"
+        [style.height]="isVerticalLayout ? '450px' : null"
       >
         <!-- Main Card Content -->
         <div
