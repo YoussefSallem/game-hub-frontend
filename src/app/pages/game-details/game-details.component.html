@@ -165,7 +165,7 @@
         <div class="mb-6">
           <h2 class="text-xl font-semibold mb-2">ESRB Rating</h2>
           <span class="px-3 py-1 bg-red-600 rounded-md">{{
-            game.esrbRating.name
+            game.esrbRating?.name || 'Unknown'
           }}</span>
         </div>
 
