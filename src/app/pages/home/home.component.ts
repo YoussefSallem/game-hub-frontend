@@ -35,9 +35,9 @@ export class HomeComponent implements OnInit {
     this.loadMore();
   }
 
-  goToGameDetails(id: string) {
+  goToGameDetails(slug: string) {
     window.scrollTo(0, 0);
-    this._router.navigateByUrl(`games/${id}`);
+    this._router.navigateByUrl(`games/${slug}`);
   }
 
   loadGenres() {
