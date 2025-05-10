@@ -14,7 +14,6 @@ import { RouterLink } from '@angular/router';
   selector: 'app-recovery-password',
   imports: [FormsModule, CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './recovery-password.component.html',
-  styleUrl: './recovery-password.component.css',
 })
 export class RecoveryPasswordComponent {
   constructor(private _apiRecoverPasswordService: ApiRecoverPasswordService) {}

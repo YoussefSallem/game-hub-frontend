@@ -8,7 +8,6 @@ import { CartService } from '../../services/cart.service';
   selector: 'app-game-details',
   imports: [CommonModule],
   templateUrl: './game-details.component.html',
-  styleUrl: './game-details.component.css',
 })
 export class GameDetailsComponent implements OnInit {
   constructor(

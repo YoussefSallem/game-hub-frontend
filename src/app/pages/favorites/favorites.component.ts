@@ -9,7 +9,6 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './favorites.component.html',
-  styleUrl: './favorites.component.css',
 })
 export class FavoritesComponent implements OnInit {
   constructor(
