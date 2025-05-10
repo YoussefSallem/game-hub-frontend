@@ -1,0 +1,57 @@
+<div class="hidden md:block ml-28">
+  <div class="relative w-fit">
+    <input
+      #searchInput
+      type="text"
+      class="outline-0 px-4 py-2 text-gray-50 rounded-3xl bg-gray-600 transition-all duration-300"
+      [ngClass]="expanded ? 'input-expanded' : 'input-default'"
+      placeholder="Search games"
+      [(ngModel)]="searchQuery"
+      (input)="onInputChange()"
+      (blur)="onSearchBlur()"
+      (focus)="expanded = true"
+    />
+
+    <div
+      *ngIf="showResults"
+      class="absolute bg-black text-white mt-2 rounded-xl shadow-lg p-4 w-[24rem] max-h-[400px] overflow-y-auto z-50"
+    >
+      <h3 class="text-sm font-semibold mb-2">
+        Games
+        <span class="text-gray-400 text-xs">{{ searchResults.length }}</span>
+      </h3>
+      <ul>
+        <li
+          *ngFor="let game of searchResults"
+          class="flex items-center space-x-3 mb-2 hover:bg-gray-700 p-2 rounded-lg cursor-pointer"
+        >
+          <img
+            [src]="game.backgroundImage"
+            alt="cover"
+            class="w-10 h-10 object-cover rounded-md"
+          />
+          <div>
+            <p class="font-medium">{{ game.name }}</p>
+            <!-- <p class="text-xs text-gray-400">
+                      {{ game.parentPlatforms.map(p => p.name).join(', ') }}
+                    </p> -->
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div
+      class="absolute top-1/2 right-3 -translate-y-1/2 flex items-center space-x-1"
+    >
+      <span
+        class="px-1.5 py-0.5 text-xs text-gray-400 bg-gray-700 border border-gray-600 rounded"
+        >alt</span
+      >
+      <span class="text-xs text-gray-400">+</span>
+      <span
+        class="px-1.5 py-0.5 text-xs text-gray-400 bg-gray-700 border border-gray-600 rounded"
+        >enter</span
+      >
+    </div>
+  </div>
+</div>

@@ -17,6 +17,10 @@ import { KeyboardService } from '../../services/keyboard.service';
 import { ApiGamesService } from '../../services/api-games.service';
 import { FormsModule } from '@angular/forms';
 import { CartService, CartItem } from '../../services/cart.service';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { LogoComponent } from './components/logo/logo.component';
+import { DesktopAuthLinksComponent } from './components/desktop-auth-links/desktop-auth-links.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -26,6 +30,10 @@ import { CartService, CartItem } from '../../services/cart.service';
     DarkModeToggleComponent,
     FormsModule,
     CommonModule,
+    SearchBarComponent,
+    LogoComponent,
+    CartComponent,
+    DesktopAuthLinksComponent,
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',

@@ -9,3 +9,11 @@
   --color-Green: #4ade80;
   --color-content: #f1f5f9;
 }
+
+.input-expanded {
+  @apply lg:w-[600px];
+}
+
+.input-default {
+  @apply w-64 lg:w-72;
+}
