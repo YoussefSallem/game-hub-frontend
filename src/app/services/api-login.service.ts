@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../environments/environment';
 import { jwtDecode } from 'jwt-decode';
 
@@ -9,10 +9,15 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root',
 })
 export class ApiLoginService {
+  private loginState = new BehaviorSubject<boolean>(false);
+  logoutEvent = new EventEmitter<void>();
+
   constructor(
     private httpClient: HttpClient,
     private cookieService: CookieService
-  ) {}
+  ) {
+    this.loginState.next(this.isLoggedIn());
+  }
 
   loginUser(loginData: object): Observable<any> {
     return this.httpClient.post(`${environment.baseUrl}/auth`, loginData);
@@ -38,6 +43,7 @@ export class ApiLoginService {
       sameSite: 'Lax',
       expires: expirationDate,
     });
+    this.loginState.next(true);
   }
 
   // get token from cookie
@@ -55,6 +61,12 @@ export class ApiLoginService {
   logout(): void {
     this.cookieService.delete('authToken', '/');
     this.cookieService.delete('rememberMe', '/');
+    this.logoutEvent.emit();
+    this.loginState.next(false);
+  }
+
+  getLoginState() {
+    return this.loginState.asObservable();
   }
 
   isLoggedIn(): boolean {

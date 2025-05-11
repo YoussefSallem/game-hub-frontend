@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { OrderService } from '../../services/order.service';
+import { CartService } from '../../services/cart.service';
 
 declare var paypal: any;
 
@@ -20,7 +21,11 @@ export class PaymentComponent implements OnInit, AfterViewInit {
   orderNumber: string = '';
   orderID: string = '';
 
-  constructor(private http: HttpClient, private orderService: OrderService) {
+  constructor(
+    private http: HttpClient,
+    private orderService: OrderService,
+    private cartService: CartService
+  ) {
     this.total = this.orderService.getTotal();
     if (this.total <= 0) {
       this.total = 49.99; // Fallback value if no total was set
@@ -73,6 +78,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
             });
         },
 
+        // In onApprove callback
         onApprove: (data: any) => {
           return this.http
             .post(`${environment.baseUrl}/paypal/capture-order`, {
@@ -83,6 +89,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
               this.paymentSuccess = true;
               this.paymentError = '';
               console.log('Payment success:', res);
+              this.cartService.clearCart();
             })
             .catch((err) => {
               console.error(err);
