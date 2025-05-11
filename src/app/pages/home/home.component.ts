@@ -15,7 +15,7 @@ import { ToastService } from '../../services/toast.service';
 export class HomeComponent implements OnInit {
   skeletonArray: number[] = Array.from({ length: 11 }, (_, i) => i);
   list: any = [];
-  page: number = Math.floor(Math.random() * 50) + 1;
+  page: number = 1;
   isLoading: boolean = false;
   selectedGenre: string | null = null;
   genres: any[] = [];
