@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from '../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -58,5 +59,18 @@ export class ApiLoginService {
 
   isLoggedIn(): boolean {
     return this.cookieService.check('authToken');
+  }
+
+  isValidToken(): boolean {
+    try {
+      const token = this.getToken();
+      if (!token) return false;
+      const decodedToken: any = jwtDecode(token);
+      if (!decodedToken._id) return false;
+      return true;
+    } catch (error) {
+      console.error('Token validation error:', error);
+      return false;
+    }
   }
 }
