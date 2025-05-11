@@ -1,5 +1,5 @@
 <div
-  class="w-64 bg-gray-800 text-gray-100 fixed lg:static h-[calc(100vh-4rem)] lg:min-h-full z-10 overflow-y-auto pt-5 transform transition-all duration-300 ease-in-out"
+  class="w-64 bg-gray-800 text-gray-100 fixed lg:static h-screen md:h-screen lg:min-h-full z-10 overflow-y-auto lg:overflow-y-hidden pt-5 md:pt-16 lg:pt-5 transform transition-all duration-300 ease-in-out"
   [class.-translate-x-full]="!sidebarService.isOpen"
   [class.lg:translate-x-0]="true"
   [class.lg:block]="true"
@@ -30,10 +30,10 @@
     <!-- Buy Games button -->
     <button
       class="w-full flex items-center justify-between my-3 p-2 roun ded transition-colors cursor-pointer"
-      [class.text-blue-400]="activeButton === 'buy'"
-      [class.bg-gray-700]="activeButton === 'buy'"
-      [class.hover:text-blue-400]="activeButton !== 'buy'"
-      [class.hover:bg-gray-700]="activeButton !== 'buy'"
+      [class.text-blue-400]="activeButton === 'buy' && !selectedGenre"
+      [class.bg-gray-700]="activeButton === 'buy' && !selectedGenre"
+      [class.hover:text-blue-400]="activeButton !== 'buy' || selectedGenre"
+      [class.hover:bg-gray-700]="activeButton !== 'buy' || selectedGenre"
       (click)="onBuyGamesClick(); $event.preventDefault()"
     >
       <span class="font-medium">Buy Games</span>
