@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  viewChild,
-  ElementRef,
-  AfterViewInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
 import { RouterLink, RouterModule, Router } from '@angular/router';
 import {
   FormControl,
