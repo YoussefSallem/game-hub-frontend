@@ -24,6 +24,7 @@ export class AppComponent {
     // when route changes
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        const url = event.urlAfterRedirects;
         const hiddenRoutes = [
           '/login',
           '/register',
@@ -34,7 +35,9 @@ export class AppComponent {
           '/checkout',
           '/reset-password/:token',
         ];
-        this.showNavbar = !hiddenRoutes.includes(event.urlAfterRedirects);
+        const isResetPasswordRoute = url.startsWith('/reset-password/');
+
+        this.showNavbar = !hiddenRoutes.includes(url) && !isResetPasswordRoute;
       }
     });
   }

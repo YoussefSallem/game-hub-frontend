@@ -10,7 +10,7 @@ export class ApiResetPasswordService {
   constructor(private httpClient: HttpClient) {}
   resetPassword(userNewPassword: object, token: string): Observable<any> {
     return this.httpClient.post(
-      `${environment.baseUrl}/reset-password/${token}`,
+      `${environment.baseUrl}/auth/reset-password/${token}`,
       userNewPassword
     );
   }
