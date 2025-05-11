@@ -71,7 +71,7 @@ export const routes: Routes = [
     title: 'Password Recovery',
   },
   {
-    path: 'reset-password/:id',
+    path: 'reset-password/:token',
     component: ResetPasswordComponent,
     title: 'Reset your password',
   },

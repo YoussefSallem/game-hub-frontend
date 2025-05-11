@@ -32,7 +32,7 @@ export class AppComponent {
           '/passwordRecovery',
           '/payment',
           '/checkout',
-          '/reset-password',
+          '/reset-password/:token',
         ];
         this.showNavbar = !hiddenRoutes.includes(event.urlAfterRedirects);
       }
