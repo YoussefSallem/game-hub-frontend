@@ -19,12 +19,12 @@ import { ToastComponent } from './components/toast/toast.component';
 export class AppComponent {
   title = 'Game Hub';
   showNavbar = true;
-  showFooter = true;
 
   constructor(private router: Router) {
     // when route changes
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        const url = event.urlAfterRedirects;
         const hiddenRoutes = [
           '/login',
           '/register',
@@ -33,9 +33,11 @@ export class AppComponent {
           '/passwordRecovery',
           '/payment',
           '/checkout',
+          '/reset-password/:token',
         ];
-        this.showNavbar = !hiddenRoutes.includes(event.urlAfterRedirects);
-        this.showFooter = !hiddenRoutes.includes(event.urlAfterRedirects);
+        const isResetPasswordRoute = url.startsWith('/reset-password/');
+
+        this.showNavbar = !hiddenRoutes.includes(url) && !isResetPasswordRoute;
       }
     });
   }

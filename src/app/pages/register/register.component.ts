@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
 import { RouterLink, RouterModule, Router } from '@angular/router';
 import {
   FormControl,
@@ -21,7 +21,8 @@ import { ApiUsersService } from '../../services/api-users.service';
   ],
   templateUrl: './register.component.html',
 })
-export class RegisterComponent {
+export class RegisterComponent implements AfterViewInit {
+  @ViewChild('emailInput') emailInput!: ElementRef;
   constructor(
     private _apiUsersService: ApiUsersService,
     private router: Router
@@ -43,6 +44,10 @@ export class RegisterComponent {
     phone: '',
     password: '',
   };
+
+  ngAfterViewInit() {
+    this.emailInput.nativeElement.focus();
+  }
 
   registerValidation = new FormGroup({
     fnameVal: new FormControl('', [
@@ -104,15 +109,13 @@ export class RegisterComponent {
       password: this.registerValidation.controls.passwordVal.value,
     };
     this.isLoading = true;
-    console.log('Spinner should appear now, isLoading =', this.isLoading);
 
-    console.log(this.registerUserDataObj);
     // send user data to backend
     this._apiUsersService.addUser(this.registerUserDataObj).subscribe({
       next: (res) => {
         console.log('User Registered', res);
         this.isLoading = false;
-        this.router.navigate(['/home']);
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         this.isLoading = false;

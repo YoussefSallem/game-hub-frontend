@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiGamesService } from '../../services/api-games.service';
 import { CartService } from '../../services/cart.service';
 
@@ -13,7 +13,7 @@ export class GameDetailsComponent implements OnInit {
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private _ApiGamesService: ApiGamesService,
-    private _Location: Location,
+    private _router: Router,
     private cartService: CartService
   ) {}
   slug!: string | null;
@@ -34,8 +34,8 @@ export class GameDetailsComponent implements OnInit {
     });
   }
 
-  back() {
-    this._Location.back();
+  backToHome() {
+    this._router.navigateByUrl('/');
   }
 
   addToCart() {
