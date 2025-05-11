@@ -4,6 +4,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RecoveryPasswordComponent } from './pages/recovery-password/recovery-password.component';
 import { PaymentComponent } from './pages/payment/payment.component';
+import { authGuard } from './guards/auth.guard';
+import { paymentGuard } from './guards/payment.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -14,6 +16,7 @@ export const routes: Routes = [
       import('./pages/admin-dashboard/admin-dashboard.component').then(
         (obj) => obj.AdminDashboardComponent
       ),
+    canActivate: [authGuard],
     title: 'AdminDashboard',
   },
   {
@@ -22,6 +25,7 @@ export const routes: Routes = [
       import('./pages/checkout/checkout.component').then(
         (obj) => obj.CheckoutComponent
       ),
+    canActivate: [authGuard],
     title: 'Checkout',
   },
   {
@@ -30,6 +34,7 @@ export const routes: Routes = [
       import('./pages/favorites/favorites.component').then(
         (obj) => obj.FavoritesComponent
       ),
+    canActivate: [authGuard],
     title: 'Favorites Games',
   },
   {
@@ -43,6 +48,7 @@ export const routes: Routes = [
       import('./pages/payment/payment.component').then(
         (obj) => obj.PaymentComponent
       ),
+    canActivate: [authGuard, paymentGuard],
     title: 'Payment',
   },
   {

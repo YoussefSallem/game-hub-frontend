@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { environment } from '../environments/environment';
 import { ApiLoginService } from './api-login.service';
 import { Router } from '@angular/router';
@@ -16,23 +16,24 @@ export class WishlistService {
   ) {}
 
   addToWishlist(gameId: string): Observable<any> {
-    const token = this._apiLoginService.getToken();
-
-    if (!token) {
+    if (
+      !this._apiLoginService.isLoggedIn() ||
+      !this._apiLoginService.isValidToken()
+    ) {
       this.router.navigate(['/login']);
+      return EMPTY;
     }
 
+    const token = this._apiLoginService.getToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'x-auth-token': token,
     });
 
     return this.httpClient.put(
-      `${environment.baseUrl}/users/wishlist`,
-      {
-        gameId,
-      },
-      { headers, observe: 'response' }
+      `${environment.baseUrl}/users/wishlist/${gameId}`,
+      {},
+      { headers }
     );
   }
 
