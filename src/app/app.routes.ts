@@ -13,8 +13,6 @@ export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, title: 'Game Hub' },
   {
-    path: 'admin/dashboard',
-    component: AdminDashboardComponent,
     path: 'adminDashboard',
     loadComponent: () =>
       import('./pages/admin-dashboard/admin-dashboard.component').then(
