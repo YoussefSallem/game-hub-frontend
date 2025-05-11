@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -12,6 +13,8 @@ export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, title: 'Game Hub' },
   {
+    path: 'admin/dashboard',
+    component: AdminDashboardComponent,
     path: 'adminDashboard',
     loadComponent: () =>
       import('./pages/admin-dashboard/admin-dashboard.component').then(
