@@ -19,7 +19,6 @@ import { ToastComponent } from './components/toast/toast.component';
 export class AppComponent {
   title = 'Game Hub';
   showNavbar = true;
-  showFooter = true;
 
   constructor(private router: Router) {
     // when route changes
@@ -35,7 +34,6 @@ export class AppComponent {
           '/checkout',
         ];
         this.showNavbar = !hiddenRoutes.includes(event.urlAfterRedirects);
-        this.showFooter = !hiddenRoutes.includes(event.urlAfterRedirects);
       }
     });
   }

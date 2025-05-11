@@ -21,6 +21,10 @@ export class FavoritesComponent implements OnInit {
   isLoading: boolean = true;
 
   ngOnInit(): void {
+    this.loadWishlist();
+  }
+
+  private loadWishlist() {
     this._apiWishlistService.showGamesInWishlist().subscribe({
       next: (res) => {
         this.wishlistGameId = res['wishlist'] || [];
