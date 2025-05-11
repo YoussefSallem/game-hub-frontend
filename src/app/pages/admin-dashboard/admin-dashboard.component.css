@@ -1,0 +1,10 @@
+/* Additional styling if needed */
+.dark {
+  color-scheme: dark;
+}
+
+/* Chart container styles */
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
