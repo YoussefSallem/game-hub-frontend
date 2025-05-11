@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
@@ -22,7 +22,8 @@ import { OnInit } from '@angular/core';
   ],
   templateUrl: './login.component.html',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
+  @ViewChild('emailInput') emailInput!: ElementRef;
   constructor(
     private _apiLoginService: ApiLoginService,
     private router: Router
@@ -34,6 +35,10 @@ export class LoginComponent implements OnInit {
     if (this._apiLoginService.isLoggedIn()) {
       this.router.navigate(['/home']);
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.emailInput.nativeElement.focus();
   }
 
   email: string = '';
