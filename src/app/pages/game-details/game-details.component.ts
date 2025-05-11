@@ -3,6 +3,8 @@ import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiGamesService } from '../../services/api-games.service';
 import { CartService } from '../../services/cart.service';
+import { ToastService } from '../../services/toast.service';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-game-details',
@@ -14,7 +16,8 @@ export class GameDetailsComponent implements OnInit {
     private _ActivatedRoute: ActivatedRoute,
     private _ApiGamesService: ApiGamesService,
     private _router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private _toaster: ToastService
   ) {}
   slug!: string | null;
   game: any;
@@ -39,14 +42,31 @@ export class GameDetailsComponent implements OnInit {
   }
 
   addToCart() {
-    if (this.game) {
-      this.cartService.addToCart({
-        id: this.game.rawgId,
-        name: this.game.name,
-        price: this.game.price || 59.99,
-        image: this.game.background_image || this.game.backgroundImage, // Fixed image property
-        slug: this.game.slug,
+    if (!this.game) return;
+
+    this.cartService
+      .getCartItems()
+      .pipe(first())
+      .subscribe({
+        next: (items) => {
+          const index = items.findIndex((item) => item.name === this.game.name);
+
+          if (index !== -1) {
+            this._toaster.show('ya 3ars manta dost abl kda', 'error', 3000);
+          } else {
+            this.cartService.addToCart({
+              id: this.game.rawgId,
+              name: this.game.name,
+              price: this.game.price || 59.99,
+              image: this.game.background_image || this.game.backgroundImage,
+              slug: this.game.slug,
+            });
+            this._toaster.show('Added to your cart!', 'success', 3000);
+          }
+        },
+        error: () => {
+          this._toaster.show('Failed to access cart', 'error', 3000);
+        },
       });
-    }
   }
 }
