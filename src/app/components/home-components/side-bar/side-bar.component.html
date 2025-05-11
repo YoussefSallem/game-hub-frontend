@@ -30,10 +30,10 @@
     <!-- Buy Games button -->
     <button
       class="w-full flex items-center justify-between my-3 p-2 roun ded transition-colors cursor-pointer"
-      [class.text-blue-400]="activeButton === 'buy'"
-      [class.bg-gray-700]="activeButton === 'buy'"
-      [class.hover:text-blue-400]="activeButton !== 'buy'"
-      [class.hover:bg-gray-700]="activeButton !== 'buy'"
+      [class.text-blue-400]="activeButton === 'buy' && !selectedGenre"
+      [class.bg-gray-700]="activeButton === 'buy' && !selectedGenre"
+      [class.hover:text-blue-400]="activeButton !== 'buy' || selectedGenre"
+      [class.hover:bg-gray-700]="activeButton !== 'buy' || selectedGenre"
       (click)="onBuyGamesClick(); $event.preventDefault()"
     >
       <span class="font-medium">Buy Games</span>
