@@ -1,13 +1,6 @@
 <div
   class="flex flex-row min-h-[calc(100vh-4rem)] md:min-h-screen overflow-y-hidden pt-16 md:pt-0"
 >
-  <!-- Sidebar - Hidden on mobile/tablet unless showSidebar is true -->
-  <app-side-bar
-    [isLoading]="genresLoading"
-    [genres]="genres"
-    [selectedGenre]="selectedGenre"
-    (genreSelected)="onGenreSelected($event)"
-  ></app-side-bar>
   <!-- Main Content -->
   <div
     class="w-full p-4 md:p-6 space-y-6 bg-gray-900 text-gray-100 min-h-screen"
@@ -17,7 +10,7 @@
       <h1
         class="text-5xl md:text-7xl font-bold text-white bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text"
       >
-        {{ getGenreName(selectedGenre) || "Buy" }} Games
+        {{ selectedGenreName || "Buy" }} Games
       </h1>
       <p class="text-sm md:text-base text-gray-400">
         Discover top-rated titles curated by player popularity and latest

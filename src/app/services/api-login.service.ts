@@ -85,4 +85,17 @@ export class ApiLoginService {
       return false;
     }
   }
+
+  isAdmin(): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+
+    try {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.isAdmin;
+    } catch (error) {
+      console.error('Token decode error:', error);
+      return false;
+    }
+  }
 }
