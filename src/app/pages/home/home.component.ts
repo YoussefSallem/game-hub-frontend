@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ApiGamesService } from '../../services/api-games.service';
 import { FormsModule } from '@angular/forms';
-import { SideBarComponent } from '../../components/home-components/side-bar/side-bar.component';
 import { Router } from '@angular/router';
 import { WishlistService } from '../../services/wishlist.service';
 import { ToastService } from '../../services/toast.service';
+import { GenreService } from '../../services/genre.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule, SideBarComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
@@ -18,39 +18,29 @@ export class HomeComponent implements OnInit {
   page: number = 1;
   isLoading: boolean = false;
   selectedGenre: string | null = null;
-  genres: any[] = [];
-  genresLoading: boolean = false;
   isVerticalLayout: boolean = false;
 
   constructor(
     private _apiGamesService: ApiGamesService,
     private _apiWishlistService: WishlistService,
     private _router: Router,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private genreService: GenreService
   ) {}
 
   ngOnInit(): void {
-    this.loadGenres();
     this.loadMore();
+    this.genreService.selectedGenre$.subscribe((genre) => {
+      if (this.selectedGenre !== genre) {
+        this.selectedGenre = genre;
+        this.resetAndLoad();
+      }
+    });
   }
 
   goToGameDetails(slug: string) {
     window.scrollTo(0, 0);
     this._router.navigateByUrl(`games/${slug}`);
-  }
-
-  loadGenres() {
-    this.genresLoading = true;
-    this._apiGamesService.getGenres().subscribe({
-      next: (res) => {
-        this.genres = res.results; // Extract results from response
-        this.genresLoading = false;
-      },
-      error: (err) => {
-        console.error('Error loading genres:', err);
-        this.genresLoading = false;
-      },
-    });
   }
 
   @HostListener('window:scroll', [])
@@ -131,12 +121,6 @@ export class HomeComponent implements OnInit {
           },
         });
     }
-  }
-
-  getGenreName(genreId: string | null): string {
-    if (!genreId) return '';
-    const genre = this.genres.find((g) => g.id === genreId);
-    return genre ? genre.name : '';
   }
 
   addToFav(gameId: string) {

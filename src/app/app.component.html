@@ -1,3 +1,15 @@
 <app-nav-bar *ngIf="showNavbar"></app-nav-bar>
-<router-outlet></router-outlet>
+
+<!-- Sidebar - Hidden on mobile/tablet unless showSidebar is true -->
+<div
+  class="flex flex-row min-h-[calc(100vh-4rem)] md:min-h-screen overflow-y-hidden pt-16 md:pt-0"
+>
+  <app-side-bar
+    [isLoading]="genresLoading"
+    [genres]="genres"
+    [selectedGenre]="selectedGenre"
+    (genreSelected)="onGenreSelected($event)"
+  ></app-side-bar>
+  <router-outlet></router-outlet>
+</div>
 <app-toast></app-toast>
