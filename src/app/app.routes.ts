@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RecoveryPasswordComponent } from './pages/recovery-password/recovery-password.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { authGuard } from './guards/auth.guard';
+import { adminGuard } from './guards/admin.guard';
 import { paymentGuard } from './guards/payment.guard';
 
 export const routes: Routes = [
@@ -16,7 +17,7 @@ export const routes: Routes = [
       import('./pages/admin-dashboard/admin-dashboard.component').then(
         (obj) => obj.AdminDashboardComponent
       ),
-    canActivate: [authGuard],
+    canActivate: [authGuard, adminGuard],
     title: 'AdminDashboard',
   },
   {
