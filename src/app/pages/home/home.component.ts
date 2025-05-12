@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   page: number = 1;
   isLoading: boolean = false;
   selectedGenre: string | null = null;
+  selectedGenreName: string | null = null;
+  genres: any[] = [];
   isVerticalLayout: boolean = false;
 
   constructor(
@@ -29,13 +31,30 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadMore();
-    this.genreService.selectedGenre$.subscribe((genre) => {
-      if (this.selectedGenre !== genre) {
-        this.selectedGenre = genre;
+    // Get genres from API first
+    this._apiGamesService.getGenres().subscribe({
+      next: (response) => {
+        this.genres = response.results;
+      },
+      error: (err) => console.error('Error loading genres:', err),
+    });
+
+    // Subscribe to genre changes
+    this.genreService.selectedGenre$.subscribe((genreId) => {
+      if (genreId) {
+        const genre = this.genres?.find((g) => g.id === genreId);
+        this.selectedGenreName = genre?.name || null;
+        this.selectedGenre = genreId;
+        this.resetAndLoad();
+      } else {
+        this.selectedGenreName = null;
+        this.selectedGenre = null;
         this.resetAndLoad();
       }
     });
+
+    // Initial load
+    this.loadMore();
   }
 
   goToGameDetails(slug: string) {

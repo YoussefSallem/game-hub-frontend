@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
   selectedGenre: string | null = null;
   genres: any[] = [];
   genresLoading: boolean = false;
+  isAdminRoute: boolean = false;
 
   constructor(
     private router: Router,
@@ -38,6 +39,8 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const url = event.urlAfterRedirects;
+        this.isAdminRoute = url.includes('adminDashboard');
+
         const hiddenRoutes = [
           '/login',
           '/register',

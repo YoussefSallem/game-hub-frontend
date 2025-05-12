@@ -1,9 +1,10 @@
-<app-nav-bar *ngIf="showNavbar"></app-nav-bar>
+<app-nav-bar *ngIf="showNavbar && !isAdminRoute"></app-nav-bar>
 
 <div
   class="flex flex-row min-h-[calc(100vh-4rem)] md:min-h-screen overflow-y-hidden pt-16 md:pt-0"
 >
   <app-side-bar
+    *ngIf="showNavbar && !isAdminRoute"
     [isLoading]="genresLoading"
     [genres]="genres"
     [selectedGenre]="selectedGenre"
