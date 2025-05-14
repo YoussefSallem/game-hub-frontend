@@ -549,21 +549,36 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div
-            *ngFor="let i of [1, 2, 3, 4, 5, 6]"
-            class="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden"
+            *ngFor="let game of data"
+            class="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden flex flex-col"
           >
-            <div class="h-40 bg-gray-200 dark:bg-gray-600"></div>
-            <div class="p-4">
-              <h4 class="font-medium text-gray-800 dark:text-white">
-                Game Title {{ i }}
+            <div
+              class="h-40 bg-gray-200 dark:bg-gray-600 flex items-center justify-center overflow-hidden"
+            >
+              <img
+                [src]="game.backgroundImage"
+                [alt]="game.name"
+                class="object-cover w-full h-full"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-4 flex flex-col flex-1 justify-between">
+              <h4 class="font-medium text-gray-800 dark:text-white truncate">
+                {{ game.name }}
               </h4>
-              <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                Genre: Action, Adventure
+              <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 truncate">
+                Genre:
+                {{
+                  game.tags && game.tags.length > 0
+                    ? game.tags[0]?.name +
+                      (game.tags[1] ? ", " + game.tags[1]?.name : "")
+                    : "N/A"
+                }}
               </p>
               <div class="flex justify-between items-center mt-3">
-                <span class="font-bold text-gray-800 dark:text-white"
-                  >$59.99</span
-                >
+                <span class="font-bold text-gray-800 dark:text-white">
+                  ${{ game.price }}
+                </span>
                 <div>
                   <button class="text-blue-500 hover:text-blue-700 mr-2">
                     Edit
