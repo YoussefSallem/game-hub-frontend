@@ -646,17 +646,29 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-              <tr *ngFor="let i of [1, 2, 3, 4, 5]">
+              <tr *ngFor="let user of users">
                 <td class="px-4 py-3 whitespace-nowrap">
                   <div class="flex items-center">
                     <div
-                      class="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-600"
-                    ></div>
+                      class="h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-600"
+                    >
+                      <img
+                        [src]="
+                          'https://ui-avatars.com/api/?name=' +
+                          user.first_name +
+                          '+' +
+                          user.last_name +
+                          '&background=random'
+                        "
+                        [alt]="user.first_name + ' ' + user.last_name"
+                        class="w-full h-full object-cover"
+                      />
+                    </div>
                     <div class="ml-4">
                       <div
                         class="text-sm font-medium text-gray-800 dark:text-gray-200"
                       >
-                        User {{ i }}
+                        {{ user.first_name }} {{ user.last_name }}
                       </div>
                     </div>
                   </div>
@@ -664,12 +676,12 @@
                 <td
                   class="px-4 py-3 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"
                 >
-                  user{{ i }}.com
+                  {{ user.email }}
                 </td>
                 <td
                   class="px-4 py-3 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"
                 >
-                  {{ i % 3 === 0 ? "Admin" : "Customer" }}
+                  {{ user.isAdmin ? "Admin" : "Customer" }}
                 </td>
                 <td class="px-4 py-3 whitespace-nowrap text-sm">
                   <span
