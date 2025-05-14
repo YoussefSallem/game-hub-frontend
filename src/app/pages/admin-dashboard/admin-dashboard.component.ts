@@ -1789,46 +1789,46 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   // Orders data
   recentOrders = [
     {
+      id: '98652366',
+      product: 'League of Legends',
+      orders: 50,
+      status: 'Approved',
+      amount: 90.29,
+    },
+    {
+      id: '94564503',
+      product: 'Valorant',
+      orders: 40,
+      status: 'Rejected',
+      amount: 542.5,
+    },
+    {
+      id: '98732623',
+      product: 'It Takes Two',
+      orders: 69,
+      status: 'Rejected',
+      amount: 29.5,
+    },
+    {
       id: '12345678',
-      product: 'Keyboard',
+      product: 'Grand Theft Auto V',
       orders: 125,
       status: 'Rejected',
       amount: 270.99,
     },
     {
       id: '12360564',
-      product: 'Computer Accessories',
+      product: 'The Witcher 3: Wild Hunt',
       orders: 100,
       status: 'Approved',
       amount: 583.46,
     },
     {
-      id: '94564503',
-      product: 'Camera Lens',
-      orders: 40,
-      status: 'Rejected',
-      amount: 542.5,
-    },
-    {
       id: '86728656',
-      product: 'TV',
+      product: 'Counter-Strike: Global Offensive',
       orders: 99,
       status: 'Pending',
       amount: 810.8,
-    },
-    {
-      id: '98652366',
-      product: 'Headset',
-      orders: 50,
-      status: 'Approved',
-      amount: 90.29,
-    },
-    {
-      id: '98732623',
-      product: 'Mouse',
-      orders: 69,
-      status: 'Rejected',
-      amount: 29.5,
     },
   ];
 
