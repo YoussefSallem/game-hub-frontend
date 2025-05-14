@@ -1712,6 +1712,80 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     },
   ];
 
+  // static array of users
+  users = [
+    {
+      _id: {
+        $oid: '681634c4b4eb313f5602817d',
+      },
+      first_name: 'Youssef',
+      last_name: 'Yasser',
+      email: 'test@gmail.com',
+      phone: '0123456789',
+      isAdmin: true,
+      resetToken: null,
+      resetTokenExpiry: null,
+      __v: 6,
+      wishlist: [],
+    },
+    {
+      _id: {
+        $oid: '680f7abbbf4b173a099e2916',
+      },
+      first_name: 'Ahmed',
+      last_name: 'Shebl',
+      email: 'bokashalaboka@gmail.com',
+      phone: '0123456789',
+      address: {
+        city: 'Giza',
+        street: '123 street',
+        zipCode: '12214',
+        apartmentNumber: '12',
+        buildingNumber: '2',
+        _id: {
+          $oid: '680f7abbbf4b173a099e2917',
+        },
+      },
+      __v: 8,
+      isAdmin: false,
+      wishlist: ['422', '41', '5679'],
+    },
+    {
+      _id: {
+        $oid: '681131168f428762e17c7a4b',
+      },
+      first_name: 'Kareem',
+      last_name: 'Ehab',
+      email: 'kareem@gmail.com',
+      phone: '01111119999',
+      isAdmin: true,
+      __v: 0,
+    },
+    {
+      _id: {
+        $oid: '681548e5bd61457e4ebbc1c1',
+      },
+      first_name: 'Mahmoud',
+      last_name: 'Mandour',
+      email: 'mahmoudmandour200015@gmail.com',
+      phone: '01112041975',
+      isAdmin: true,
+      __v: 131,
+      wishlist: [],
+      authMethod: 'google',
+      googleId: '118442509182108541040',
+      isVerified: false,
+      updatedAt: {
+        $date: '2025-05-12T01:31:33.359Z',
+      },
+      resetToken:
+        'ee1ec4e9280b2dfe98c1f415750970ea19fa43351c25ad497a2a1ff93788898c',
+      resetTokenExpiry: {
+        $date: '2025-05-13T14:36:48.684Z',
+      },
+    },
+  ];
+
   // Orders data
   recentOrders = [
     {
