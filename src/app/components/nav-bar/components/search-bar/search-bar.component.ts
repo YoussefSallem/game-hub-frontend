@@ -109,6 +109,16 @@ export class SearchBarComponent implements AfterViewInit {
 
   goToGameDetails(slug: string) {
     window.scrollTo(0, 0);
-    this._router.navigateByUrl(`games/${slug}`);
+    // Instead of just navigating, we need to check if we're already on a game details page
+    if (this._router.url.includes('games/')) {
+      // If we are, navigate to the same URL with skipLocationChange first, then to the new URL
+      // This forces Angular to reload the component
+      this._router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this._router.navigate([`games/${slug}`]);
+      });
+    } else {
+      // If we're not on a game details page, navigate normally
+      this._router.navigateByUrl(`games/${slug}`);
+    }
   }
 }
