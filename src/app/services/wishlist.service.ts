@@ -31,8 +31,8 @@ export class WishlistService {
     });
 
     return this.httpClient.put(
-      `${environment.baseUrl}/users/wishlist/${gameId}`,
-      {},
+      `${environment.baseUrl}/users/wishlist`,
+      { gameId },
       { headers }
     );
   }
