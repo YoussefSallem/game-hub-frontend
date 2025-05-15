@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../environments/environment';
 import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ export class ApiLoginService {
 
   constructor(
     private httpClient: HttpClient,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) {
     this.loginState.next(this.isLoggedIn());
   }
@@ -61,8 +63,9 @@ export class ApiLoginService {
   logout(): void {
     this.cookieService.delete('authToken', '/');
     this.cookieService.delete('rememberMe', '/');
-    this.logoutEvent.emit();
+    // this.logoutEvent.emit();
     this.loginState.next(false);
+    this.router.navigate(['/login']);
   }
 
   getLoginState() {
@@ -75,7 +78,9 @@ export class ApiLoginService {
 
   isValidToken(): boolean {
     try {
+      // const token = this.getToken();
       const token = this.getToken();
+
       if (!token) return false;
       const decodedToken: any = jwtDecode(token);
       if (!decodedToken._id) return false;
