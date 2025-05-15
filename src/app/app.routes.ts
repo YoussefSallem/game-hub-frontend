@@ -5,8 +5,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RecoveryPasswordComponent } from './pages/recovery-password/recovery-password.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { authGuard } from './guards/auth.guard';
+import { adminGuard } from './guards/admin.guard';
 import { paymentGuard } from './guards/payment.guard';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -17,7 +17,7 @@ export const routes: Routes = [
       import('./pages/admin-dashboard/admin-dashboard.component').then(
         (obj) => obj.AdminDashboardComponent
       ),
-    canActivate: [authGuard],
+    canActivate: [authGuard, adminGuard],
     title: 'AdminDashboard',
   },
   {
@@ -49,7 +49,7 @@ export const routes: Routes = [
       import('./pages/payment/payment.component').then(
         (obj) => obj.PaymentComponent
       ),
-    canActivate: [authGuard, paymentGuard],
+    canActivate: [authGuard, paymentGuard], // Add both guards
     title: 'Payment',
   },
   {
@@ -69,11 +69,6 @@ export const routes: Routes = [
     path: 'passwordRecovery',
     component: RecoveryPasswordComponent,
     title: 'Password Recovery',
-  },
-  {
-    path: 'reset-password/:token',
-    component: ResetPasswordComponent,
-    title: 'Reset your password',
   },
   {
     path: 'payment',

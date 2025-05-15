@@ -1,59 +1,85 @@
-# RawG
+# Game Hub - Information Technology Institue (ITI)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+This is a gaming platform built using Angular, TypeScript, and Tailwind CSS. It allows users to discover, browse, and purchase games while providing detailed information about each title.
 
-## Development server
+## Table of contents
 
-To start a local development server, run:
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [Our process](#our-process)
+  - [Built with](#built-with)
+- [Authors](#authors)
 
-```bash
-ng serve
-```
+## Overview
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### The challenge
 
-## Code scaffolding
+Users should be able to:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- View and browse games with responsive layout across all devices
+- Filter games by genre, platform, and other criteria
+- Sort games by different parameters (name, release date, popularity, etc.)
+- Toggle between different layout views for game listings
+- Add/Remove games from their wishlist
+- View detailed information about each game
+- Complete the purchase process for selected games
+- Access their wishlist of saved games
+- Receive form validations during registration and login
+- Maintain session state across browser refreshes
+- View order history and manage their profile
+- Admin users can access dashboard for management tasks
 
-```bash
-ng generate component component-name
-```
+### Screenshot
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+![](./public/Images/screenshot.png)
 
-```bash
-ng generate --help
-```
+### Links
 
-## Building
+- Web Application Solution URL: (https://github.com/YoussefSallem/game-hub-frontend/)
+- Backend Solution URL: (https://github.com/AhmedShebl2000/game-hub-backend/)
+- Live Site URL: (https://game-hub-iti.netlify.app/home/)
+- Live Back-end URL: (https://game-hub-backend-woad.vercel.app/api/)
 
-To build the project run:
+## Our process
 
-```bash
-ng build
-```
+### Built with
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- [Angular](https://angular.io/) - Web Framework
+- [TypeScript](https://www.typescriptlang.org/) - Programming Language
+- [Tailwind CSS](https://tailwindcss.com/) - CSS Framework
+- [Node.js](https://nodejs.org/) - Runtime Environment
+- [Express](https://expressjs.com/) - Backend Framework
+- [MongoDB](https://www.mongodb.com/) - Database
+- RESTful API Architecture
+- Responsive Design principles
+- JWT Authentication
+- Lazy Loading
+- Component-Based Architecture
 
-## Running unit tests
+## Authors
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- Kareem Ehab
 
-```bash
-ng test
-```
+  - [GitHub](https://github.com/KareemEhab)
+  - [LinkedIn](https://www.linkedin.com/in/kareem-hamouda/)
 
-## Running end-to-end tests
+- Youssef Yasser
 
-For end-to-end (e2e) testing, run:
+  - [GitHub](https://github.com/Youssef-Yasser-Mahmoud)
+  - [LinkedIn](https://www.linkedin.com/in/jooyasser/)
 
-```bash
-ng e2e
-```
+- Mahmoud Mohamed
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+  - [GitHub](https://github.com/mahmoud1mandour)
+  - [LinkedIn](https://www.linkedin.com/in/mahmoud-mandour-m107/)
 
-## Additional Resources
+- Ahmed Shebl
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+  - [GitHub](https://github.com/AhmedShebl2000)
+  - [LinkedIn](https://www.linkedin.com/in/ahmedshebl16/)
+
+- Youssef Salem
+  - [GitHub](https://github.com/YoussefSallem)
+  - [LinkedIn](https://www.linkedin.com/in/yousseffsalem/)

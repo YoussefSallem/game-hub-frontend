@@ -2,24 +2,24 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ApiGamesService } from '../../services/api-games.service';
 import { FormsModule } from '@angular/forms';
-import { SideBarComponent } from '../../components/home-components/side-bar/side-bar.component';
 import { Router } from '@angular/router';
 import { WishlistService } from '../../services/wishlist.service';
 import { ToastService } from '../../services/toast.service';
+import { GenreService } from '../../services/genre.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule, SideBarComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
   skeletonArray: number[] = Array.from({ length: 11 }, (_, i) => i);
   list: any = [];
-  page: number = Math.floor(Math.random() * 50) + 1;
+  page: number = 1;
   isLoading: boolean = false;
   selectedGenre: string | null = null;
+  selectedGenreName: string | null = null;
   genres: any[] = [];
-  genresLoading: boolean = false;
   isVerticalLayout: boolean = false;
   wishlistGames: string[] = [];
 
@@ -27,11 +27,34 @@ export class HomeComponent implements OnInit {
     private _apiGamesService: ApiGamesService,
     private _apiWishlistService: WishlistService,
     private _router: Router,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private genreService: GenreService
   ) {}
 
   ngOnInit(): void {
-    this.loadGenres();
+    // Get genres from API first
+    this._apiGamesService.getGenres().subscribe({
+      next: (response) => {
+        this.genres = response.results;
+      },
+      error: (err) => console.error('Error loading genres:', err),
+    });
+
+    // Subscribe to genre changes
+    this.genreService.selectedGenre$.subscribe((genreId) => {
+      if (genreId) {
+        const genre = this.genres?.find((g) => g.id === genreId);
+        this.selectedGenreName = genre?.name || null;
+        this.selectedGenre = genreId;
+        this.resetAndLoad();
+      } else {
+        this.selectedGenreName = null;
+        this.selectedGenre = null;
+        this.resetAndLoad();
+      }
+    });
+
+    // Initial load
     this.loadMore();
     this.loadWishlist();
   }
@@ -39,20 +62,6 @@ export class HomeComponent implements OnInit {
   goToGameDetails(slug: string) {
     window.scrollTo(0, 0);
     this._router.navigateByUrl(`games/${slug}`);
-  }
-
-  loadGenres() {
-    this.genresLoading = true;
-    this._apiGamesService.getGenres().subscribe({
-      next: (res) => {
-        this.genres = res.results; // Extract results from response
-        this.genresLoading = false;
-      },
-      error: (err) => {
-        console.error('Error loading genres:', err);
-        this.genresLoading = false;
-      },
-    });
   }
 
   @HostListener('window:scroll', [])

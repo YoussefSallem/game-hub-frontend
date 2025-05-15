@@ -10,12 +10,12 @@ import { ToastService, Toast } from '../../services/toast.service';
     <div class="fixed top-4 right-4 z-[1001] flex flex-col gap-2">
       @for (toast of toasts; track toast.id) {
       <div
-        class="min-w-[300px] p-4 rounded-lg shadow-lg flex items-center gap-3 animate-slideIn"
+        class="min-w-[300px] p-4 rounded-lg shadow-lg flex items-center gap-3 animate-slideIn text-white"
         [ngClass]="{
-          'bg-green-600 text-white': toast.type === 'success',
-          'bg-red-600 text-white': toast.type === 'error',
-          'bg-blue-600 text-white': toast.type === 'info',
-          'bg-yellow-500 text-white': toast.type === 'warning'
+          'bg-green-600': toast.type === 'success',
+          'bg-red-600': toast.type === 'error',
+          'bg-blue-600': toast.type === 'info',
+          'bg-yellow-500': toast.type === 'warning'
         }"
       >
         <div class="flex-shrink-0">
