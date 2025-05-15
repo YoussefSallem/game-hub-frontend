@@ -7,6 +7,7 @@ import {
   ElementRef,
   AfterViewInit,
   HostListener,
+  NgZone,
 } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -59,7 +60,8 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnChanges {
     private sidebarService: SidebarService,
     private keyboardService: KeyboardService,
     private cartService: CartService,
-    private gameService: ApiGamesService
+    private gameService: ApiGamesService,
+    private _ngZone: NgZone
   ) {}
 
   onInputChange(): void {
@@ -153,5 +155,9 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnChanges {
     this.isLoginIn = false;
     this.closeMenu();
     this.router.navigate(['/home']);
+    // this._apiLoginService.signOutExternal();
+    this._ngZone.run(() =>
+      this.router.navigate(['/']).then(() => window.location.reload())
+    );
   }
 }

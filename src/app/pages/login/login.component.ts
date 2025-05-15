@@ -1,4 +1,10 @@
-import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  AfterViewInit,
+  ElementRef,
+  NgZone,
+} from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
@@ -10,6 +16,9 @@ import {
 } from '@angular/forms';
 import { ApiLoginService } from '../../services/api-login.service';
 import { OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
+
+declare const google: any;
 
 @Component({
   selector: 'app-login',
@@ -26,10 +35,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('emailInput') emailInput!: ElementRef;
   constructor(
     private _apiLoginService: ApiLoginService,
-    private router: Router
+    private router: Router,
+    private _ngZone: NgZone
   ) {
     this.rememberMe = this._apiLoginService.getRememberMe();
   }
+  client_id2 = environment.client_id2;
 
   ngOnInit(): void {
     if (this._apiLoginService.isLoggedIn()) {
@@ -37,8 +48,47 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
   }
 
+  handleCredentialResponse(response: any) {
+    this._ngZone.run(() => {
+      fetch('https://game-hub-backend-woad.vercel.app/api/auth/google', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          credential: response.credential,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('Backend response:', data);
+          this._apiLoginService.storeTokenInCookie(data.token, false);
+          this.router.navigate(['/home']);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    });
+  }
+
   ngAfterViewInit(): void {
     this.emailInput.nativeElement.focus();
+    //  Initialize Google Sign-In with the prompt parameter.
+    google.accounts.id.initialize({
+      client_id: `${environment.client_id2}`,
+      callback: (response: any) => this.handleCredentialResponse(response),
+      prompt: 'select_account',
+    });
+
+    google.accounts.id.renderButton(document.getElementById('g_id_signin'), {
+      theme: 'outline',
+      size: 'miduem',
+      text: 'signin_with',
+      shape: 'rectangular',
+      logo_alignment: 'left',
+      width: 280,
+      locale: 'en',
+    });
   }
 
   email: string = '';

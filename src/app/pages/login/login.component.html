@@ -1,74 +1,100 @@
-<div
-  class="flex min-h-screen relative justify-center items-center p-4 bg-gray-900"
->
-  <!-- Background Image with overlay -->
-  <div class="fixed inset-0 z-0 bg-gray-900">
-    <div
-      class="absolute inset-0 bg-gradient-to-r from-black to-transparent z-5"
-    ></div>
-    <img
-      rel="preload"
-      src="/Images/loginFormPageBg.jpg"
-      alt="image"
-      class="absolute object-cover inset-0"
-      loading="eager"
-    />
-  </div>
-  <!-- Form Container -->
+<div class="min-h-screen flex flex-col md:flex-row">
+  <!-- Left Side - Image and Branding -->
   <div
-    class="flex bg-white w-full max-w-lg relative z-10 flex-col rounded-4xl shadow-lg"
+    class="hidden md:flex md:w-1/2 relative overflow-hidden"
+    style="
+      background-image: url('/Images/loginFormBg1.jpeg');
+      background-size: cover;
+      background-position: center;
+    "
   >
-    <!-- Top Side - Image -->
+    <!-- Overlay for better text readability -->
     <div
-      class="h-[300px] relative rounded-t-4xl overflow-hidden hidden md:block"
+      class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-indigo-900/70"
+    ></div>
+
+    <!-- Decorative Elements -->
+    <div class="absolute top-0 left-0 w-full h-full opacity-20">
+      <div
+        class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-blue-500 filter blur-3xl"
+      ></div>
+      <div
+        class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-purple-500 filter blur-3xl"
+      ></div>
+    </div>
+
+    <!-- Content -->
+    <div
+      class="relative z-10 flex flex-col justify-center items-center w-full p-12"
     >
-      <div class="absolute inset-0 bg-black/30 z-10"></div>
-      <!-- Back Arrow Button -->
-      <a
-        routerLink="/"
-        class="absolute top-4 left-4 flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-md hover:bg-gray-100 transition duration-300 group z-20"
-      >
-        <!-- SVG Arrow Icon -->
+      <!-- Logo -->
+      <div class="mb-8">
         <svg
-          class="w-5 h-5 text-black group-hover:-translate-x-1 transition-transform duration-300"
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
+          class="h-20 w-20 text-white"
+          viewBox="0 0 20 20"
+          fill="currentColor"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15 19l-7-7 7-7"
+            d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"
           />
         </svg>
-        <!-- Button Text -->
-        <span class="text-sm font-medium text-black">Home</span>
-      </a>
-      <img
-        src="/Images/loginFormBg.webp"
-        rel="preload"
-        alt="Image"
-        class="absolute w-full h-full object-center rounded-t-4xl bg-gray-900"
-        style="min-height: 300px"
-        loading="eager"
-      />
+      </div>
+
+      <!-- Text -->
+      <h1 class="text-5xl font-bold text-white mb-6 drop-shadow-lg">GameHub</h1>
+      <p class="text-xl text-white text-center max-w-md drop-shadow-lg">
+        Your ultimate destination for gaming community, reviews, and
+        discussions.
+      </p>
+
+      <!-- Back to home -->
     </div>
-    <!-- Bottom Side - Form -->
-    <div class="p-6 h-1/2">
+  </div>
+
+  <!-- Right Side - Login Form -->
+  <div class="flex-1 flex items-center justify-center p-6 bg-gray-50">
+    <div class="w-full max-w-md">
+      <!-- Mobile Logo -->
+      <div class="text-center mb-8 md:hidden">
+        <div
+          class="inline-block p-4 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg mb-4"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-12 w-12 text-white"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"
+            />
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-800">GameHub</h1>
+      </div>
+
+      <!-- Form Header -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">Welcome back</h2>
+        <p class="text-gray-600 mt-1">
+          Sign in to continue your gaming journey
+        </p>
+      </div>
+
+      <!-- Login Form -->
       <form
         (submit)="userLoginData()"
         [formGroup]="loginValidation"
-        class="flex flex-col gap-3"
+        class="space-y-5"
       >
-        <div class="text-center text-2xl md:hidden">
-          <h2>GameHub</h2>
-        </div>
-        <div class="text-center text-2xl md:hidden">
-          <p>Log in</p>
-        </div>
-        <div class="flex flex-col gap-0.5">
+        <!-- Email Field -->
+        <div>
+          <label
+            for="email"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Email</label
+          >
           <div class="relative">
             <div
               class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
@@ -90,17 +116,18 @@
             <input
               #emailInput
               type="email"
-              placeholder="Email"
+              id="email"
+              placeholder="your@email.com"
               name="email"
-              class="w-full pl-10 px-4 py-1 xl:py-2 border rounded-xl focus:outline-0 focus:ring-blue-500 focus:ring-2 placeholder:text-slate-600 caret-blue-500 transition-all duration-300"
+              class="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400 transition-all duration-300 bg-white"
               formControlName="emailVal"
               [ngClass]="{
-                'border-slate-500': !loginValidation.controls.emailVal.touched,
-                'border-green-500':
+                'border-gray-300': !loginValidation.controls.emailVal.touched,
+                'border-green-500 bg-green-50/30':
                   isEmailValid &&
                   loginValidation.controls.emailVal.touched &&
                   loginValidation.controls.emailVal.value,
-                'border-red-500':
+                'border-red-500 bg-red-50/30':
                   !isEmailValid && loginValidation.controls.emailVal.touched
               }"
               (input)="errorMessage = ''"
@@ -111,8 +138,25 @@
               loginValidation.controls.emailVal.touched &&
               !loginValidation.controls.emailVal.value
             "
+            class="mt-1"
           >
-            <p class="text-red-500 text-xs xl:text-sm">Email is required.</p>
+            <p class="text-red-500 text-sm flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+              Email is required.
+            </p>
           </div>
           <div
             *ngIf="
@@ -120,11 +164,35 @@
               loginValidation.controls.emailVal.touched &&
               loginValidation.controls.emailVal.value
             "
+            class="mt-1"
           >
-            <p class="text-red-500 text-xs xl:text-sm">Email is not valid.</p>
+            <p class="text-red-500 text-sm flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+              Email is not valid.
+            </p>
           </div>
         </div>
-        <div class="flex flex-col gap-0.5">
+
+        <!-- Password Field -->
+        <div>
+          <label
+            for="password"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Password</label
+          >
           <div class="relative">
             <div
               class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
@@ -144,18 +212,19 @@
             </div>
             <input
               type="password"
-              placeholder="Password"
+              id="password"
+              placeholder="••••••••"
               name="password"
-              class="w-full pl-10 px-4 py-1 xl:py-2 border rounded-xl focus:outline-0 focus:ring-blue-500 focus:ring-2 placeholder:text-slate-600 caret-blue-500 transition-all duration-300"
+              class="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400 transition-all duration-300 bg-white"
               formControlName="passwordVal"
               [ngClass]="{
-                'border-slate-500':
+                'border-gray-300':
                   !loginValidation.controls.passwordVal.touched,
-                'border-green-500':
+                'border-green-500 bg-green-50/30':
                   isPasswordValid &&
                   loginValidation.controls.passwordVal.touched &&
                   loginValidation.controls.passwordVal.value,
-                'border-red-500':
+                'border-red-500 bg-red-50/30':
                   !isPasswordValid &&
                   loginValidation.controls.passwordVal.touched
               }"
@@ -167,8 +236,25 @@
               loginValidation.controls.passwordVal.touched &&
               !loginValidation.controls.passwordVal.value
             "
+            class="mt-1"
           >
-            <p class="text-red-500 text-xs xl:text-sm">Password is required.</p>
+            <p class="text-red-500 text-sm flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+              Password is required.
+            </p>
           </div>
           <div
             *ngIf="
@@ -176,16 +262,31 @@
               loginValidation.controls.passwordVal.touched &&
               loginValidation.controls.passwordVal.value
             "
+            class="mt-1"
           >
-            <p class="text-red-500 text-xs xl:text-sm">
+            <p class="text-red-500 text-sm flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
               Password must be at least 8 characters, with at least one
               uppercase letter, one lowercase letter, and one number.
             </p>
           </div>
         </div>
-        <div
-          class="flex justify-between flex-col sm:flex-row gap-2 sm:gap-0 text-center sm:text-start"
-        >
+
+        <!-- Remember Me & Forgot Password -->
+        <div class="flex justify-between items-center">
           <div class="flex items-center gap-2">
             <input
               type="checkbox"
@@ -193,26 +294,32 @@
               id="remember"
               [(ngModel)]="rememberMe"
               [ngModelOptions]="{ standalone: true }"
-              class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300"
+              class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300"
             />
             <label
               for="remember"
               class="cursor-pointer block text-sm text-gray-700"
-              >Remember me</label
             >
+              Remember me
+            </label>
           </div>
           <div>
-            <p class="text-sm hover:text-blue-500 text-gray-700">
-              <a routerLink="/passwordRecovery">Forgot password?</a>
-            </p>
+            <a
+              routerLink="/passwordRecovery"
+              class="text-sm text-indigo-600 hover:text-indigo-800 hover:underline transition-colors"
+            >
+              Forgot password?
+            </a>
           </div>
         </div>
+
+        <!-- Sign In Button -->
         <button
           type="submit"
-          class="w-full px-4 py-1 xl:py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-xl transition-colors duration-300 cursor-pointer"
+          class="w-full px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors duration-300 cursor-pointer font-medium shadow-md flex justify-center items-center"
           [disabled]="isLoading"
         >
-          <span *ngIf="!isLoading">Login</span>
+          <span *ngIf="!isLoading">Sign In</span>
           <span class="flex justify-center items-center" *ngIf="isLoading">
             <svg
               class="animate-spin h-5 w-5 text-white"
@@ -236,30 +343,51 @@
             </svg>
           </span>
         </button>
-        <div *ngIf="errorMessage" class="text-red-500 text-sm text-center">
-          <p>
-            {{ errorMessage }}
-          </p>
+
+        <!-- Error Message -->
+        <div
+          *ngIf="errorMessage"
+          class="text-red-500 text-sm text-center bg-red-50 p-3 rounded-lg"
+        >
+          <p>{{ errorMessage }}</p>
         </div>
       </form>
-      <p class="text-center text-sm mt-2 text-gray-500">
+
+      <!-- Divider -->
+      <div class="flex items-center my-6">
+        <div class="flex-grow border-t border-gray-300"></div>
+        <span class="px-4 text-gray-500 text-sm font-medium">OR</span>
+        <div class="flex-grow border-t border-gray-300"></div>
+      </div>
+
+      <!-- Google Sign-in Button -->
+      <div class="w-full">
+        <div
+          id="g_id_onload"
+          [attr.data-client_id]="client_id2"
+          data-context="signin"
+          data-ux_mode="popup"
+          data-login_uri="https://game-hub-backend-woad.vercel.app/api/auth/google"
+          data-auto_prompt="false"
+          data-callback="handleCredentialResponse"
+        ></div>
+
+        <div
+          id="g_id_signin"
+          class="g_id_signin w-full flex justify-center"
+        ></div>
+      </div>
+
+      <!-- Create Account Link -->
+      <p class="text-center text-sm mt-8 text-gray-600">
         Don't have an account?
         <a
           routerLink="/register"
-          class="text-blue-500 hover:text-blue-600 cursor-pointer"
-          >Register</a
+          class="text-indigo-600 hover:text-indigo-800 font-medium hover:underline cursor-pointer"
         >
+          Create Account
+        </a>
       </p>
-      <button
-        class="w-full py-1 xl:py-2 px-6 mb-4 border border-gray-300 rounded-xl flex items-center justify-center gap-2 bg-gray-50 hover:bg-transparent transition-colors duration-300 cursor-pointer text-gray-700 mt-2"
-      >
-        <img
-          src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-          alt="Google logo"
-          class="w-5 h-5"
-        />
-        <span>Continue with Google</span>
-      </button>
     </div>
   </div>
 </div>

@@ -22,7 +22,7 @@ import { ApiUsersService } from '../../services/api-users.service';
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements AfterViewInit {
-  @ViewChild('emailInput') emailInput!: ElementRef;
+  @ViewChild('firstNameInput') firstNameInput!: ElementRef;
   constructor(
     private _apiUsersService: ApiUsersService,
     private router: Router
@@ -46,7 +46,7 @@ export class RegisterComponent implements AfterViewInit {
   };
 
   ngAfterViewInit() {
-    this.emailInput.nativeElement.focus();
+    this.firstNameInput.nativeElement.focus();
   }
 
   registerValidation = new FormGroup({

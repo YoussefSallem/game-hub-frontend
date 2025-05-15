@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   selectedGenreName: string | null = null;
   genres: any[] = [];
   isVerticalLayout: boolean = false;
+  wishlistGames: string[] = [];
 
   constructor(
     private _apiGamesService: ApiGamesService,
@@ -55,6 +56,7 @@ export class HomeComponent implements OnInit {
 
     // Initial load
     this.loadMore();
+    this.loadWishlist();
   }
 
   goToGameDetails(slug: string) {
@@ -142,18 +144,36 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  getGenreName(genreId: string | null): string {
+    if (!genreId) return '';
+    const genre = this.genres.find((g) => g.id === genreId);
+    return genre ? genre.name : '';
+  }
+
+  loadWishlist() {
+    this._apiWishlistService.showGamesInWishlist().subscribe({
+      next: (res) => {
+        this.wishlistGames = res['wishlist'] || [];
+      },
+      error: (err) => {
+        console.log('Error loading wishlist:', err);
+      },
+    });
+  }
+
   addToFav(gameId: string) {
+    if (this.wishlistGames.includes(gameId)) {
+      this._toastService.show('Game is already in your wishlist!', 'warning');
+      return;
+    }
     // First check if game is already in wishlist
     this._apiWishlistService.showGamesInWishlist().subscribe({
       next: (res) => {
-        const wishlist = res['wishlist'] || [];
-        if (wishlist.includes(gameId)) {
-          this._toastService.show(
-            'Game is already in your wishlist!',
-            'warning'
-          );
-          return;
-        }
+        this.wishlistGames.push(gameId); // أضف إلى المتغير المحلي فورًا
+        this._toastService.show(
+          'Game added to wishlist successfully!',
+          'success'
+        );
 
         // If not in wishlist, proceed to add it
         this._apiWishlistService.addToWishlist(gameId).subscribe({
