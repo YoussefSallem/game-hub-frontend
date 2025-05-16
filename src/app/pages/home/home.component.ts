@@ -162,44 +162,41 @@ export class HomeComponent implements OnInit {
   }
 
   addToFav(gameId: string) {
+    // First check locally to prevent unnecessary API calls
     if (this.wishlistGames.includes(gameId)) {
       this._toastService.show('Game is already in your wishlist!', 'warning');
       return;
     }
-    // First check if game is already in wishlist
-    this._apiWishlistService.showGamesInWishlist().subscribe({
+
+    // Make the API call to add to wishlist
+    this._apiWishlistService.addToWishlist(gameId).subscribe({
       next: (res) => {
-        this.wishlistGames.push(gameId); // أضف إلى المتغير المحلي فورًا
+        console.log('Successfully added to wishlist', res);
+        // Update local wishlist only after successful API call
+        this.wishlistGames.push(gameId);
         this._toastService.show(
           'Game added to wishlist successfully!',
           'success'
         );
-
-        // If not in wishlist, proceed to add it
-        this._apiWishlistService.addToWishlist(gameId).subscribe({
-          next: (res) => {
-            console.log('Successfully added to wishlist', res);
-            this._toastService.show(
-              'Game added to wishlist successfully!',
-              'success'
-            );
-          },
-          error: (err) => {
-            console.log('Error details:', err);
-            this._toastService.show(
-              'You already added this game to your wishlist.',
-              'error'
-            );
-          },
-        });
       },
       error: (err) => {
-        console.log('Error checking wishlist:', err);
-        this._toastService.show('Failed to check wishlist status', 'error');
+        console.log('Error details:', err);
+        if (err.status === 409) {
+          this._toastService.show(
+            'You already added this game to your wishlist.',
+            'error'
+          );
+          // Update local wishlist to match server state
+          this.loadWishlist();
+        } else {
+          this._toastService.show(
+            'You already added this game to your wishlist.',
+            'error'
+          );
+        }
       },
     });
   }
-
   toggleLayout(isVertical: boolean) {
     this.isVerticalLayout = isVertical;
   }
