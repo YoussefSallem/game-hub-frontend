@@ -1,7 +1,7 @@
 <div class="relative">
   <button
     (click)="toggleCart($event)"
-    class="text-gray-400 hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md transition-colors relative"
+    class="text-white dark:text-sky-400 hover:text-black dark:hover:text-white hover:bg-gray-400 dark:hover:bg-gray-700 px-3 py-2 rounded-md transition-colors relative"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -31,9 +31,9 @@
     class="fixed md:absolute top-16 md:top-full left-0 right-0 md:left-auto md:right-0 flex justify-center md:block z-[1000]"
   >
     <div
-      class="w-[90vw] sm:w-[400px] md:w-80 bg-gray-800 rounded-lg shadow-xl mt-4"
+      class="w-[90vw] sm:w-[400px] md:w-80  rounded-lg shadow-xl mt-4 bg-gray-600 dark:bg-gray-800"
     >
-      <div class="p-4">
+      <div class="p-4 ">
         <h3 class="text-lg font-semibold mb-4">Shopping Cart</h3>
 
         <!-- Cart Items -->
@@ -74,7 +74,7 @@
             <a
               routerLink="/checkout"
               (click)="toggleCart()"
-              class="w-full block text-center bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition-colors"
+              class="w-full block text-center bg-neonGreen text-gray-600 rounded-lg px-4 py-2 hover:bg-teal-500 transition-colors text-l font-russo"
             >
               Proceed to Checkout
             </a>

@@ -1,4 +1,4 @@
-<div class="min-h-screen flex flex-col md:flex-row">
+<div class="min-h-screen flex flex-col md:flex-row ">
   <!-- Left Side - Image and Branding -->
   <div
     class="hidden md:flex md:w-1/2 relative overflow-hidden"
@@ -42,15 +42,15 @@
       </div>
 
       <!-- Text -->
-      <h1 class="text-5xl font-bold text-white mb-6 drop-shadow-lg">GameHub</h1>
-      <p class="text-xl text-white text-center max-w-md drop-shadow-lg">
+      <h1 class="text-5xl font-bold text-white mb-6 drop-shadow-lg font-sega">Game Hub</h1>
+      <p class="text-xl text-white text-center max-w-md drop-shadow-lg font-russo">
         Join our gaming community and discover new adventures.
       </p>
     </div>
   </div>
 
   <!-- Right Side - Register Form -->
-  <div class="flex-1 flex items-center justify-center p-6 bg-gray-50">
+  <div class="flex-1 flex items-center justify-center p-6 bg-bg-primary-light dark:bg-gray-900">
     <div class="w-full max-w-md">
       <!-- Mobile Logo -->
       <div class="text-center mb-8 md:hidden">
@@ -68,13 +68,13 @@
             />
           </svg>
         </div>
-        <h1 class="text-3xl font-bold text-gray-800">GameHub</h1>
+        <h1 class="text-3xl font-bold text-gray-600 font-russo">GameHub</h1>
       </div>
 
       <!-- Form Header -->
       <div class="mb-8">
-        <h2 class="text-2xl font-bold text-gray-800">Create an account</h2>
-        <p class="text-gray-600 mt-1">
+        <h2 class="text-2xl font-bold text-black dark:text-gray-300 font-russo">Create an account</h2>
+        <p class="text-black dark:text-gray-300 mt-1 font-title">
           Join the gaming community and start your adventure
         </p>
       </div>
@@ -332,7 +332,7 @@
         </p>
         <button
           type="submit"
-          class="w-full py-1 lg:py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors duration-300 font-medium mt-1 cursor-pointer"
+          class="w-full py-1 lg:py-2 bg-indigo-600 dark:bg-neonGreen hover:bg-indigo-700 text-white text-xl rounded-xl font-sporty transition-colors duration-300 font-medium mt-1 cursor-pointer"
           [disabled]="isLoading"
         >
           <span *ngIf="!isLoading">Register</span>
@@ -363,7 +363,7 @@
           </span>
         </button>
       </form>
-      <p class="text-center text-gray-500 text-sm mt-4">
+      <p class="text-center text-black dark:text-gray-300 text-sm mt-4">
         Already have an account?
         <a routerLink="/login" class="text-blue-500 hover:text-blue-600"
           >Login</a

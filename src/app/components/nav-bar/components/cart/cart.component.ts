@@ -8,7 +8,6 @@ import { CartItem, CartService } from '../../../../services/cart.service';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
   isCartOpen = false;

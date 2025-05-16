@@ -1,9 +1,9 @@
-<div class="min-h-screen bg-gray-900 text-gray-100 p-6">
+<div class="min-h-screen bg-bg-primary-light dark:bg-gray-900 text-black  dark:text-gray-100 p-6">
   <!-- Header with back button -->
   <div class="flex items-center mb-6">
     <a
       routerLink="/checkout"
-      class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+      class="flex items-center gap-2 text-black dark:text-gray-300 hover:text-gray-700 transition-colors font-russo"
     >
       <svg
         class="w-5 h-5"
@@ -21,11 +21,11 @@
       </svg>
       <span>Go Back</span>
     </a>
-    <h1 class="text-2xl font-bold mx-auto">Payment</h1>
+    <h1 class="text-2xl font-bold mx-auto font-russo">Payment</h1>
   </div>
 
   <!-- Progress Steps -->
-  <div class="bg-gray-800 rounded-lg p-4 mb-6">
+  <div class="bg-gray-600 dark:bg-gray-800 rounded-lg p-4 mb-6">
     <div class="flex justify-between items-center">
       <div class="flex items-center">
         <div
@@ -86,7 +86,7 @@
 
   <!-- Payment Form Container -->
   <div
-    class="bg-gray-800 rounded-2xl shadow-lg p-8 max-w-md w-full mx-auto text-center space-y-6 border border-gray-700"
+    class="bg-gray-600 dark:bg-gray-800 rounded-2xl shadow-lg p-8 max-w-md w-full mx-auto text-center space-y-6 border border-gray-700"
   >
     <!-- Payment Form (shown when not successful) -->
     <div *ngIf="!paymentSuccess" class="space-y-6">
@@ -103,11 +103,11 @@
             clip-rule="evenodd"
           ></path>
         </svg>
-        <h2 class="text-2xl font-bold text-white">Payment Details</h2>
+        <h2 class="text-2xl font-bold text-white font-title">Payment Details</h2>
       </div>
 
       <div
-        class="text-xl font-semibold text-gray-200 bg-gray-700/50 py-3 px-4 rounded-lg"
+        class="text-xl font-semibold text-gray-200 bg-gray-700/50 py-3 px-4 rounded-lg "
       >
         Total amount: <span class="text-blue-400">${{ total.toFixed(2) }}</span>
       </div>
@@ -229,9 +229,9 @@
   </div>
 
   <!-- Footer Info Section -->
-  <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+  <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center ">
     <div
-      class="p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors"
+      class="p-4 rounded-lg bg-gray-600 dark:bg-gray-800 hover:bg-gray-800 dark:hover:bg-gray-500 hover:text-gray-300 transition-colors"
     >
       <div class="flex justify-center mb-2">
         <svg
@@ -247,13 +247,13 @@
           ></path>
         </svg>
       </div>
-      <h3 class="font-semibold">Your information is Safe</h3>
+      <h3 class="font-semibold ">Your information is Safe</h3>
       <p class="text-sm text-gray-400">
         All transactions are secure and encrypted for your protection.
       </p>
     </div>
     <div
-      class="p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors"
+      class="p-4 rounded-lg bg-gray-600 dark:bg-gray-800 hover:bg-gray-800 dark:hover:bg-gray-500 transition-colors hover:text-gray-300"
     >
       <div class="flex justify-center mb-2">
         <svg
@@ -275,7 +275,7 @@
       </p>
     </div>
     <div
-      class="p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors"
+      class="p-4 rounded-lg transition-colors bg-gray-600 dark:bg-gray-800 hover:bg-gray-800 dark:hover:bg-gray-500 hover:text-gray-300"
     >
       <div class="flex justify-center mb-2">
         <svg

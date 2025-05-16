@@ -1,14 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary: #1e0342;
-  --color-secondary: #334155;
-  --color-random: #0f172a;
-  --color-Green: #4ade80;
-  --color-content: #f1f5f9;
+  --color-bg-primary-light: #d2d3db;
+  --color-bg-secondary-light: #9394a5;
+  --color-neonGreen: #06d6a0;
+  --font-sega: "Press Start 2P", system-ui;
+  --font-title: "Playfair Display", serif;
+  --font-russo: "Russo One", sans-serif;
+  --font-sporty: "Racing Sans One", sans-serif;
 }
+
+/* --color-background-light: #e4e5f1;
+  --color-primary-light: #d2d3db;
+  --color-secondary-light: #9394a5;
+  --color-navbar-light: #1e0342;
+  --color-sidebar-light: #1e0342; */
 
 .input-expanded {
   @apply lg:w-[600px];

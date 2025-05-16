@@ -37,7 +37,6 @@ import { CartComponent } from './components/cart/cart.component';
     DesktopAuthLinksComponent,
   ],
   templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.css',
 })
 export class NavBarComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
