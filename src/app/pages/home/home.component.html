@@ -160,7 +160,7 @@
       [class]="
         isVerticalLayout
           ? 'flex flex-col items-center justify-center min-h-[60vh] gap-4'
-          : 'grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 xs:gap-3 sm:gap-4 md:gap-5 lg:gap-6'
+          : 'grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6'
       "
     >
       @for(item of list; track item.rawgId) {
@@ -195,7 +195,7 @@
           <!-- Game Info -->
           <div class="text-center">
             <p
-              class="cursor-pointer text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2"
+              class="truncate overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-blue-400 transition-colors"
             >
               {{ item.name }}
             </p>
