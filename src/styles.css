@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap");
 
 @import "tailwindcss";
 
@@ -10,7 +10,135 @@
 @theme {
   --color-bg-primary-light: #d2d3db;
   --color-bg-secondary-light: #9394a5;
+
+  /** HOME PAGE **/
+
+  /*------------------------LIGHT MODE COLORS-----------------------*/
+
+  /*----------HOME----------*/
+  --color-Home-light: #d2d3db;
+  --color-Home-BuyGames-light: theme("colors.black");
+
+  --color-Home-MainCard-Bg-light: theme("colors.gray.600");
+  --color-Home-GameInfo-light: theme("colors.white");
+  --color-Home-GamePrice-light: theme("colors.green.400");
+
+  /*----------NAVBAR----------*/
+  --color-Navbar-light: theme("colors.gray.500");
+
+  --color-Navbar-LogoColor-light: theme("colors.white");
+
+  --color-Navbar-Search-TextColor-light: theme("colors.white");
+  --color-Navbar-Search-Bg-light: theme("colors.gray.600");
+
+  --color-Navbar-Cart-Color-light: theme("colors.white");
+  --color-Navbar-Cart-HoverColor-light: theme("colors.black");
+  --color-Navbar-Cart-BgHover-light: theme("colors.gray.400");
+
+  /*----------SIDEBAR----------*/
+  --color-Sidebar-light: theme("colors.gray.500");
+  --color-Sidebar-Text-light: theme("colors.gray.100");
+  --color-Sidebar-GamesTitleColor-light: theme("colors.white");
+  --color-Sidebar-GamesNum-light: theme("colors.gray.400");
+
+  /*------------------------LIGHT MODE COLORS-----------------------*/
+  /*------------------------DARK MODE COLORS-----------------------*/
+
+  /*----------HOME----------*/
+  --color-Home-dark: theme("colors.gray.900");
+  --color-Home-BuyGames-dark: theme("colors.white");
+
+  --color-Home-MainCard-Bg-dark: theme("colors.gray.800");
+  --color-Home-GameInfo-dark: theme("colors.white");
+  --color-Home-GamePrice-dark: theme("colors.green.400");
+
+  /*----------NAVBAR----------*/
+  --color-Navbar-dark: theme("colors.gray.800");
+
+  --color-Navbar-LogoColor-dark: theme("colors.white");
+
+  --color-Navbar-Search-TextColor-dark: theme("colors.white");
+  --color-Navbar-Search-Bg-dark: theme("colors.gray.600");
+
+  --color-Navbar-Cart-Color-dark: theme("colors.sky.400");
+  --color-Navbar-Cart-HoverColor-dark: theme("colors.white");
+  --color-Navbar-Cart-BgHover-dark: theme("colors.gray.700");
+
+  /*----------SIDEBAR----------*/
+  --color-Sidebar-dark: theme("colors.gray.800");
+  --color-Sidebar-Text-dark: theme("colors.gray.100");
+  --color-Sidebar-GamesTitleColor-dark: theme("colors.white");
+  --color-Sidebar-GamesNum-dark: theme("colors.gray.400");
+
+  /*^ CheckOut Page ^*/
+  /*------------------------LIGHT MODE COLORS-----------------------*/
+  --color-CkOut-Bg-light: #d2d3db;
+  --color-CkOut-Txt-light: theme("colors.black");
+
+  --color-CkOut-Progress-Bg-light: theme("colors.gray.600");
+
+  --color-CkOut-OrderItems-Bg-light: theme("colors.gray.600");
+  --color-CkOut-OrderItems-Txt-light: theme("colors.gray.300");
+  --color-CkOut-OrderItems-BgInside-light: theme("colors.gray.800");
+  --color-CkOut-OrderItems-ItemName-light: theme("colors.gray.300");
+  --color-CkOut-OrderItems-ItemPrice-light: theme("colors.gray.400");
+
+  --color-CkOut-Summary-Bg-light: theme("colors.gray.600");
+  --color-CkOut-Summary-Txt-light: theme("colors.gray.400");
+
+  /*-----------------------DARK MODE COLORS----------------------*/
+  --color-CkOut-Bg-dark: theme("colors.gray.900");
+  --color-CkOut-Txt-dark: theme("colors.gray.100");
+
+  --color-CkOut-Progress-Bg-dark: theme("colors.gray.800");
+
+  --color-CkOut-OrderItems-Bg-dark: theme("colors.gray.800");
+  --color-CkOut-OrderItems-Txt-dark: theme("colors.gray.300");
+  --color-CkOut-OrderItems-BgInside-dark: theme("colors.gray.600");
+  --color-CkOut-OrderItems-ItemName-dark: theme("colors.gray.300");
+  --color-CkOut-OrderItems-ItemPrice-dark: theme("colors.gray.400");
+
+  --color-CkOut-Summary-Bg-dark: theme("colors.gray.800");
+  --color-CkOut-Summary-Txt-dark: theme("colors.gray.300");
+
+  /*~ Payment Page~*/
+  /*------------------------LIGHT MODE COLORS-----------------------*/
+  --color-Pay-Bg-light: #d2d3db;
+  --color-pay-Txt-light: theme("colors.black");
+
+  --color-Pay-Progress-Bg-light: theme("colors.gray.600");
+
+  --color-Pay-Form-Bg-light: theme("colors.gray.600");
+
+  --color-Pay-Footer-Bg-light: theme("colors.gray.600");
+
+  --color-Pay-Footer-HoverBg-light: theme("colors.gray.800");
+
+  /*-----------------------DARK MODE COLORS----------------------*/
+  --color-Pay-Bg-dark: theme("colors.gray.900");
+  --color-Pay-Txt-dark: theme("colors.gray.100");
+
+  --color-Pay-Progress-Bg-dark: theme("colors.gray.800");
+
+  --color-Pay-Form-Bg-dark: theme("colors.gray.800");
+
+  --color-Pay-Footer-Bg-dark: theme("colors.gray.800");
+
+  --color-Pay-Footer-HoverBg-dark: theme("colors.gray.600");
+
+  /*& Wish List &*/
+  /*------------------------LIGHT MODE COLORS-----------------------*/
+  --color-Fav-Bg-light: #d2d3db;
+  --color-Fav-Txt-light: theme("colors.black");
+
+  /*-----------------------DARK MODE COLORS----------------------*/
+  --color-Fav-Bg-dark: theme("colors.gray.900");
+  --color-Fav-Txt-dark: theme("colors.gray.100");
+
+  /*--------------------Other Colors--------------------*/
   --color-neonGreen: #06d6a0;
+
+  /*--------------------FONTS--------------------*/
   --font-sega: "Press Start 2P", system-ui;
   --font-title: "Playfair Display", serif;
   --font-russo: "Russo One", sans-serif;

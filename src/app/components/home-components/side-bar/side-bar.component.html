@@ -1,5 +1,5 @@
 <div
-  class="w-64 bg-gray-600 dark:bg-gray-700 text-gray-100 fixed lg:static h-screen md:h-screen lg:min-h-full z-10 overflow-y-auto lg:overflow-y-hidden pt-5 md:pt-16 lg:pt-5 transform transition-all duration-300 ease-in-out"
+  class="w-64 bg-Sidebar-light dark:bg-Sidebar-dark text-Sidebar-Text-light dark:text-Sidebar-Text-dark fixed lg:static h-screen md:h-screen lg:min-h-full z-10 overflow-y-auto lg:overflow-y-hidden pt-5 md:pt-16 lg:pt-5 transform transition-all duration-300 ease-in-out"
   [class.-translate-x-full]="!sidebarService.isOpen"
   [class.lg:translate-x-0]="true"
   [class.lg:block]="true"
@@ -24,7 +24,7 @@
         />
       </svg>
 
-      <h2 class="text-2xl font-bold text-white mb-1">Purchasing</h2>
+      <h2 class="text-2xl font-bold text-white mb-1 font-russo">Purchasing</h2>
     </div>
 
     <!-- Buy Games button -->
@@ -36,7 +36,7 @@
       [class.hover:bg-gray-700]="activeButton !== 'buy' || selectedGenre"
       (click)="onBuyGamesClick(); $event.preventDefault()"
     >
-      <span class="font-medium">Buy Games</span>
+      <span class="font-medium font-title">Buy Games</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-5 w-5"
@@ -60,7 +60,7 @@
       (click)="onWishlistClick(); $event.preventDefault()"
       routerLink="/wishlist"
     >
-      <span class="font-medium">Wishlist</span>
+      <span class="font-medium font-title">Wishlist</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-5 w-5"
@@ -95,7 +95,7 @@
 
     <!-- Genres list -->
     <div *ngIf="!isLoading" class="space-y-2">
-      <h2 class="text-xl font-bold mb-4">View Games</h2>
+      <h2 class="text-xl font-bold mb-4 font-title">View Games</h2>
       <ul>
         <li *ngFor="let genre of genres">
           <button
@@ -111,8 +111,8 @@
               alt="{{ genre.name }}"
               class="w-8 h-8 rounded object-cover"
             />
-            <span>{{ genre.name }}</span>
-            <span class="ml-auto text-gray-400 text-sm">{{
+            <span class="font-sporty text-Sidebar-GamesTitleColor-light dark:text-Sidebar-GamesTitleColor-dark">{{ genre.name }}</span>
+            <span class="ml-auto text-Sidebar-GamesNum-light dark:text-Sidebar-GamesNum-dark text-sm ">{{
               genre.games_count
             }}</span>
           </button>

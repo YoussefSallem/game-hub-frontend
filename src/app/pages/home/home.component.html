@@ -3,16 +3,18 @@
 >
   <!-- Main Content -->
   <div
-    class="w-full p-4 md:p-6 space-y-6 bg-bg-primary-light dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen"
+    class="w-full p-4 md:p-6 space-y-6 bg-Home-light dark:bg-Home-dark text-gray-800 dark:text-gray-100 min-h-screen"
   >
     <!-- Header Section -->
     <div class="text-center sm:text-left space-y-2">
       <h1
-        class="text-5xl md:text-7xl font-bold text-text-primary-light dark:text-white bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text font-russo"
+        class="text-5xl md:text-7xl font-bold text-Home-BuyGames-light dark:text-Home-BuyGames-dark bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text font-russo"
       >
         {{ selectedGenreName || "Buy" }} Games
       </h1>
-      <p class="text-sm md:text-base text-gray-900 dark:text-gray-300 font-russo">
+      <p
+        class="text-sm md:text-base text-gray-900 dark:text-gray-300 font-russo"
+      >
         Discover top-rated titles curated by player popularity and latest
         releases
       </p>
@@ -50,7 +52,7 @@
             id="orderSelect"
             [(ngModel)]="orderValue"
             (change)="onOrderChange($event)"
-            class="w-full text-sm md:text-base border border-gray-700 bg-bg-secondary-light text-gray-800 dark:bg-gray-800 dark:text-gray-200 rounded-lg p-2 md:p-3 focus:outline-none focus:ring-2  hover:border-blue-400 transition-colors"
+            class="w-full text-sm md:text-base border border-gray-700 bg-bg-secondary-light text-gray-800 dark:bg-gray-800 dark:text-gray-200 rounded-lg p-2 md:p-3 focus:outline-none focus:ring-2 hover:border-blue-400 transition-colors"
           >
             <option value="Relevance">Relevance</option>
             <option value="Name">Name (A → Z)</option>
@@ -103,7 +105,9 @@
       <div
         class="w-full md:w-auto hidden sm:flex flex-col items-center md:items-end gap-2 mt-2 md:mt-0"
       >
-        <h3 class="text-sm md:text-base font-medium text-gray-800 dark:text-gray-300 mb-1">
+        <h3
+          class="text-sm md:text-base font-medium text-gray-800 dark:text-gray-300 mb-1 font-russo"
+        >
           Display options:
         </h3>
         <div class="flex justify-center items-center gap-3">
@@ -111,7 +115,7 @@
             (click)="toggleLayout(true)"
             [class.text-blue-400]="isVerticalLayout"
             [class.text-sky-500]="!isVerticalLayout"
-            class="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 dark:text-neonGreen hover:text-slate-700 dark:hover:text-sky-50 transition-colors cursor-pointer"
+            class="h-10 w-10 sm:h-10 sm:w-10 lg:h-9 lg:w-9 dark:text-neonGreen hover:text-slate-700 dark:hover:text-sky-50 transition-colors cursor-pointer"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -129,7 +133,7 @@
             (click)="toggleLayout(false)"
             [class.text-blue-400]="!isVerticalLayout"
             [class.text-sky-500]="isVerticalLayout"
-            class="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 dark:text-neonGreen hover:text-slate-700 dark:hover:text-sky-50 transition-colors cursor-pointer"
+            class="h-10 w-10 sm:h-12 sm:w-12 lg:h-10 lg:w-10 dark:text-neonGreen hover:text-slate-700 dark:hover:text-sky-50 transition-colors cursor-pointer"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -160,9 +164,10 @@
         [style.width]="isVerticalLayout ? '450px' : null"
         [style.height]="isVerticalLayout ? '450px' : null"
       >
-        <!-- Main Card Content -->
+        <!--! Main Card Content -->
+
         <div
-          class="h-full rounded-xl md:rounded-2xl group-hover:rounded-b-none p-3 sm:p-4 bg-gray-600 dark:bg-gray-800 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/10 relative"
+          class="h-full rounded-xl md:rounded-2xl group-hover:rounded-b-none p-3 sm:p-4 bg-Home-MainCard-Bg-light dark:bg-Home-MainCard-Bg-dark transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/10 relative"
         >
           <!-- Game Image with Gradient Overlay -->
           <div
@@ -185,7 +190,7 @@
           <!-- Game Info -->
           <div class="text-center">
             <p
-              class="cursor-pointer text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2"
+              class="cursor-pointer text-base sm:text-lg md:text-xl font-bold text-Home-GameInfo-light dark:text-Home-GameInfo-dark group-hover:text-blue-400 transition-colors line-clamp-2 font-title"
             >
               {{ item.name }}
             </p>
@@ -193,9 +198,10 @@
             <!-- Price - only show if no genre is selected -->
             @if(!selectedGenre) {
             <p class="text-base sm:text-lg text-gray-400 mt-1 sm:mt-2">
-              💲<span class="text-green-400 font-semibold">{{
-                item.price || "Free"
-              }}</span>
+              💲<span
+                class="text-Home-GamePrice-light dark:text-Home-GamePrice-dark font-semibold"
+                >{{ item.price || "Free" }}</span
+              >
             </p>
             }
 
