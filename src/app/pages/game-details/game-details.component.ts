@@ -52,7 +52,11 @@ export class GameDetailsComponent implements OnInit {
           const index = items.findIndex((item) => item.name === this.game.name);
 
           if (index !== -1) {
-            this._toaster.show('ya 3ars manta dost abl kda', 'error', 3000);
+            this._toaster.show(
+              'You already added this item to cart',
+              'error',
+              3000
+            );
           } else {
             this.cartService.addToCart({
               id: this.game.rawgId,
