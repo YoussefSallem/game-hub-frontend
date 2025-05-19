@@ -49,26 +49,22 @@
     <div class="w-full max-w-md">
       <!-- Mobile Logo -->
       <div class="text-center mb-8 md:hidden">
-        <div
-          class="inline-block p-4 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg mb-4"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-12 w-12 text-white"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"
+        <div class="mb-8">
+          <div class="mb-8">
+            <img
+              src="/bg.png"
+              alt="GameHub Logo"
+              class="h-72 relative -top-35 -mb-60"
             />
-          </svg>
+          </div>
         </div>
-        <h1 class="text-3xl font-bold text-gray-600 font-russo">GameHub</h1>
       </div>
 
       <!-- Form Header -->
       <div class="mb-8">
-        <h2 class="text-2xl font-bold text-black dark:text-gray-300 font-russo">
+        <h2
+          class="md:text-3xl text-2xl font-bold text-black dark:text-gray-300 font-russo"
+        >
           Create an account
         </h2>
         <p class="text-black dark:text-gray-300 mt-1 font-title">
@@ -88,7 +84,7 @@
             type="text"
             name="Fname"
             placeholder="First Name"
-            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
+            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600 bg-white"
             formControlName="fnameVal"
             [ngClass]="{
               'border-slate-500': !registerValidation.controls.fnameVal.touched,
@@ -129,7 +125,7 @@
             type="text"
             name="Lname"
             placeholder="Last Name"
-            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
+            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600 bg-white"
             formControlName="lnameVal"
             [ngClass]="{
               'border-slate-500': !registerValidation.controls.lnameVal.touched,
@@ -169,7 +165,7 @@
             type="email"
             name="email"
             placeholder="Email"
-            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
+            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600 bg-white"
             formControlName="emailVal"
             [ngClass]="{
               'border-slate-500': !registerValidation.controls.emailVal.touched,
@@ -205,7 +201,7 @@
             type="text"
             name="Phone"
             placeholder="Phone Number"
-            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
+            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600 bg-white"
             formControlName="phoneNumberVal"
             [ngClass]="{
               'border-slate-500':
@@ -247,7 +243,7 @@
             type="password"
             name="password"
             placeholder="Password"
-            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
+            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600 bg-white"
             formControlName="passwordVal"
             [ngClass]="{
               'border-slate-500':
@@ -288,7 +284,7 @@
             type="password"
             name="confirmPassword"
             placeholder="Confirm Password"
-            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600"
+            class="w-full px-4 py-1 xl:py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 caret-blue-500 placeholder:text-slate-600 bg-white"
             formControlName="confirmPasswordVal"
             [ngClass]="{
               'border-slate-500':
