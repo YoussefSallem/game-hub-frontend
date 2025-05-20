@@ -7,6 +7,7 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
 import { paymentGuard } from './guards/payment.guard';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -74,6 +75,10 @@ export const routes: Routes = [
     path: 'payment',
     component: PaymentComponent,
     title: 'Payment Page',
+  },
+  {
+    path: 'reset-password/:token',
+    component: ResetPasswordComponent,
   },
   {
     path: 'not-found',
