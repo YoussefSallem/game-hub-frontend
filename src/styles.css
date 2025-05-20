@@ -37,6 +37,7 @@
 
   /*----------SIDEBAR----------*/
   --color-Sidebar-light: theme("colors.gray.500");
+
   --color-Sidebar-Text-light: theme("colors.gray.100");
   --color-Sidebar-GamesTitleColor-light: theme("colors.white");
   --color-Sidebar-GamesNum-light: theme("colors.gray.400");
@@ -65,6 +66,7 @@
 
   /*----------SIDEBAR----------*/
   --color-Sidebar-dark: theme("colors.gray.800");
+
   --color-Sidebar-Text-dark: theme("colors.gray.100");
   --color-Sidebar-GamesTitleColor-dark: theme("colors.white");
   --color-Sidebar-GamesNum-dark: theme("colors.gray.400");
