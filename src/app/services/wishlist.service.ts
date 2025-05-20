@@ -38,10 +38,14 @@ export class WishlistService {
   }
 
   showGamesInWishlist(): Observable<any> {
+    if (
+      !this._apiLoginService.isLoggedIn() ||
+      !this._apiLoginService.isValidToken()
+    ) {
+      return EMPTY;
+    }
+
     const token = this._apiLoginService.getToken();
-
-    if (!token) this.router.navigate(['/login']);
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'x-auth-token': token,
@@ -52,17 +56,16 @@ export class WishlistService {
     });
   }
 
-  getGameById(gameId: string): Observable<any> {
-    return this.httpClient.get(`${environment.baseUrl}/games/game/${gameId}`);
-  }
-
   removeGameFromWishlist(gameId: string): Observable<any> {
-    const token = this._apiLoginService.getToken();
-
-    if (!token) {
+    if (
+      !this._apiLoginService.isLoggedIn() ||
+      !this._apiLoginService.isValidToken()
+    ) {
       this.router.navigate(['/login']);
+      return EMPTY;
     }
 
+    const token = this._apiLoginService.getToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'x-auth-token': token,
@@ -72,5 +75,9 @@ export class WishlistService {
       `${environment.baseUrl}/users/wishlist/${gameId}`,
       { headers }
     );
+  }
+
+  getGameById(gameId: string): Observable<any> {
+    return this.httpClient.get(`${environment.baseUrl}/games/game/${gameId}`);
   }
 }
