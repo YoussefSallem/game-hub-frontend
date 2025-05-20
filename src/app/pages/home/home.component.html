@@ -153,7 +153,7 @@
     <div
       [class]="
         isVerticalLayout
-          ? 'flex flex-col items-center justify-center min-h-[60vh] gap-4'
+          ? 'flex flex-col items-center justify-center min-h-[60vh] gap-6'
           : 'grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6'
       "
     >
@@ -161,8 +161,8 @@
       <div
         (click)="goToGameDetails(item.slug)"
         class="cursor-pointer group relative transform transition-all duration-300 hover:scale-[1.02] hover:z-20"
-        [style.width]="isVerticalLayout ? '450px' : null"
-        [style.height]="isVerticalLayout ? '450px' : null"
+        [style.width]="isVerticalLayout ? '700px' : null"
+        [style.height]="isVerticalLayout ? '700px' : null"
       >
         <!--! Main Card Content -->
 

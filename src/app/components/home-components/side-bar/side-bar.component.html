@@ -29,11 +29,19 @@
 
     <!-- Buy Games button -->
     <button
-      class="w-full flex items-center justify-between my-3 p-2 roun ded transition-colors cursor-pointer"
-      [class.text-blue-400]="activeButton === 'buy' && !selectedGenre"
-      [class.bg-gray-700]="activeButton === 'buy' && !selectedGenre"
-      [class.hover:text-blue-400]="activeButton !== 'buy' || selectedGenre"
-      [class.hover:bg-gray-700]="activeButton !== 'buy' || selectedGenre"
+      class="w-full flex items-center justify-between my-3 p-2 rounded transition-colors cursor-pointer"
+      [class.text-blue-400]="
+        sidebarService.activeButton === 'buy' && !selectedGenre
+      "
+      [class.bg-gray-700]="
+        sidebarService.activeButton === 'buy' && !selectedGenre
+      "
+      [class.hover:text-blue-400]="
+        sidebarService.activeButton !== 'buy' || selectedGenre
+      "
+      [class.hover:bg-gray-700]="
+        sidebarService.activeButton !== 'buy' || selectedGenre
+      "
       (click)="onBuyGamesClick(); $event.preventDefault()"
     >
       <span class="font-medium font-title">Buy Games</span>
@@ -53,10 +61,10 @@
     <!-- Wishlist button -->
     <button
       class="w-full flex items-center justify-between my-3 p-2 rounded transition-colors cursor-pointer"
-      [class.text-blue-400]="activeButton === 'wishlist'"
-      [class.bg-gray-700]="activeButton === 'wishlist'"
-      [class.hover:text-blue-400]="activeButton !== 'wishlist'"
-      [class.hover:bg-gray-700]="activeButton !== 'wishlist'"
+      [class.text-blue-400]="sidebarService.activeButton === 'wishlist'"
+      [class.bg-gray-700]="sidebarService.activeButton === 'wishlist'"
+      [class.hover:text-blue-400]="sidebarService.activeButton !== 'wishlist'"
+      [class.hover:bg-gray-700]="sidebarService.activeButton !== 'wishlist'"
       (click)="onWishlistClick(); $event.preventDefault()"
       routerLink="/wishlist"
     >
@@ -111,10 +119,14 @@
               alt="{{ genre.name }}"
               class="w-8 h-8 rounded object-cover"
             />
-            <span class="font-sporty text-Sidebar-GamesTitleColor-light dark:text-Sidebar-GamesTitleColor-dark">{{ genre.name }}</span>
-            <span class="ml-auto text-Sidebar-GamesNum-light dark:text-Sidebar-GamesNum-dark text-sm ">{{
-              genre.games_count
-            }}</span>
+            <span
+              class="font-sporty text-Sidebar-GamesTitleColor-light dark:text-Sidebar-GamesTitleColor-dark"
+              >{{ genre.name }}</span
+            >
+            <span
+              class="ml-auto text-Sidebar-GamesNum-light dark:text-Sidebar-GamesNum-dark text-sm"
+              >{{ genre.games_count }}</span
+            >
           </button>
         </li>
       </ul>

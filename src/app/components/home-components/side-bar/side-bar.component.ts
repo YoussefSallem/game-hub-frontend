@@ -27,29 +27,33 @@ export class SideBarComponent implements OnInit {
     this.genreService.selectedGenre$.subscribe((genre) => {
       this.selectedGenre = genre;
       if (genre) {
-        this.activeButton = null;
+        this.sidebarService.setActiveButton(null);
       }
+    });
+
+    this.sidebarService.activeButton$.subscribe((button) => {
+      this.activeButton = button;
     });
   }
 
   onGenreClick(genreId: string) {
     this.genreService.setSelectedGenre(genreId);
     this.genreSelected.emit(genreId);
-    this.activeButton = null;
+    this.sidebarService.setActiveButton(null);
     this.sidebarService.close();
   }
 
   onBuyGamesClick() {
     this.genreService.setSelectedGenre(null);
     this.genreSelected.emit(null);
-    this.activeButton = 'buy';
+    this.sidebarService.setActiveButton('buy');
     this.sidebarService.close();
   }
 
   onWishlistClick() {
     this.genreService.setSelectedGenre(null);
     this.genreSelected.emit(null);
-    this.activeButton = 'wishlist';
+    this.sidebarService.setActiveButton('wishlist');
     this.sidebarService.close();
   }
 }

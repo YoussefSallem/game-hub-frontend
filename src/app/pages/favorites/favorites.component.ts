@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { WishlistService } from '../../services/wishlist.service';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { WishlistService } from '../../services/wishlist.service';
+import { Router } from '@angular/router';
+import { SidebarService } from '../../services/sidebar.service';
+import { GenreService } from '../../services/genre.service';
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './favorites.component.html',
 })
 export class FavoritesComponent implements OnInit {
   constructor(
     private _apiWishlistService: WishlistService,
-    private _router: Router
+    private _router: Router,
+    private sidebarService: SidebarService,
+    private genreService: GenreService
   ) {}
 
   wishlistGameId: string[] = [];
@@ -79,5 +83,11 @@ export class FavoritesComponent implements OnInit {
       },
     });
     console.log('Remove from wishlist:', gameId);
+  }
+
+  goToHome() {
+    this.genreService.setSelectedGenre(null);
+    this.sidebarService.setActiveButton('buy');
+    this._router.navigate(['/home']);
   }
 }
