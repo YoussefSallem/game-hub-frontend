@@ -49,7 +49,7 @@ export const routes: Routes = [
       import('./pages/payment/payment.component').then(
         (obj) => obj.PaymentComponent
       ),
-    canActivate: [authGuard, paymentGuard], // Add both guards
+    canActivate: [authGuard, paymentGuard],
     title: 'Payment',
   },
   {
