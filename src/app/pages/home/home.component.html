@@ -198,6 +198,7 @@
             <!-- Price - only show if no genre is selected -->
             @if(!selectedGenre) {
             <p class="text-base sm:text-lg text-gray-400 mt-1 sm:mt-2">
+              <span>Price:</span>
               💲<span
                 class="text-Home-GamePrice-light dark:text-Home-GamePrice-dark font-semibold"
                 >{{ item.price || "Free" }}</span
