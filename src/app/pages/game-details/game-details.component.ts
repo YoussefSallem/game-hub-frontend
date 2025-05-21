@@ -5,6 +5,7 @@ import { ApiGamesService } from '../../services/api-games.service';
 import { CartService } from '../../services/cart.service';
 import { ToastService } from '../../services/toast.service';
 import { first } from 'rxjs';
+import { ApiLoginService } from '../../services/api-login.service';
 
 @Component({
   selector: 'app-game-details',
@@ -17,7 +18,8 @@ export class GameDetailsComponent implements OnInit {
     private _ApiGamesService: ApiGamesService,
     private _router: Router,
     private cartService: CartService,
-    private _toaster: ToastService
+    private _toaster: ToastService,
+    private _apiLoginService: ApiLoginService
   ) {}
   slug!: string | null;
   game: any;
@@ -42,7 +44,10 @@ export class GameDetailsComponent implements OnInit {
   }
 
   addToCart() {
-    if (!this.game) return;
+    if (!this.game || !this._apiLoginService.isLoggedIn()) {
+      this._router.navigate(['/login']);
+      return;
+    }
 
     this.cartService
       .getCartItems()
